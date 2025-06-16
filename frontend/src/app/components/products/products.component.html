@@ -1,0 +1,108 @@
+<section id="products" class="py-16 bg-gradient-to-br from-black to-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-serif font-bold bg-gradient-to-r from-gray-200 to-gray-500 bg-clip-text text-transparent mb-4">
+          Our Products
+        </h2>
+        <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          Choose from our carefully crafted portrait packages and premium print options, all designed to preserve
+          your memories in stunning detail.
+        </p>
+      </div>
+  
+      <!-- Product Filter Buttons -->
+      <div class="flex justify-center mb-8">
+        <div class="inline-flex space-x-2 p-2 bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl shadow-2xl border border-gray-700">
+          <button 
+            (click)="setFilter('all')"
+            [class]="isActiveFilter('all') 
+              ? 'px-6 py-3 text-sm font-medium rounded-xl transition-all bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+              : 'px-6 py-3 text-sm font-medium rounded-xl transition-all text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white'"
+          >
+            All Products
+          </button>
+          <button 
+            (click)="setFilter('session')"
+            [class]="isActiveFilter('session') 
+              ? 'px-6 py-3 text-sm font-medium rounded-xl transition-all bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+              : 'px-6 py-3 text-sm font-medium rounded-xl transition-all text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white'"
+          >
+            Sessions
+          </button>
+          <button 
+            (click)="setFilter('print')"
+            [class]="isActiveFilter('print') 
+              ? 'px-6 py-3 text-sm font-medium rounded-xl transition-all bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+              : 'px-6 py-3 text-sm font-medium rounded-xl transition-all text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white'"
+          >
+            Prints
+          </button>
+          <button 
+            (click)="setFilter('digital')"
+            [class]="isActiveFilter('digital') 
+              ? 'px-6 py-3 text-sm font-medium rounded-xl transition-all bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+              : 'px-6 py-3 text-sm font-medium rounded-xl transition-all text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white'"
+          >
+            Digital
+          </button>
+        </div>
+      </div>
+  
+      <!-- Product Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div 
+          *ngFor="let product of filteredProducts; trackBy: trackByProductId"
+          class="relative bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 border border-gray-700 group"
+        >
+          <div *ngIf="product.popular" class="absolute top-4 left-4 z-10">
+            <span class="px-3 py-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-xs font-bold rounded-full border border-gray-500">
+              POPULAR
+            </span>
+          </div>
+  
+          <div class="aspect-[4/3] relative overflow-hidden">
+            <img 
+              [src]="product.image" 
+              [alt]="product.name" 
+              class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110 grayscale"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          </div>
+  
+          <div class="p-6">
+            <div class="flex items-center mb-2">
+              <div class="flex items-center">
+                <svg class="h-4 w-4 text-gray-400 fill-current" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+                <span class="text-sm text-gray-400 ml-1">{{ product.rating }}</span>
+              </div>
+            </div>
+  
+            <h3 class="text-xl font-semibold mb-2 text-white">{{ product.name }}</h3>
+            <p class="text-gray-400 mb-4 text-sm leading-relaxed">{{ product.description }}</p>
+  
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <span class="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  ${{ product.price }}
+                </span>
+                <span *ngIf="product.originalPrice" class="text-sm text-gray-500 line-through">
+                  ${{ product.originalPrice }}
+                </span>
+              </div>
+              <button 
+                (click)="addToCart(product)"
+                class="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-600 text-white rounded-xl hover:from-gray-600 hover:to-gray-500 transform hover:scale-105 transition-all duration-300 shadow-lg border border-gray-600"
+              >
+                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5-6M17 21a2 2 0 100-4 2 2 0 000 4zM9 21a2 2 0 100-4 2 2 0 000 4z"></path>
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
