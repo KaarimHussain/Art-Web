@@ -1,0 +1,854 @@
+<div class="min-h-screen bg-gradient-to-br from-black via-gray-900 to-gray-800">
+  <!-- Navigation -->
+  <header
+    class="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-gray-700 shadow-lg"
+  >
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center">
+          <a
+            href="#"
+            class="text-2xl font-serif font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+          >
+            PORTRAIT
+          </a>
+        </div>
+
+        <nav class="hidden md:flex space-x-8">
+          <a
+            href="#gallery"
+            class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+            >Gallery</a
+          >
+          <a
+            href="#products"
+            class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+            >Products</a
+          >
+          <a
+            href="#about"
+            class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+            >About</a
+          >
+          <a
+            href="#contact"
+            class="text-sm font-medium text-gray-300 hover:text-white transition-colors"
+            >Contact</a
+          >
+        </nav>
+
+        <div class="flex items-center space-x-4">
+          <button
+            (click)="openCart()"
+            class="p-2 rounded-full hover:bg-gradient-to-r hover:from-gray-800 hover:to-gray-700 transition-all"
+          >
+            <svg
+              class="h-5 w-5 text-gray-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9"
+              ></path>
+            </svg>
+          </button>
+          <button
+            class="md:hidden p-2 rounded-full hover:bg-gradient-to-r hover:from-gray-800 hover:to-gray-700 transition-all"
+          >
+            <svg
+              class="h-5 w-5 text-gray-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section
+    class="relative h-[80vh] bg-gradient-to-br from-black via-gray-900 to-gray-800"
+  >
+    <div class="absolute inset-0 overflow-hidden">
+      <img
+        src="/placeholder.svg?height=1080&width=1920"
+        alt="Hero portrait"
+        class="w-full h-full object-cover opacity-30"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-black/90 via-gray-900/70 to-black/90"
+      ></div>
+    </div>
+
+    <div
+      class="relative container mx-auto px-4 h-full flex flex-col justify-center"
+    >
+      <h1 class="text-4xl md:text-6xl font-serif font-bold text-white mb-4">
+        Timeless Portraits
+        <br />
+        <span
+          class="bg-gradient-to-r from-gray-300 to-gray-500 bg-clip-text text-transparent"
+        >
+          Captured in Elegance
+        </span>
+      </h1>
+      <p class="text-xl text-gray-300 mb-8 max-w-md leading-relaxed">
+        Professional portrait photography that captures your essence with
+        timeless black and white artistry.
+      </p>
+      <div>
+        <a
+          href="#products"
+          class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-gray-700 to-gray-600 text-white font-medium rounded-full hover:from-gray-600 hover:to-gray-500 transform hover:scale-105 transition-all duration-300 shadow-xl border border-gray-600"
+        >
+          Explore Our Collection
+          <svg
+            class="ml-2 h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="py-16 bg-gradient-to-br from-gray-900 to-black">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2
+          class="text-4xl font-serif font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mb-4"
+        >
+          Our Gallery
+        </h2>
+        <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          Discover the artistry and emotion captured in every frame. Each
+          portrait tells a unique story through the timeless beauty of black and
+          white photography.
+        </p>
+      </div>
+
+      <!-- Portrait Gallery Filter -->
+      <div class="flex justify-center mb-8">
+        <div
+          class="inline-flex space-x-2 p-2 bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl shadow-2xl border border-gray-700"
+        >
+          <button
+            (click)="setPortraitFilter('all')"
+            [class]="
+              'px-6 py-3 text-sm font-medium rounded-xl transition-all ' +
+              (activePortraitFilter === 'all'
+                ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+                : 'text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white')
+            "
+          >
+            All
+          </button>
+          <button
+            (click)="setPortraitFilter('professional')"
+            [class]="
+              'px-6 py-3 text-sm font-medium rounded-xl transition-all ' +
+              (activePortraitFilter === 'professional'
+                ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+                : 'text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white')
+            "
+          >
+            Professional
+          </button>
+          <button
+            (click)="setPortraitFilter('family')"
+            [class]="
+              'px-6 py-3 text-sm font-medium rounded-xl transition-all ' +
+              (activePortraitFilter === 'family'
+                ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+                : 'text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white')
+            "
+          >
+            Family
+          </button>
+          <button
+            (click)="setPortraitFilter('artistic')"
+            [class]="
+              'px-6 py-3 text-sm font-medium rounded-xl transition-all ' +
+              (activePortraitFilter === 'artistic'
+                ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+                : 'text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white')
+            "
+          >
+            Artistic
+          </button>
+        </div>
+      </div>
+
+      <!-- Portrait Gallery Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div
+          *ngFor="let portrait of filteredPortraits"
+          class="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border border-gray-700"
+        >
+          <div class="aspect-[3/4] relative">
+            <img
+              [src]="portrait.src"
+              [alt]="portrait.alt"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            ></div>
+          </div>
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6"
+          >
+            <div>
+              <p class="text-white font-medium text-lg mb-2">
+                {{ portrait.alt }}
+              </p>
+              <div
+                class="w-16 h-1 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="py-16 bg-gradient-to-br from-black to-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2
+          class="text-4xl font-serif font-bold bg-gradient-to-r from-gray-200 to-gray-500 bg-clip-text text-transparent mb-4"
+        >
+          Our Products
+        </h2>
+        <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          Choose from our carefully crafted portrait packages and premium print
+          options, all designed to preserve your memories in stunning detail.
+        </p>
+      </div>
+
+      <!-- Product Filter -->
+      <div class="flex justify-center mb-8">
+        <div
+          class="inline-flex space-x-2 p-2 bg-gradient-to-r from-gray-800 to-gray-900 rounded-2xl shadow-2xl border border-gray-700"
+        >
+          <button
+            (click)="setProductFilter('all')"
+            [class]="
+              'px-6 py-3 text-sm font-medium rounded-xl transition-all ' +
+              (activeProductFilter === 'all'
+                ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+                : 'text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white')
+            "
+          >
+            All Products
+          </button>
+          <button
+            (click)="setProductFilter('session')"
+            [class]="
+              'px-6 py-3 text-sm font-medium rounded-xl transition-all ' +
+              (activeProductFilter === 'session'
+                ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+                : 'text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white')
+            "
+          >
+            Sessions
+          </button>
+          <button
+            (click)="setProductFilter('print')"
+            [class]="
+              'px-6 py-3 text-sm font-medium rounded-xl transition-all ' +
+              (activeProductFilter === 'print'
+                ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+                : 'text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white')
+            "
+          >
+            Prints
+          </button>
+          <button
+            (click)="setProductFilter('digital')"
+            [class]="
+              'px-6 py-3 text-sm font-medium rounded-xl transition-all ' +
+              (activeProductFilter === 'digital'
+                ? 'bg-gradient-to-r from-gray-600 to-gray-700 text-white shadow-lg transform scale-105 border border-gray-500'
+                : 'text-gray-300 hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 hover:text-white')
+            "
+          >
+            Digital
+          </button>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          *ngFor="let product of filteredProducts"
+          class="relative bg-gradient-to-br from-gray-900 to-black rounded-2xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 border border-gray-700 group"
+        >
+          <div *ngIf="product.popular" class="absolute top-4 left-4 z-10">
+            <span
+              class="px-3 py-1 bg-gradient-to-r from-gray-600 to-gray-700 text-white text-xs font-bold rounded-full border border-gray-500"
+            >
+              POPULAR
+            </span>
+          </div>
+
+          <div class="aspect-[4/3] relative overflow-hidden">
+            <img
+              [src]="product.image"
+              [alt]="product.name"
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            ></div>
+          </div>
+
+          <div class="p-6">
+            <div class="flex items-center mb-2">
+              <div class="flex items-center">
+                <svg
+                  class="h-4 w-4 text-gray-400 fill-current"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+                <span class="text-sm text-gray-400 ml-1">{{
+                  product.rating
+                }}</span>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-semibold mb-2 text-white">
+              {{ product.name }}
+            </h3>
+            <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+              {{ product.description }}
+            </p>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-2">
+                <span
+                  class="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+                >
+                  ${{ product.price }}
+                </span>
+                <span
+                  *ngIf="product.originalPrice"
+                  class="text-sm text-gray-500 line-through"
+                >
+                  ${{ product.originalPrice }}
+                </span>
+              </div>
+              <button
+                (click)="addToCart(product)"
+                class="flex items-center justify-center px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-600 text-white rounded-xl hover:from-gray-600 hover:to-gray-500 transform hover:scale-105 transition-all duration-300 shadow-lg border border-gray-600"
+              >
+                <svg
+                  class="h-4 w-4 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9"
+                  ></path>
+                </svg>
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 bg-gradient-to-br from-gray-900 to-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2
+            class="text-4xl font-serif font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent mb-4"
+          >
+            About Our Studio
+          </h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+              At PORTRAIT, we believe that every face tells a story. Our mission
+              is to capture the essence of who you are in a single, timeless
+              image that you'll cherish forever.
+            </p>
+            <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+              Founded in 2010 by award-winning photographer Jane Doe, our studio
+              has created thousands of stunning portraits for clients around the
+              world. We specialize in the timeless art of black and white
+              photography.
+            </p>
+            <p class="text-lg text-gray-300 leading-relaxed">
+              Whether you're looking for a professional headshot, a family
+              portrait, or a creative artistic piece, our team will work with
+              you to create something truly special.
+            </p>
+          </div>
+          <div class="relative">
+            <div
+              class="absolute inset-0 bg-gradient-to-br from-gray-700 to-gray-800 rounded-2xl transform rotate-3"
+            ></div>
+            <div
+              class="relative bg-gradient-to-br from-gray-800 to-gray-900 p-8 rounded-2xl shadow-2xl border border-gray-700"
+            >
+              <div class="text-center">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-gray-600 to-gray-700 rounded-full mx-auto mb-4 flex items-center justify-center border border-gray-600"
+                >
+                  <span class="text-2xl font-bold text-white">10+</span>
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-2">
+                  Years of Excellence
+                </h3>
+                <p class="text-gray-400">
+                  Creating timeless portraits with passion and precision
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 bg-gradient-to-br from-gray-800 to-black">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2
+          class="text-4xl font-serif font-bold bg-gradient-to-r from-gray-200 to-gray-500 bg-clip-text text-transparent mb-4"
+        >
+          Contact Us
+        </h2>
+        <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          Ready to create your perfect portrait? Get in touch with us today to
+          discuss your vision.
+        </p>
+      </div>
+      <div class="max-w-lg mx-auto">
+        <div
+          class="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl p-8 border border-gray-700"
+        >
+          <form (ngSubmit)="onSubmit($event)" class="space-y-6">
+            <div>
+              <label
+                for="name"
+                class="block text-sm font-medium text-gray-300 mb-2"
+                >Name</label
+              >
+              <input
+                type="text"
+                id="name"
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+                placeholder="Your full name"
+              />
+            </div>
+            <div>
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-300 mb-2"
+                >Email</label
+              >
+              <input
+                type="email"
+                id="email"
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+                placeholder="your@email.com"
+              />
+            </div>
+            <div>
+              <label
+                for="message"
+                class="block text-sm font-medium text-gray-300 mb-2"
+                >Message</label
+              >
+              <textarea
+                id="message"
+                rows="4"
+                class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-all text-white placeholder-gray-400"
+                placeholder="Tell us about your portrait vision..."
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-600 text-white font-medium rounded-xl hover:from-gray-600 hover:to-gray-500 transform hover:scale-105 transition-all duration-300 shadow-lg border border-gray-600"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Drawer -->
+  <div
+    [class]="
+      'fixed inset-y-0 right-0 w-full sm:w-96 bg-gradient-to-br from-gray-900 to-black shadow-2xl z-50 transform transition-transform duration-300 border-l border-gray-700 ' +
+      (isCartOpen ? 'translate-x-0' : 'translate-x-full')
+    "
+  >
+    <div class="flex flex-col h-full">
+      <div
+        class="flex items-center justify-between p-6 border-b border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900"
+      >
+        <h2
+          class="text-xl font-semibold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+        >
+          Your Cart
+        </h2>
+        <button
+          (click)="closeCart()"
+          class="p-2 rounded-full hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 transition-all"
+        >
+          <svg
+            class="h-5 w-5 text-gray-300"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-6">
+        <div
+          *ngIf="cartItems.length === 0"
+          class="flex flex-col items-center justify-center h-full text-center"
+        >
+          <div
+            class="w-20 h-20 bg-gradient-to-br from-gray-800 to-gray-900 rounded-full flex items-center justify-center mb-4 border border-gray-700"
+          >
+            <svg
+              class="h-8 w-8 text-gray-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9"
+              ></path>
+            </svg>
+          </div>
+          <p class="text-gray-400 mb-4">Your cart is empty</p>
+          <button
+            (click)="closeCart()"
+            class="px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-600 text-white rounded-xl hover:from-gray-600 hover:to-gray-500 transition-all border border-gray-600"
+          >
+            Continue Shopping
+          </button>
+        </div>
+        @if(cartItems.length > 0){
+        <div class="space-y-4">
+          @for(item of cartItems; track $index){
+          <div
+            class="flex items-center space-x-4 py-4 border-b border-gray-700"
+          >
+            <div
+              class="relative h-16 w-16 flex-shrink-0 rounded-xl overflow-hidden border border-gray-700"
+            >
+              <img
+                [src]="item.image"
+                [alt]="item.name"
+                class="w-full h-full object-cover filter grayscale"
+              />
+            </div>
+            <div class="flex-1">
+              <h3 class="font-medium text-white">{{ item.name }}</h3>
+              <div class="flex items-center justify-between mt-2">
+                <div class="flex items-center space-x-2">
+                  <button
+                    (click)="updateQuantity(item.id, -1)"
+                    class="w-8 h-8 flex items-center justify-center border border-gray-600 rounded-lg hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 transition-all text-gray-300"
+                  >
+                    <svg
+                      class="h-3 w-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M20 12H4"
+                      ></path>
+                    </svg>
+                  </button>
+                  <span class="w-8 text-center font-medium text-white">{{
+                    item.quantity
+                  }}</span>
+                  <button
+                    (click)="updateQuantity(item.id, 1)"
+                    class="w-8 h-8 flex items-center justify-center border border-gray-600 rounded-lg hover:bg-gradient-to-r hover:from-gray-700 hover:to-gray-800 transition-all text-gray-300"
+                  >
+                    <svg
+                      class="h-3 w-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 4v16m8-8H4"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <span
+                  class="font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+                >
+                  ${{ item.price * item.quantity }}
+                </span>
+              </div>
+            </div>
+            <button
+              (click)="removeFromCart(item.id)"
+              class="p-2 text-gray-400 hover:text-red-400 transition-colors"
+            >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          }
+        </div>
+        }
+      </div>
+
+      @if (cartItems.length > 0) {
+      <div
+        class="p-6 border-t border-gray-700 bg-gradient-to-r from-gray-800 to-gray-900"
+      ></div>
+      }
+      <div class="flex justify-between mb-4">
+        <span class="font-medium text-gray-300">Subtotal</span>
+        <span
+          class="font-bold text-xl bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+        >
+          ${{ subtotal }}
+        </span>
+      </div>
+      <button
+        (click)="closeCart()"
+        class="w-full py-3 bg-gradient-to-r from-gray-700 to-gray-600 text-white font-medium rounded-xl hover:from-gray-600 hover:to-gray-500 transform hover:scale-105 transition-all duration-300 shadow-lg border border-gray-600"
+      >
+        Proceed to Checkout
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer
+  class="bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white py-16 border-t border-gray-700"
+>
+  <div class="container mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <div class="flex items-center mb-4">
+          <svg
+            class="h-8 w-8 text-gray-400 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
+            ></path>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
+            ></path>
+          </svg>
+          <h3
+            class="text-2xl font-serif font-bold bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent"
+          >
+            PORTRAIT
+          </h3>
+        </div>
+        <p class="text-gray-400 leading-relaxed">
+          Capturing timeless moments through the art of professional black and
+          white portrait photography with passion and precision.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-medium mb-6 text-white">Quick Links</h4>
+        <ul class="space-y-3">
+          <li>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              href="#gallery"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Gallery</a
+            >
+          </li>
+          <li>
+            <a
+              href="#products"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Products</a
+            >
+          </li>
+          <li>
+            <a
+              href="#about"
+              class="text-gray-400 hover:text-white transition-colors"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              href="#contact"
+              class="text-gray-400 hover:text-white transition-colors"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-medium mb-6 text-white">Contact</h4>
+        <address class="not-italic text-gray-400 space-y-2">
+          <p>123 Portrait Lane</p>
+          <p>New York, NY 10001</p>
+          <p class="mt-4">infoportrait.com</p>
+          <p>(555) 123-4567</p>
+        </address>
+      </div>
+
+      <div>
+        <h4 class="text-lg font-medium mb-6 text-white">Follow Us</h4>
+        <div class="flex space-x-4 mb-6">
+          <a
+            href="#"
+            class="p-3 bg-gradient-to-r from-gray-700 to-gray-600 rounded-full hover:from-gray-600 hover:to-gray-500 transition-all transform hover:scale-110 border border-gray-600"
+          >
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+              />
+            </svg>
+            <span class="sr-only">Twitter</span>
+          </a>
+          <a
+            href="#"
+            class="p-3 bg-gradient-to-r from-gray-700 to-gray-600 rounded-full hover:from-gray-600 hover:to-gray-500 transition-all transform hover:scale-110 border border-gray-600"
+          >
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.097.118.112.221.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"
+              />
+            </svg>
+            <span class="sr-only">Instagram</span>
+          </a>
+          <a
+            href="#"
+            class="p-3 bg-gradient-to-r from-gray-700 to-gray-600 rounded-full hover:from-gray-600 hover:to-gray-500 transition-all transform hover:scale-110 border border-gray-600"
+          >
+            <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+              <path
+                d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"
+              />
+            </svg>
+            <span class="sr-only">Facebook</span>
+          </a>
+        </div>
+        <div>
+          <h5 class="text-sm font-medium mb-3 text-white">
+            Subscribe to our newsletter
+          </h5>
+          <form class="flex">
+            <input
+              type="email"
+              placeholder="Your email"
+              class="px-4 py-2 bg-gray-800 text-white placeholder-gray-400 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-gray-500 w-full border border-gray-600"
+            />
+            <button
+              type="submit"
+              class="px-4 py-2 bg-gradient-to-r from-gray-700 to-gray-600 text-white font-medium rounded-r-xl hover:from-gray-600 hover:to-gray-500 transition-all border border-gray-600"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400 text-sm"
+    >
+      <p>
+        &copy; {{ getCurrentYear() }} PORTRAIT. All rights reserved. | Crafted
+        with elegance for timeless memories.
+      </p>
+    </div>
+  </div>
+</footer>
