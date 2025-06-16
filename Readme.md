@@ -2,7 +2,7 @@
 
 Welcome to **Artify**, a full-stack Art Selling Website designed to connect **talented artists** with **passionate buyers**. This platform supports artwork discovery, secure purchases, artist commissions, and more — all wrapped in a modern, mobile-responsive UI with a powerful backend.
 
-======================================================================================================
+========================================
 
 ## 🌐 Tech Stack
 
