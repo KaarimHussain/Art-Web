@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using backend.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers;
 
@@ -17,9 +17,6 @@ public class HomeController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        return Ok(new ApiResponse 
-        { 
-            Message = "Welcome to the Art Website API" 
-        });
+        return Ok(new ApiResponse { Message = "Welcome to the Art Website API" });
     }
 }
