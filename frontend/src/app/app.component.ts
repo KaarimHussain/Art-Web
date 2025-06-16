@@ -1,13 +1,29 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from "@angular/core"
+import { CommonModule } from "@angular/common"
+import { HeaderComponent } from "./components/header/header.component"
+import { HeroComponent } from "./components/hero/hero.component"
+import { AboutComponent } from "./components/about/about.component"
+import { ContactComponent } from "./components/contact/contact.component"
+import { FooterComponent } from "./components/footer/footer.component"
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [CommonModule, HeaderComponent, HeroComponent, AboutComponent, ContactComponent, FooterComponent],
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent {
-  title = 'frontend';
+  title = "Portrait E-commerce"
+
+  scrollToSection(sectionId: string): void {
+    try {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" })
+      }
+    } catch (error) {
+      console.warn("Could not scroll to section:", error)
+    }
+  }
 }

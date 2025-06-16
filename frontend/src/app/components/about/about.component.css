@@ -1,0 +1,14 @@
+/* Custom styles for About component */
+.grayscale {
+    filter: grayscale(100%);
+  }
+  
+  .grayscale-0 {
+    filter: grayscale(0%);
+  }
+  
+  /* Smooth transitions for team member cards */
+  .group:hover .grayscale {
+    filter: grayscale(0%);
+  }
+  
