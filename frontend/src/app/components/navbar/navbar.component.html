@@ -1,0 +1,121 @@
+<!-- Navigation -->
+<header
+  class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-xl border-b border-emerald-800/20"
+>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <div class="flex items-center relative">
+        <div
+          class="absolute -left-4 -top-2 w-12 h-12 border-2 border-amber-500 rotate-45 opacity-20"
+        ></div>
+        <a
+          routerLink="/"
+          class="text-3xl font-serif font-bold text-amber-400 tracking-wider relative z-10"
+        >
+          PORTRAIT
+        </a>
+      </div>
+
+      <nav class="hidden md:flex space-x-12">
+        <a
+          routerLink="/shop"
+          class="text-sm font-medium text-slate-300 hover:text-amber-400 transition-all duration-300 relative group"
+        >
+          Shop
+          <div
+            class="absolute -bottom-2 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
+          ></div>
+          <div
+            class="absolute -top-8 -left-2 w-6 h-6 border border-emerald-600 rotate-45 opacity-0 group-hover:opacity-30 transition-all duration-300"
+          ></div>
+        </a>
+        <a
+          routerLink="/collection"
+          class="text-sm font-medium text-slate-300 hover:text-amber-400 transition-all duration-300 relative group"
+        >
+          Collections
+          <div
+            class="absolute -bottom-2 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
+          ></div>
+          <div
+            class="absolute -top-8 -left-2 w-6 h-6 border border-emerald-600 rotate-45 opacity-0 group-hover:opacity-30 transition-all duration-300"
+          ></div>
+        </a>
+        <a
+          routerLink="/about"
+          class="text-sm font-medium text-slate-300 hover:text-amber-400 transition-all duration-300 relative group"
+        >
+          About
+          <div
+            class="absolute -bottom-2 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
+          ></div>
+          <div
+            class="absolute -top-8 -left-2 w-6 h-6 border border-emerald-600 rotate-45 opacity-0 group-hover:opacity-30 transition-all duration-300"
+          ></div>
+        </a>
+        <a
+          routerLink="/contact"
+          class="text-sm font-medium text-slate-300 hover:text-amber-400 transition-all duration-300 relative group"
+        >
+          Contact
+          <div
+            class="absolute -bottom-2 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
+          ></div>
+          <div
+            class="absolute -top-8 -left-2 w-6 h-6 border border-emerald-600 rotate-45 opacity-0 group-hover:opacity-30 transition-all duration-300"
+          ></div>
+        </a>
+      </nav>
+
+      <div class="flex items-center space-x-4">
+        <!-- Cart Button (shown when logged in) -->
+        <ng-container *ngIf="isLoggedIn; else authButtons">
+          <button
+            (click)="openCart()"
+            class="relative p-3 rounded-full hover:bg-slate-800/50 transition-all duration-300 group"
+          >
+            <svg
+              class="h-6 w-6 text-slate-300 group-hover:text-amber-400 transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9"
+              ></path>
+            </svg>
+            <span
+              *ngIf="cartItems.length > 0"
+              class="absolute -top-1 -right-1 bg-amber-500 text-slate-900 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
+              >{{ cartItems.length }}</span
+            >
+            <div
+              class="absolute -bottom-8 -right-2 w-4 h-4 bg-emerald-600 rotate-45 opacity-0 group-hover:opacity-20 transition-all duration-300"
+            ></div>
+          </button>
+        </ng-container>
+
+        <!-- Login/Signup Buttons (shown when not logged in) -->
+        <ng-template #authButtons>
+          <div class="flex space-x-3">
+            <a
+              routerLink="/login"
+              class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors"
+            >
+              Login
+            </a>
+            <a
+              routerLink="/signup"
+              class="px-4 py-2 text-sm font-medium bg-amber-500 text-slate-900 rounded-md hover:bg-amber-400 transition-colors"
+            >
+              Sign Up
+            </a>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</header>

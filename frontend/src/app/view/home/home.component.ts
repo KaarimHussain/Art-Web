@@ -1,29 +1,12 @@
 import { Component } from '@angular/core';
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  category: string;
-  rating: number;
-  popular: boolean;
-}
+import CartItem from '../../models/CartItems';
+import Product from '../../models/Product';
 
 interface Portrait {
   id: number;
   src: string;
   alt: string;
   category: string;
-}
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  image: string;
 }
 @Component({
   selector: 'app-home',
@@ -234,9 +217,5 @@ export class HomeComponent {
     event.preventDefault();
     // Handle form submission
     console.log('Form submitted');
-  }
-
-  getCurrentYear(){
-    return Date.now();
   }
 }

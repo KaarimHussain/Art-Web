@@ -1,5 +1,4 @@
-<div class="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700">
-    <!-- Navigation Header -->
+<!-- 
     <header
       class="sticky top-0 z-50 bg-green-900/95 backdrop-blur-sm border-b border-green-600 shadow-lg"
       role="banner"
@@ -91,12 +90,10 @@
       </div>
     </header>
   
-    <!-- Main Content -->
+ 
     <main role="main">
-      <!-- Artwork Detail Section -->
       <section class="py-12" aria-labelledby="artwork-title">
         <div class="container mx-auto px-4">
-          <!-- Breadcrumb Navigation -->
           <nav class="flex items-center text-sm mb-8" aria-label="Breadcrumb">
             <ol class="flex items-center">
               <li>
@@ -122,7 +119,6 @@
           </nav>
   
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Artwork Image Section -->
             <div class="space-y-4">
               <div class="relative aspect-[4/3] bg-gradient-to-br from-green-800 to-green-900 rounded-2xl overflow-hidden border border-green-600 shadow-2xl">
                 <img
@@ -144,7 +140,6 @@
                 </button>
               </div>
   
-              <!-- Thumbnail Gallery -->
               <div class="flex space-x-3 overflow-x-auto pb-2" role="tablist" aria-label="Artwork images">
                 <button
                   *ngFor="let image of artwork.images; let i = index; trackBy: trackByImageIndex"
@@ -161,7 +156,6 @@
               </div>
             </div>
   
-            <!-- Artwork Details Section -->
             <div class="space-y-6">
               <div>
                 <h1 id="artwork-title" class="text-3xl md:text-4xl font-serif font-bold text-yellow-100 mb-2">
@@ -179,7 +173,6 @@
                 </div>
               </div>
   
-              <!-- Price and Add to Cart -->
               <div class="flex items-center justify-between bg-green-800/50 p-4 rounded-xl border border-green-600">
                 <div>
                   <span class="text-yellow-300 text-sm">Price</span>
@@ -228,7 +221,6 @@
                 </div>
               </div>
   
-              <!-- Artwork Details -->
               <div class="space-y-4">
                 <div>
                   <h2 class="text-lg font-medium text-yellow-100 mb-2">Description</h2>
@@ -237,8 +229,7 @@
                   </p>
                 </div>
   
-                <!-- Artwork Specifications -->
-                <div class="grid grid-cols-2 gap-4 bg-green-800/30 p-4 rounded-xl border border-green-600">
+=                <div class="grid grid-cols-2 gap-4 bg-green-800/30 p-4 rounded-xl border border-green-600">
                   <div>
                     <span class="text-yellow-400 text-sm">Medium</span>
                     <p class="text-yellow-200">{{ artwork.medium }}</p>
@@ -257,7 +248,6 @@
                   </div>
                 </div>
   
-                <!-- Artist Info -->
                 <div class="flex items-center space-x-4 bg-green-800/30 p-4 rounded-xl border border-green-600">
                   <div class="h-16 w-16 rounded-full overflow-hidden border border-green-500">
                     <img [src]="artwork.artistImage" [alt]="artwork.artist + ' profile picture'" class="h-full w-full object-cover" loading="lazy" />
@@ -275,7 +265,6 @@
                   </a>
                 </div>
   
-                <!-- Commission Request -->
                 <div class="bg-gradient-to-r from-green-700 to-green-800 p-4 rounded-xl border border-green-600">
                   <h3 class="text-lg font-medium text-yellow-100 mb-2">Request a Custom Commission</h3>
                   <p class="text-yellow-300 text-sm mb-3">
@@ -294,7 +283,6 @@
             </div>
           </div>
   
-          <!-- Reviews Section -->
           <section class="mt-16" aria-labelledby="reviews-heading">
             <h2 id="reviews-heading" class="text-2xl font-serif font-bold text-yellow-100 mb-6">Customer Reviews</h2>
             
@@ -318,7 +306,6 @@
               </button>
             </div>
   
-            <!-- Review List -->
             <div class="space-y-6">
               <article *ngFor="let review of artwork.reviewList; trackBy: trackByReviewId" class="bg-green-800/30 p-6 rounded-xl border border-green-600">
                 <div class="flex justify-between mb-3">
@@ -350,7 +337,6 @@
               </article>
             </div>
   
-            <!-- Pagination -->
             <nav class="flex justify-center mt-8" aria-label="Reviews pagination">
               <div class="inline-flex rounded-xl overflow-hidden border border-green-600">
                 <button 
@@ -385,7 +371,6 @@
             </nav>
           </section>
   
-          <!-- Related Artworks -->
           <section class="mt-16" aria-labelledby="related-heading">
             <h2 id="related-heading" class="text-2xl font-serif font-bold text-yellow-100 mb-6">You May Also Like</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Related artworks">
@@ -424,7 +409,6 @@
       </section>
     </main>
   
-    <!-- Footer -->
     <footer class="bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-yellow-100 py-16 border-t border-green-600" role="contentinfo">
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -544,7 +528,6 @@
       </div>
     </footer>
   
-    <!-- Image Zoom Modal -->
     <div *ngIf="showZoomModal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="zoom-modal-title">
       <div class="relative w-full h-full flex items-center justify-center">
         <h2 id="zoom-modal-title" class="sr-only">Zoomed view of {{ artwork.title }}</h2>
@@ -577,4 +560,4 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->

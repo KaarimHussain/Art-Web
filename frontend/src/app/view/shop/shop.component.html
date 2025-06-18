@@ -1,0 +1,735 @@
+<div class="min-h-screen bg-slate-900 relative overflow-hidden">
+  <!-- Creative Background Pattern -->
+  <div class="fixed inset-0 opacity-5">
+    <div
+      class="absolute top-20 left-10 w-32 h-32 border-2 border-emerald-600 rotate-45 rounded-2xl"
+    ></div>
+    <div
+      class="absolute top-40 right-20 w-24 h-24 bg-amber-500 rounded-full opacity-10"
+    ></div>
+    <div
+      class="absolute bottom-40 left-1/4 w-16 h-16 border border-emerald-500 rotate-12 rounded-xl"
+    ></div>
+    <div
+      class="absolute top-1/3 right-1/3 w-20 h-20 border-2 border-amber-400 rounded-full"
+    ></div>
+    <div
+      class="absolute bottom-20 right-10 w-28 h-28 border border-emerald-600 -rotate-12 rounded-3xl"
+    ></div>
+    <div
+      class="absolute top-1/2 left-10 w-12 h-12 bg-amber-500/20 rotate-45"
+    ></div>
+  </div>
+
+  <!-- Main Shop Content -->
+  <main class="relative z-10 py-12">
+    <div class="container mx-auto px-4">
+      <!-- Creative Header Section -->
+      <section class="relative mb-12">
+        <div
+          class="absolute -inset-4 bg-amber-500/10 rounded-3xl -rotate-1"
+        ></div>
+        <div
+          class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8"
+        >
+          <div
+            class="absolute top-6 right-6 w-8 h-8 border-2 border-emerald-600/30 rotate-45 rounded-xl"
+          ></div>
+          <div class="text-center relative z-10">
+            <div class="inline-block mb-4">
+              <span
+                class="px-6 py-2 bg-emerald-800/30 text-emerald-400 text-sm font-semibold rounded-full border border-emerald-600/50"
+              >
+                Portrait Gallery
+              </span>
+            </div>
+            <h1
+              class="text-4xl md:text-5xl font-serif font-bold text-slate-100 mb-4"
+            >
+              Discover <span class="text-amber-400">Stunning</span> Portraits
+            </h1>
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+              Explore our curated collection of professional portraits, each
+              capturing unique moments and emotions
+            </p>
+          </div>
+          <div
+            class="absolute -bottom-4 -left-4 w-12 h-12 bg-emerald-600/20 rotate-45 rounded-xl"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Filters and Search Section -->
+      <section class="relative mb-8">
+        <div
+          class="absolute -inset-3 bg-emerald-600/5 rounded-3xl rotate-1"
+        ></div>
+        <div
+          class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 p-6"
+        >
+          <div
+            class="flex flex-col lg:flex-row gap-6 items-center justify-between"
+          >
+            <!-- Search Bar -->
+            <div class="relative flex-1 max-w-md">
+              <div
+                class="absolute -top-2 -left-2 w-6 h-6 border border-amber-500/30 rotate-45 rounded-lg"
+              ></div>
+              <div class="relative">
+                <input
+                  type="text"
+                  [(ngModel)]="searchQuery"
+                  (input)="onSearch()"
+                  placeholder="Search portraits..."
+                  class="w-full pl-12 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-slate-100 placeholder-slate-400"
+                />
+                <svg
+                  class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap gap-3">
+              <button
+                *ngFor="let category of categories; let i = index"
+                (click)="selectCategory(category)"
+                [class]="
+                  'group relative overflow-hidden px-6 py-3 rounded-xl font-medium transition-all duration-300 border ' +
+                  (selectedCategory === category
+                    ? i % 3 === 0
+                      ? 'bg-emerald-600 text-slate-100 border-emerald-500'
+                      : i % 3 === 1
+                      ? 'bg-amber-500 text-slate-900 border-amber-400'
+                      : 'bg-slate-600 text-slate-100 border-slate-500'
+                    : 'bg-slate-700/50 text-slate-300 border-slate-600/50 hover:bg-slate-600/50')
+                "
+              >
+                <span class="relative z-10">{{ category }}</span>
+                <div
+                  *ngIf="selectedCategory !== category"
+                  [class]="
+                    'absolute inset-0 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ' +
+                    (i % 3 === 0
+                      ? 'bg-emerald-600/20'
+                      : i % 3 === 1
+                      ? 'bg-amber-500/20'
+                      : 'bg-slate-600/20')
+                  "
+                ></div>
+              </button>
+            </div>
+
+            <!-- Sort Dropdown -->
+            <div class="relative">
+              <select
+                [(ngModel)]="sortBy"
+                (change)="onSortChange()"
+                class="appearance-none bg-slate-700/50 border border-slate-600/50 rounded-xl px-6 py-3 pr-10 text-slate-100 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all cursor-pointer"
+              >
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="popular">Most Popular</option>
+              </select>
+              <svg
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Active Filters Display -->
+          <div
+            *ngIf="hasActiveFilters()"
+            class="mt-4 pt-4 border-t border-slate-700/50"
+          >
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="text-sm text-slate-400">Active filters:</span>
+              <span
+                *ngIf="selectedCategory !== 'All'"
+                class="inline-flex items-center px-3 py-1 bg-emerald-600/20 text-emerald-400 text-sm rounded-full border border-emerald-600/30"
+              >
+                {{ selectedCategory }}
+                <button
+                  (click)="clearCategoryFilter()"
+                  class="ml-2 hover:text-emerald-300"
+                >
+                  <svg
+                    class="w-3 h-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                </button>
+              </span>
+              <span
+                *ngIf="searchQuery"
+                class="inline-flex items-center px-3 py-1 bg-amber-500/20 text-amber-400 text-sm rounded-full border border-amber-500/30"
+              >
+                "{{ searchQuery }}"
+                <button
+                  (click)="clearSearch()"
+                  class="ml-2 hover:text-amber-300"
+                >
+                  <svg
+                    class="w-3 h-3"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                </button>
+              </span>
+              <button
+                (click)="clearAllFilters()"
+                class="text-sm text-slate-400 hover:text-slate-300 underline"
+              >
+                Clear all
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Results Summary -->
+      <div class="flex items-center justify-between mb-8">
+        <div class="flex items-center space-x-4">
+          <div class="w-1 h-8 bg-amber-500 rounded-full"></div>
+          <div>
+            <p class="text-slate-100 font-semibold">
+              {{ filteredPortraits.length }} portraits found
+            </p>
+            <p class="text-slate-400 text-sm">{{ getResultsText() }}</p>
+          </div>
+        </div>
+
+        <!-- View Toggle -->
+        <div
+          class="flex items-center space-x-2 bg-slate-800/50 rounded-xl p-1 border border-slate-700/30"
+        >
+          <button
+            (click)="setViewMode('grid')"
+            [class]="
+              'p-2 rounded-lg transition-all ' +
+              (viewMode === 'grid'
+                ? 'bg-emerald-600 text-slate-100'
+                : 'text-slate-400 hover:text-slate-300')
+            "
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+              ></path>
+            </svg>
+          </button>
+          <button
+            (click)="setViewMode('list')"
+            [class]="
+              'p-2 rounded-lg transition-all ' +
+              (viewMode === 'list'
+                ? 'bg-emerald-600 text-slate-100'
+                : 'text-slate-400 hover:text-slate-300')
+            "
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 10h16M4 14h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="text-center py-16">
+        <div class="inline-block relative">
+          <div
+            class="w-16 h-16 border-4 border-slate-700 border-t-amber-500 rounded-full animate-spin"
+          ></div>
+          <div
+            class="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-emerald-500 rounded-full animate-spin"
+            style="animation-delay: 0.3s"
+          ></div>
+        </div>
+        <p class="text-slate-300 mt-4">Loading portraits...</p>
+      </div>
+
+      <!-- No Results -->
+      <div
+        *ngIf="!isLoading && filteredPortraits.length === 0"
+        class="text-center py-16"
+      >
+        <div class="relative inline-block mb-6">
+          <div
+            class="w-20 h-20 bg-slate-800/50 rounded-2xl flex items-center justify-center"
+          >
+            <svg
+              class="w-10 h-10 text-slate-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              ></path>
+            </svg>
+          </div>
+          <div
+            class="absolute -top-2 -right-2 w-6 h-6 border border-amber-500/30 rotate-45 rounded-lg"
+          ></div>
+        </div>
+        <h3 class="text-xl font-semibold text-slate-100 mb-2">
+          No portraits found
+        </h3>
+        <p class="text-slate-400 mb-6">
+          Try adjusting your search or filters to find what you're looking for.
+        </p>
+        <button
+          (click)="clearAllFilters()"
+          class="px-6 py-3 bg-emerald-600 text-slate-100 rounded-xl hover:bg-emerald-500 transition-all font-medium"
+        >
+          Clear All Filters
+        </button>
+      </div>
+
+      <!-- No Results for Current Page -->
+      <div
+        *ngIf="
+          !isLoading &&
+          filteredPortraits.length > 0 &&
+          paginatedPortraits.length === 0
+        "
+        class="text-center py-16"
+      >
+        <div class="relative inline-block mb-6">
+          <div
+            class="w-20 h-20 bg-slate-800/50 rounded-2xl flex items-center justify-center"
+          >
+            <svg
+              class="w-10 h-10 text-slate-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              ></path>
+            </svg>
+          </div>
+          <div
+            class="absolute -top-2 -right-2 w-6 h-6 border border-amber-500/30 rotate-45 rounded-lg"
+          ></div>
+        </div>
+        <h3 class="text-xl font-semibold text-slate-100 mb-2">
+          No portraits on this page
+        </h3>
+        <p class="text-slate-400 mb-6">
+          Try going to the first page or adjusting your filters.
+        </p>
+        <button
+          (click)="goToPage(1)"
+          class="px-6 py-3 bg-emerald-600 text-slate-100 rounded-xl hover:bg-emerald-500 transition-all font-medium"
+        >
+          Go to First Page
+        </button>
+      </div>
+
+      <!-- Portraits Grid -->
+      <div *ngIf="!isLoading && paginatedPortraits.length > 0">
+        <!-- Grid View -->
+        <div
+          *ngIf="viewMode === 'grid'"
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        >
+          <article
+            *ngFor="
+              let portrait of paginatedPortraits;
+              let i = index;
+              trackBy: trackByPortraitId
+            "
+            class="group relative"
+          >
+            <div
+              [class]="
+                'absolute -inset-3 rounded-2xl transition-all duration-300 ' +
+                (i % 3 === 0
+                  ? 'bg-emerald-600/10 rotate-1 group-hover:rotate-2'
+                  : i % 3 === 1
+                  ? 'bg-amber-500/10 -rotate-1 group-hover:-rotate-2'
+                  : 'bg-slate-700/20 rotate-0 group-hover:rotate-1')
+              "
+            ></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/30 group-hover:border-slate-600/50 transition-all"
+            >
+              <!-- Image Container -->
+              <div class="relative aspect-[3/4] overflow-hidden">
+                <img
+                  [src]="portrait.imageUrl"
+                  [alt]="portrait.title + ' by ' + portrait.artist"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="lazy"
+                />
+                <div
+                  class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center"
+                >
+                  <div
+                    class="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500"
+                  >
+                    <button
+                      (click)="viewPortrait(portrait)"
+                      class="px-6 py-3 bg-amber-500 text-slate-900 rounded-xl font-semibold hover:bg-amber-400 transition-all mr-3"
+                    >
+                      View Details
+                    </button>
+                    <button
+                      (click)="addToWishlist(portrait, $event)"
+                      [class]="
+                        'p-3 rounded-xl border-2 transition-all ' +
+                        (portrait.isInWishlist
+                          ? 'bg-emerald-600 border-emerald-500 text-slate-100'
+                          : 'bg-slate-800/80 border-slate-600 text-slate-300 hover:border-emerald-500')
+                      "
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Category Badge -->
+                <div class="absolute top-4 left-4">
+                  <span
+                    [class]="
+                      'px-3 py-1 text-xs font-semibold rounded-full ' +
+                      getCategoryBadgeClass(portrait.category)
+                    "
+                  >
+                    {{ portrait.category }}
+                  </span>
+                </div>
+
+                <!-- Popular Badge -->
+                <div *ngIf="portrait.isPopular" class="absolute top-4 right-4">
+                  <span
+                    class="px-3 py-1 bg-amber-500 text-slate-900 text-xs font-semibold rounded-full flex items-center"
+                  >
+                    <svg
+                      class="w-3 h-3 mr-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    Popular
+                  </span>
+                </div>
+              </div>
+
+              <!-- Content -->
+              <div class="p-6">
+                <div class="flex items-start justify-between mb-3">
+                  <h3
+                    class="text-lg font-semibold text-slate-100 group-hover:text-amber-400 transition-colors"
+                  >
+                    {{ portrait.title }}
+                  </h3>
+                  <span class="text-xl font-bold text-amber-400"
+                    >${{ portrait.price }}</span
+                  >
+                </div>
+
+                <div class="flex items-center justify-between mb-4">
+                  <p class="text-slate-300 text-sm">By {{ portrait.artist }}</p>
+                  <div class="flex items-center">
+                    <svg
+                      class="w-4 h-4 text-amber-400 mr-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    <span class="text-slate-300 text-sm">{{
+                      portrait.rating
+                    }}</span>
+                  </div>
+                </div>
+
+                <p class="text-slate-400 text-sm mb-4 line-clamp-2">
+                  {{ portrait.description }}
+                </p>
+
+                <button
+                  (click)="addToCart(portrait)"
+                  class="w-full py-3 bg-emerald-700 text-slate-100 rounded-xl hover:bg-emerald-600 transition-all font-medium group-hover:bg-emerald-600"
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- List View -->
+        <div *ngIf="viewMode === 'list'" class="space-y-6">
+          <article
+            *ngFor="
+              let portrait of paginatedPortraits;
+              let i = index;
+              trackBy: trackByPortraitId
+            "
+            class="group relative"
+          >
+            <div
+              [class]="
+                'absolute -inset-3 rounded-2xl transition-all duration-300 ' +
+                (i % 2 === 0
+                  ? 'bg-emerald-600/5 rotate-1 group-hover:rotate-2'
+                  : 'bg-amber-500/5 -rotate-1 group-hover:-rotate-2')
+              "
+            ></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 group-hover:border-slate-600/50 transition-all overflow-hidden"
+            >
+              <div class="flex flex-col md:flex-row">
+                <!-- Image -->
+                <div
+                  class="relative md:w-80 aspect-[4/3] md:aspect-[3/4] overflow-hidden"
+                >
+                  <img
+                    [src]="portrait.imageUrl"
+                    [alt]="portrait.title + ' by ' + portrait.artist"
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div class="absolute top-4 left-4">
+                    <span
+                      [class]="
+                        'px-3 py-1 text-xs font-semibold rounded-full ' +
+                        getCategoryBadgeClass(portrait.category)
+                      "
+                    >
+                      {{ portrait.category }}
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Content -->
+                <div class="flex-1 p-8">
+                  <div class="flex items-start justify-between mb-4">
+                    <div>
+                      <h3
+                        class="text-2xl font-serif font-bold text-slate-100 mb-2 group-hover:text-amber-400 transition-colors"
+                      >
+                        {{ portrait.title }}
+                      </h3>
+                      <p class="text-slate-300">By {{ portrait.artist }}</p>
+                    </div>
+                    <div class="text-right">
+                      <span class="text-3xl font-bold text-amber-400"
+                        >${{ portrait.price }}</span
+                      >
+                      <div class="flex items-center justify-end mt-1">
+                        <svg
+                          class="w-4 h-4 text-amber-400 mr-1"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                          />
+                        </svg>
+                        <span class="text-slate-300">{{
+                          portrait.rating
+                        }}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p class="text-slate-300 mb-6 leading-relaxed">
+                    {{ portrait.description }}
+                  </p>
+
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                      <span class="text-sm text-slate-400">{{
+                        portrait.dimensions
+                      }}</span>
+                      <span class="text-sm text-slate-400">{{
+                        portrait.medium
+                      }}</span>
+                    </div>
+
+                    <div class="flex items-center space-x-3">
+                      <button
+                        (click)="addToWishlist(portrait, $event)"
+                        [class]="
+                          'p-3 rounded-xl border-2 transition-all ' +
+                          (portrait.isInWishlist
+                            ? 'bg-emerald-600 border-emerald-500 text-slate-100'
+                            : 'bg-slate-700/50 border-slate-600 text-slate-300 hover:border-emerald-500')
+                        "
+                      >
+                        <svg
+                          class="w-5 h-5"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        (click)="viewPortrait(portrait)"
+                        class="px-6 py-3 bg-slate-700 text-slate-100 rounded-xl hover:bg-slate-600 transition-all font-medium"
+                      >
+                        View Details
+                      </button>
+                      <button
+                        (click)="addToCart(portrait)"
+                        class="px-8 py-3 bg-emerald-600 text-slate-100 rounded-xl hover:bg-emerald-500 transition-all font-medium"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div
+        *ngIf="!isLoading && filteredPortraits.length > 0"
+        class="mt-12 flex justify-center"
+      >
+        <div class="flex items-center space-x-2">
+          <button
+            (click)="previousPage()"
+            [disabled]="currentPage === 1"
+            class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/30 text-slate-300 hover:bg-slate-700/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              ></path>
+            </svg>
+          </button>
+
+          <div class="flex items-center space-x-1">
+            <button
+              *ngFor="let page of getPageNumbers()"
+              (click)="goToPage(page)"
+              [class]="
+                'px-4 py-2 rounded-lg transition-all ' +
+                (page === currentPage
+                  ? 'bg-amber-500 text-slate-900 font-semibold'
+                  : 'bg-slate-800/50 text-slate-300 hover:bg-slate-700/50')
+              "
+            >
+              {{ page }}
+            </button>
+          </div>
+
+          <button
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages"
+            class="p-3 rounded-xl bg-slate-800/50 border border-slate-700/30 text-slate-300 hover:bg-slate-700/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

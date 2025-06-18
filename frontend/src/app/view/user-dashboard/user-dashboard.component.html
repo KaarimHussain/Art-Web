@@ -1,283 +1,241 @@
-<div class="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700">
-    <!-- Navigation Header -->
-    <header
-      class="sticky top-0 z-50 bg-green-900/95 backdrop-blur-sm border-b border-green-600 shadow-lg"
-      role="banner"
-    >
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <div class="flex items-center">
-            <a
-              href="#"
-              class="text-2xl font-serif font-bold bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent"
-              aria-label="ARTISTRY - Home"
-            >
-              ARTISTRY
-            </a>
-          </div>
-  
-          <nav class="hidden md:flex space-x-8" role="navigation" aria-label="Main navigation">
-            <a
-              href="#"
-              class="text-sm font-medium text-yellow-200 hover:text-yellow-100 transition-colors"
-              >Gallery</a
-            >
-            <a
-              href="#"
-              class="text-sm font-medium text-yellow-200 hover:text-yellow-100 transition-colors"
-              >Artists</a
-            >
-            <a
-              href="#"
-              class="text-sm font-medium text-yellow-200 hover:text-yellow-100 transition-colors"
-              >Commissions</a
-            >
-            <a
-              href="#"
-              class="text-sm font-medium text-yellow-200 hover:text-yellow-100 transition-colors"
-              >About</a
-            >
-          </nav>
-  
-          <div class="flex items-center space-x-4">
-            <button
-              (click)="openCart()"
-              class="p-2 rounded-full hover:bg-gradient-to-r hover:from-green-700 hover:to-green-600 transition-all"
-              aria-label="Open shopping cart"
-              type="button"
-            >
-              <svg
-                class="h-5 w-5 text-yellow-200"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9"
-                ></path>
-              </svg>
-            </button>
-            <div class="relative">
-              <button
-                (click)="toggleUserMenu()"
-                class="flex items-center space-x-2 text-yellow-200 hover:text-yellow-100 transition-colors"
-                aria-label="User menu"
-                aria-expanded="false"
-                type="button"
-              >
-                <div class="h-8 w-8 rounded-full overflow-hidden border border-yellow-500">
-                  <img [src]="user.profileImage" [alt]="user.name + ' profile picture'" class="h-full w-full object-cover" />
-                </div>
-                <span class="text-sm font-medium">{{ user.firstName }}</span>
-              </button>
-            </div>
-            <button
-              class="md:hidden p-2 rounded-full hover:bg-gradient-to-r hover:from-green-700 hover:to-green-600 transition-all"
-              aria-label="Open mobile menu"
-              type="button"
-            >
-              <svg
-                class="h-5 w-5 text-yellow-200"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </header>
-  
-    <!-- Main Content -->
-    <main role="main">
-      <!-- Dashboard Content -->
-      <div class="container mx-auto px-4 py-12">
-        <div class="flex flex-col lg:flex-row gap-8">
-          <!-- Sidebar -->
-          <aside class="lg:w-1/4" role="complementary" aria-label="Dashboard navigation">
-            <div class="bg-gradient-to-br from-green-800 to-green-900 rounded-2xl shadow-xl border border-green-600 overflow-hidden sticky top-24">
+<div class="min-h-screen bg-slate-900 relative overflow-hidden">
+  <!-- Creative Background Pattern -->
+  <div class="fixed inset-0 opacity-5">
+    <div class="absolute top-20 left-10 w-32 h-32 border-2 border-emerald-600 rotate-45 rounded-2xl"></div>
+    <div class="absolute top-40 right-20 w-24 h-24 bg-amber-500 rounded-full opacity-10"></div>
+    <div class="absolute bottom-40 left-1/4 w-16 h-16 border border-emerald-500 rotate-12 rounded-xl"></div>
+    <div class="absolute top-1/3 right-1/3 w-20 h-20 border-2 border-amber-400 rounded-full"></div>
+    <div class="absolute bottom-20 right-10 w-28 h-28 border border-emerald-600 -rotate-12 rounded-3xl"></div>
+    <div class="absolute top-1/2 left-10 w-12 h-12 bg-amber-500/20 rotate-45"></div>
+  </div>
+
+  <!-- Main Content -->
+  <main role="main" class="relative z-10">
+    <!-- Dashboard Content -->
+    <div class="container mx-auto px-4 py-12">
+      <div class="flex flex-col lg:flex-row gap-8">
+        
+        <!-- Creative Sidebar -->
+        <aside class="lg:w-1/4" role="complementary" aria-label="Dashboard navigation">
+          <div class="relative sticky top-24">
+            <div class="absolute -inset-4 bg-emerald-600/10 rounded-3xl rotate-1"></div>
+            <div class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 overflow-hidden">
+              
               <!-- User Profile Summary -->
-              <div class="p-6 border-b border-green-600 flex items-center space-x-4">
-                <div class="h-16 w-16 rounded-full overflow-hidden border-2 border-yellow-500">
-                  <img [src]="user.profileImage" [alt]="user.name + ' profile picture'" class="h-full w-full object-cover" />
-                </div>
-                <div>
-                  <h2 class="text-xl font-bold text-yellow-100">{{ user.name }}</h2>
-                  <p class="text-yellow-300 text-sm">{{ user.email }}</p>
+              <div class="p-6 border-b border-slate-700/50 relative">
+                <div class="absolute top-4 right-4 w-6 h-6 border-2 border-amber-500/30 rotate-45 rounded-lg"></div>
+                <div class="flex items-center space-x-4 relative z-10">
+                  <div class="relative">
+                    <div class="h-16 w-16 rounded-2xl overflow-hidden border-2 border-amber-500 relative">
+                      <img [src]="user.profileImage" [alt]="user.name + ' profile picture'" class="h-full w-full object-cover" />
+                    </div>
+                    <div class="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-slate-800"></div>
+                  </div>
+                  <div>
+                    <h2 class="text-xl font-bold text-slate-100">{{ user.name }}</h2>
+                    <p class="text-amber-400 text-sm">{{ user.email }}</p>
+                    <div class="flex items-center mt-1">
+                      <div class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></div>
+                      <span class="text-emerald-400 text-xs">Premium Member</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-  
+
               <!-- Navigation Menu -->
-              <nav class="p-2" role="navigation" aria-label="Dashboard navigation">
-                <a
-                  *ngFor="let item of navItems; trackBy: trackByNavItem"
-                  [routerLink]="item.link"
-                  routerLinkActive="bg-gradient-to-r from-yellow-600 to-yellow-500 text-green-900 border-yellow-500"
-                  class="flex items-center space-x-3 px-4 py-3 rounded-xl mb-1 border border-transparent hover:bg-green-700 transition-all text-yellow-200"
-                  [class.font-medium]="item.active"
-                  [attr.aria-current]="item.active ? 'page' : null"
-                >
-                  <svg class="h-5 w-5" [innerHTML]="item.icon" aria-hidden="true"></svg>
-                  <span>{{ item.label }}</span>
-                </a>
+              <nav class="p-4" role="navigation" aria-label="Dashboard navigation">
+                <div class="space-y-2">
+                  <a
+                    *ngFor="let item of navItems; trackBy: trackByNavItem; let i = index"
+                    [routerLink]="item.link"
+                    routerLinkActive="bg-amber-500 text-slate-900 border-amber-400"
+                    class="group flex items-center space-x-3 px-4 py-3 rounded-xl border border-transparent hover:bg-slate-700/50 transition-all text-slate-300 hover:text-amber-400 relative overflow-hidden"
+                    [class.font-medium]="item.active"
+                    [attr.aria-current]="item.active ? 'page' : null"
+                  >
+                    <div [class]="'w-8 h-8 rounded-xl flex items-center justify-center transition-all ' + 
+                                 (i % 3 === 0 ? 'bg-emerald-600/20 group-hover:bg-emerald-600/30' : 
+                                  i % 3 === 1 ? 'bg-amber-500/20 group-hover:bg-amber-500/30' : 
+                                  'bg-slate-700/50 group-hover:bg-slate-600/50')">
+                      <svg class="h-4 w-4" [innerHTML]="item.icon" aria-hidden="true"></svg>
+                    </div>
+                    <span class="relative z-10">{{ item.label }}</span>
+                    <div class="absolute inset-0 bg-amber-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left opacity-0 group-hover:opacity-10"></div>
+                  </a>
+                </div>
               </nav>
-  
+
               <!-- Logout Button -->
-              <div class="p-4 border-t border-green-600">
+              <div class="p-4 border-t border-slate-700/50 relative">
+                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 w-4 h-4 border border-emerald-600/30 rotate-45 rounded-sm"></div>
                 <button
                   (click)="logout()"
-                  class="flex items-center justify-center w-full px-4 py-3 bg-green-700 text-yellow-200 rounded-xl hover:bg-green-600 transition-all border border-green-500"
+                  class="group relative overflow-hidden flex items-center justify-center w-full px-4 py-3 bg-slate-700/50 text-slate-300 rounded-xl hover:bg-slate-600/50 transition-all border border-slate-600/50 hover:border-amber-500/30"
                   type="button"
                 >
-                  <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-                    ></path>
+                  <svg class="h-5 w-5 mr-2 group-hover:text-amber-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                   </svg>
-                  Logout
+                  <span class="group-hover:text-amber-400 transition-colors">Logout</span>
                 </button>
               </div>
             </div>
-          </aside>
-  
-          <!-- Main Content -->
-          <div class="lg:w-3/4 space-y-8">
-            <!-- Welcome Banner -->
-            <section class="bg-gradient-to-r from-green-700 to-green-800 rounded-2xl shadow-xl border border-green-600 p-6" aria-labelledby="welcome-heading">
-              <div class="flex flex-col md:flex-row justify-between items-center">
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="lg:w-3/4 space-y-8">
+          
+          <!-- Creative Welcome Banner -->
+          <section class="relative" aria-labelledby="welcome-heading">
+            <div class="absolute -inset-4 bg-amber-500/10 rounded-3xl -rotate-1"></div>
+            <div class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8 overflow-hidden">
+              <div class="absolute top-6 right-6 w-8 h-8 border-2 border-emerald-600/30 rotate-45 rounded-xl"></div>
+              <div class="flex flex-col md:flex-row justify-between items-center relative z-10">
                 <div>
-                  <h1 id="welcome-heading" class="text-2xl md:text-3xl font-bold text-yellow-100 mb-2">Welcome back, {{ user.firstName }}!</h1>
-                  <p class="text-yellow-300">
+                  <div class="inline-block mb-4">
+                    <span class="px-4 py-2 bg-emerald-800/30 text-emerald-400 text-sm font-semibold rounded-full border border-emerald-600/50">
+                      Dashboard
+                    </span>
+                  </div>
+                  <h1 id="welcome-heading" class="text-3xl md:text-4xl font-serif font-bold text-slate-100 mb-3">
+                    Welcome back, <span class="text-amber-400">{{ user.firstName }}</span>!
+                  </h1>
+                  <p class="text-slate-300 text-lg">
                     Here's an overview of your recent activity and purchases.
                   </p>
                 </div>
-                <div class="mt-4 md:mt-0">
+                <div class="mt-6 md:mt-0">
                   <button
                     (click)="browseArtworks()"
-                    class="px-6 py-3 bg-gradient-to-r from-yellow-600 to-yellow-500 text-green-900 rounded-xl hover:from-yellow-500 hover:to-yellow-400 transition-all font-medium border border-yellow-500"
+                    class="group relative overflow-hidden px-8 py-4 bg-amber-500 text-slate-900 font-semibold rounded-2xl hover:bg-amber-400 transition-all duration-300 transform hover:scale-105"
                     type="button"
                   >
-                    Browse New Artworks
+                    <span class="relative z-10 flex items-center">
+                      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                      </svg>
+                      Browse New Artworks
+                    </span>
+                    <div class="absolute inset-0 bg-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                   </button>
                 </div>
               </div>
-            </section>
-  
-            <!-- Stats Overview -->
-            <section aria-labelledby="stats-heading">
-              <h2 id="stats-heading" class="sr-only">Account Statistics</h2>
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-gradient-to-br from-green-800 to-green-900 rounded-2xl shadow-xl border border-green-600 p-6">
+              <!-- Floating Elements -->
+              <div class="absolute -bottom-4 -left-4 w-12 h-12 bg-emerald-600/20 rotate-45 rounded-xl"></div>
+            </div>
+          </section>
+
+          <!-- Creative Stats Overview -->
+          <section aria-labelledby="stats-heading">
+            <h2 id="stats-heading" class="sr-only">Account Statistics</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              <!-- Orders Stat -->
+              <div class="group relative">
+                <div class="absolute -inset-3 bg-emerald-600/10 rounded-3xl rotate-2 group-hover:rotate-3 transition-transform duration-300"></div>
+                <div class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 p-6">
                   <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-medium text-yellow-100">Orders</h3>
-                    <div class="p-2 bg-green-700 rounded-full">
-                      <svg class="h-6 w-6 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-                        ></path>
+                    <h3 class="text-lg font-semibold text-slate-100">Orders</h3>
+                    <div class="w-12 h-12 bg-emerald-600/20 rounded-xl flex items-center justify-center">
+                      <svg class="h-6 w-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
                       </svg>
                     </div>
                   </div>
-                  <p class="text-3xl font-bold text-yellow-100">{{ stats.orders }}</p>
-                  <p class="text-yellow-300 text-sm mt-1">
-                    <span class="text-yellow-400">+{{ stats.newOrders }}</span> new this month
-                  </p>
-                </div>
-  
-                <div class="bg-gradient-to-br from-green-800 to-green-900 rounded-2xl shadow-xl border border-green-600 p-6">
-                  <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-medium text-yellow-100">Wishlist</h3>
-                    <div class="p-2 bg-green-700 rounded-full">
-                      <svg class="h-6 w-6 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        ></path>
-                      </svg>
-                    </div>
+                  <p class="text-3xl font-bold text-slate-100 mb-2">{{ stats.orders }}</p>
+                  <div class="flex items-center">
+                    <div class="w-3 h-0.5 bg-emerald-500 mr-2"></div>
+                    <p class="text-slate-300 text-sm">
+                      <span class="text-emerald-400 font-medium">+{{ stats.newOrders }}</span> new this month
+                    </p>
                   </div>
-                  <p class="text-3xl font-bold text-yellow-100">{{ stats.wishlist }}</p>
-                  <p class="text-yellow-300 text-sm mt-1">Saved artworks</p>
-                </div>
-  
-                <div class="bg-gradient-to-br from-green-800 to-green-900 rounded-2xl shadow-xl border border-green-600 p-6">
-                  <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-medium text-yellow-100">Commissions</h3>
-                    <div class="p-2 bg-green-700 rounded-full">
-                      <svg class="h-6 w-6 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                        ></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <p class="text-3xl font-bold text-yellow-100">{{ stats.commissions }}</p>
-                  <p class="text-yellow-300 text-sm mt-1">
-                    <span class="text-yellow-400">{{ stats.activeCommissions }}</span> in progress
-                  </p>
                 </div>
               </div>
-            </section>
-  
-            <!-- Recent Orders -->
-            <section class="bg-gradient-to-br from-green-800 to-green-900 rounded-2xl shadow-xl border border-green-600 overflow-hidden" aria-labelledby="recent-orders-heading">
-              <div class="flex justify-between items-center p-6 border-b border-green-600">
-                <h2 id="recent-orders-heading" class="text-xl font-bold text-yellow-100">Recent Orders</h2>
+
+              <!-- Wishlist Stat -->
+              <div class="group relative">
+                <div class="absolute -inset-3 bg-amber-500/10 rounded-3xl -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
+                <div class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 p-6">
+                  <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-slate-100">Wishlist</h3>
+                    <div class="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center">
+                      <svg class="h-6 w-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <p class="text-3xl font-bold text-slate-100 mb-2">{{ stats.wishlist }}</p>
+                  <div class="flex items-center">
+                    <div class="w-3 h-0.5 bg-amber-500 mr-2"></div>
+                    <p class="text-slate-300 text-sm">Saved artworks</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Commissions Stat -->
+              <div class="group relative">
+                <div class="absolute -inset-3 bg-emerald-600/10 rounded-3xl rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
+                <div class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 p-6">
+                  <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-slate-100">Commissions</h3>
+                    <div class="w-12 h-12 bg-emerald-600/20 rounded-xl flex items-center justify-center">
+                      <svg class="h-6 w-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                      </svg>
+                    </div>
+                  </div>
+                  <p class="text-3xl font-bold text-slate-100 mb-2">{{ stats.commissions }}</p>
+                  <div class="flex items-center">
+                    <div class="w-3 h-0.5 bg-emerald-500 mr-2"></div>
+                    <p class="text-slate-300 text-sm">
+                      <span class="text-emerald-400 font-medium">{{ stats.activeCommissions }}</span> in progress
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Creative Recent Orders -->
+          <section class="relative" aria-labelledby="recent-orders-heading">
+            <div class="absolute -inset-4 bg-emerald-600/5 rounded-3xl rotate-1"></div>
+            <div class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 overflow-hidden">
+              <div class="flex justify-between items-center p-6 border-b border-slate-700/50 relative">
+                <div class="absolute top-4 left-4 w-4 h-4 border border-amber-500/30 rotate-45 rounded-sm"></div>
+                <h2 id="recent-orders-heading" class="text-xl font-serif font-bold text-slate-100 relative z-10">Recent Orders</h2>
                 <a
                   routerLink="/orders"
-                  class="text-yellow-300 hover:text-yellow-100 transition-colors text-sm flex items-center"
+                  class="text-amber-400 hover:text-amber-300 transition-colors text-sm flex items-center group"
                 >
                   View All
-                  <svg class="h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                   </svg>
                 </a>
               </div>
-  
+
               <div class="overflow-x-auto">
                 <table class="w-full" role="table" aria-label="Recent orders">
                   <thead>
-                    <tr class="bg-green-700/50 text-left">
-                      <th scope="col" class="px-6 py-3 text-yellow-200 font-medium text-sm">Order ID</th>
-                      <th scope="col" class="px-6 py-3 text-yellow-200 font-medium text-sm">Date</th>
-                      <th scope="col" class="px-6 py-3 text-yellow-200 font-medium text-sm">Items</th>
-                      <th scope="col" class="px-6 py-3 text-yellow-200 font-medium text-sm">Total</th>
-                      <th scope="col" class="px-6 py-3 text-yellow-200 font-medium text-sm">Status</th>
-                      <th scope="col" class="px-6 py-3 text-yellow-200 font-medium text-sm">Action</th>
+                    <tr class="bg-slate-700/30 text-left">
+                      <th scope="col" class="px-6 py-4 text-slate-300 font-semibold text-sm">Order ID</th>
+                      <th scope="col" class="px-6 py-4 text-slate-300 font-semibold text-sm">Date</th>
+                      <th scope="col" class="px-6 py-4 text-slate-300 font-semibold text-sm">Items</th>
+                      <th scope="col" class="px-6 py-4 text-slate-300 font-semibold text-sm">Total</th>
+                      <th scope="col" class="px-6 py-4 text-slate-300 font-semibold text-sm">Status</th>
+                      <th scope="col" class="px-6 py-4 text-slate-300 font-semibold text-sm">Action</th>
                     </tr>
                   </thead>
-                  <tbody class="divide-y divide-green-600">
-                    <tr *ngFor="let order of recentOrders; trackBy: trackByOrderId" class="hover:bg-green-700/30 transition-colors">
-                      <td class="px-6 py-4 text-yellow-100">#{{ order.id }}</td>
-                      <td class="px-6 py-4 text-yellow-300">{{ order.date }}</td>
-                      <td class="px-6 py-4 text-yellow-300">{{ order.items }}</td>
-                      <td class="px-6 py-4 font-medium text-yellow-100">${{ order.total }}</td>
+                  <tbody class="divide-y divide-slate-700/30">
+                    <tr *ngFor="let order of recentOrders; trackBy: trackByOrderId" class="hover:bg-slate-700/20 transition-colors group">
+                      <td class="px-6 py-4 text-slate-100 font-medium">#{{ order.id }}</td>
+                      <td class="px-6 py-4 text-slate-300">{{ order.date }}</td>
+                      <td class="px-6 py-4 text-slate-300">{{ order.items }}</td>
+                      <td class="px-6 py-4 font-bold text-amber-400">${{ order.total }}</td>
                       <td class="px-6 py-4">
                         <span
-                          class="px-3 py-1 rounded-full text-xs font-medium"
+                          class="px-3 py-1 rounded-full text-xs font-medium border"
                           [class]="getStatusClass(order.status)"
                         >
                           {{ order.status }}
@@ -286,7 +244,7 @@
                       <td class="px-6 py-4">
                         <a
                           [routerLink]="['/orders', order.id]"
-                          class="text-yellow-400 hover:text-yellow-200 transition-colors"
+                          class="text-emerald-400 hover:text-emerald-300 transition-colors font-medium group-hover:underline"
                           [attr.aria-label]="'View details for order ' + order.id"
                         >
                           View Details
@@ -296,275 +254,181 @@
                   </tbody>
                 </table>
               </div>
-            </section>
-  
-            <!-- Wishlist Preview -->
-            <section class="bg-gradient-to-br from-green-800 to-green-900 rounded-2xl shadow-xl border border-green-600 p-6" aria-labelledby="wishlist-heading">
-              <div class="flex justify-between items-center mb-6">
-                <h2 id="wishlist-heading" class="text-xl font-bold text-yellow-100">Your Wishlist</h2>
+            </div>
+          </section>
+
+          <!-- Creative Wishlist Preview -->
+          <section class="relative" aria-labelledby="wishlist-heading">
+            <div class="absolute -inset-4 bg-amber-500/5 rounded-3xl -rotate-1"></div>
+            <div class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-6">
+              <div class="flex justify-between items-center mb-6 relative">
+                <div class="absolute -top-2 -left-2 w-6 h-6 border border-emerald-500/30 rotate-45 rounded-lg"></div>
+                <h2 id="wishlist-heading" class="text-xl font-serif font-bold text-slate-100 relative z-10">Your Wishlist</h2>
                 <a
                   routerLink="/wishlist"
-                  class="text-yellow-300 hover:text-yellow-100 transition-colors text-sm flex items-center"
+                  class="text-amber-400 hover:text-amber-300 transition-colors text-sm flex items-center group"
                 >
                   View All
-                  <svg class="h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                   </svg>
                 </a>
               </div>
-  
+
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Wishlist items">
                 <article
-                  *ngFor="let item of wishlistItems; trackBy: trackByWishlistItem"
-                  class="group relative bg-gradient-to-br from-green-700 to-green-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 border border-green-600"
+                  *ngFor="let item of wishlistItems; trackBy: trackByWishlistItem; let i = index"
+                  class="group relative"
                   role="listitem"
                 >
-                  <a [routerLink]="['/artwork', item.id]" class="block" [attr.aria-label]="'View details for ' + item.title">
-                    <div class="relative aspect-[3/4] overflow-hidden">
-                      <img
-                        [src]="item.image"
-                        [alt]="item.title + ' by ' + item.artist"
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        loading="lazy"
-                      />
-                      <div
-                        class="absolute inset-0 bg-gradient-to-t from-green-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      ></div>
-                    </div>
-                  </a>
-                  <div class="p-4">
-                    <div class="flex justify-between items-start">
-                      <h3 class="text-base font-medium text-yellow-100 truncate">
-                        {{ item.title }}
-                      </h3>
+                  <div [class]="'absolute -inset-2 rounded-2xl transition-all duration-300 ' + 
+                               (i % 2 === 0 ? 'bg-emerald-600/10 rotate-1 group-hover:rotate-2' : 
+                                'bg-amber-500/10 -rotate-1 group-hover:-rotate-2')"></div>
+                  <div class="relative bg-slate-700/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-600/30 group-hover:border-slate-500/50 transition-all">
+                    <a [routerLink]="['/artwork', item.id]" class="block" [attr.aria-label]="'View details for ' + item.title">
+                      <div class="relative aspect-[3/4] overflow-hidden">
+                        <img
+                          [src]="item.image"
+                          [alt]="item.title + ' by ' + item.artist"
+                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
+                          loading="lazy"
+                        />
+                        <div class="absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
+                          <div class="p-4 w-full">
+                            <div class="w-8 h-0.5 bg-amber-400 mb-2"></div>
+                            <p class="text-slate-100 font-medium">View Details</p>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <div class="p-4">
+                      <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-base font-semibold text-slate-100 truncate">{{ item.title }}</h3>
+                        <button
+                          (click)="removeFromWishlist(item.id, $event)"
+                          class="text-amber-400 hover:text-amber-300 transition-colors"
+                          [attr.aria-label]="'Remove ' + item.title + ' from wishlist'"
+                          type="button"
+                        >
+                          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                          </svg>
+                        </button>
+                      </div>
+                      <div class="flex items-center justify-between mb-4">
+                        <p class="text-slate-300 text-sm">By {{ item.artist }}</p>
+                        <span class="font-bold text-lg text-amber-400">${{ item.price }}</span>
+                      </div>
                       <button
-                        (click)="removeFromWishlist(item.id, $event)"
-                        class="text-yellow-400 hover:text-yellow-200 transition-colors"
-                        [attr.aria-label]="'Remove ' + item.title + ' from wishlist'"
+                        (click)="addToCart(item, $event)"
+                        class="group relative overflow-hidden w-full py-2 bg-emerald-700 text-slate-100 rounded-xl hover:bg-emerald-600 transition-all text-sm font-medium"
+                        [attr.aria-label]="'Add ' + item.title + ' to cart'"
                         type="button"
                       >
-                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                          <path
-                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          />
-                        </svg>
+                        <span class="relative z-10">Add to Cart</span>
+                        <div class="absolute inset-0 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                       </button>
                     </div>
-                    <div class="flex items-center justify-between mt-2">
-                      <p class="text-yellow-300 text-sm">
-                        By {{ item.artist }}
-                      </p>
-                      <span class="font-bold text-lg bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent">
-                        ${{ item.price }}
-                      </span>
-                    </div>
-                    <button
-                      (click)="addToCart(item, $event)"
-                      class="w-full mt-3 py-2 bg-gradient-to-r from-yellow-600 to-yellow-500 text-green-900 rounded-lg hover:from-yellow-500 hover:to-yellow-400 transition-all text-sm font-medium border border-yellow-500"
-                      [attr.aria-label]="'Add ' + item.title + ' to cart'"
-                      type="button"
-                    >
-                      Add to Cart
-                    </button>
                   </div>
                 </article>
               </div>
-            </section>
-  
-            <!-- Commission Status -->
-            <section class="bg-gradient-to-br from-green-800 to-green-900 rounded-2xl shadow-xl border border-green-600 p-6" aria-labelledby="commissions-heading">
-              <div class="flex justify-between items-center mb-6">
-                <h2 id="commissions-heading" class="text-xl font-bold text-yellow-100">Active Commissions</h2>
+            </div>
+          </section>
+
+          <!-- Creative Commission Status -->
+          <section class="relative" aria-labelledby="commissions-heading">
+            <div class="absolute -inset-4 bg-emerald-600/5 rounded-3xl rotate-1"></div>
+            <div class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-6">
+              <div class="flex justify-between items-center mb-6 relative">
+                <div class="absolute -top-2 -right-2 w-6 h-6 border border-amber-500/30 rotate-45 rounded-lg"></div>
+                <h2 id="commissions-heading" class="text-xl font-serif font-bold text-slate-100 relative z-10">Active Commissions</h2>
                 <a
                   routerLink="/commissions"
-                  class="text-yellow-300 hover:text-yellow-100 transition-colors text-sm flex items-center"
+                  class="text-amber-400 hover:text-amber-300 transition-colors text-sm flex items-center group"
                 >
                   View All
-                  <svg class="h-4 w-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                   </svg>
                 </a>
               </div>
-  
-              <div *ngIf="activeCommissions.length === 0" class="text-center py-8">
-                <div class="w-16 h-16 bg-green-700 rounded-full mx-auto flex items-center justify-center mb-4">
-                  <svg class="h-8 w-8 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                    ></path>
+
+              <div *ngIf="activeCommissions.length === 0" class="text-center py-12 relative">
+                <div class="absolute top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 border border-emerald-600/20 rotate-45 rounded-xl"></div>
+                <div class="w-20 h-20 bg-slate-700/50 rounded-2xl mx-auto flex items-center justify-center mb-6 relative z-10">
+                  <svg class="h-10 w-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
                   </svg>
                 </div>
-                <p class="text-yellow-300 mb-4">You don't have any active commissions</p>
+                <p class="text-slate-300 mb-6 text-lg">You don't have any active commissions</p>
                 <button
                   (click)="requestNewCommission()"
-                  class="px-6 py-3 bg-gradient-to-r from-yellow-600 to-yellow-500 text-green-900 rounded-xl hover:from-yellow-500 hover:to-yellow-400 transition-all font-medium border border-yellow-500"
+                  class="group relative overflow-hidden px-8 py-4 bg-emerald-600 text-slate-100 font-semibold rounded-2xl hover:bg-emerald-500 transition-all duration-300 transform hover:scale-105"
                   type="button"
                 >
-                  Request a Commission
+                  <span class="relative z-10 flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    Request a Commission
+                  </span>
+                  <div class="absolute inset-0 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 </button>
               </div>
-  
-              <div *ngIf="activeCommissions.length > 0" class="space-y-4">
+
+              <div *ngIf="activeCommissions.length > 0" class="space-y-6">
                 <article
-                  *ngFor="let commission of activeCommissions; trackBy: trackByCommissionId"
-                  class="bg-green-700/30 rounded-xl border border-green-600 p-4"
+                  *ngFor="let commission of activeCommissions; trackBy: trackByCommissionId; let i = index"
+                  class="group relative"
                 >
-                  <div class="flex flex-col md:flex-row justify-between">
-                    <div class="mb-4 md:mb-0">
-                      <h3 class="text-lg font-medium text-yellow-100">{{ commission.title }}</h3>
-                      <p class="text-yellow-300 text-sm">Artist: {{ commission.artist }}</p>
-                      <div class="flex items-center mt-2">
-                        <span class="text-yellow-400 text-sm mr-2">Status:</span>
-                        <span
-                          class="px-3 py-1 rounded-full text-xs font-medium"
-                          [class]="getStatusClass(commission.status)"
-                        >
-                          {{ commission.status }}
-                        </span>
+                  <div [class]="'absolute -inset-3 rounded-2xl transition-all duration-300 ' + 
+                               (i % 2 === 0 ? 'bg-emerald-600/10 rotate-1 group-hover:rotate-2' : 
+                                'bg-amber-500/10 -rotate-1 group-hover:-rotate-2')"></div>
+                  <div class="relative bg-slate-700/50 backdrop-blur-sm rounded-2xl border border-slate-600/30 p-6">
+                    <div class="flex flex-col md:flex-row justify-between">
+                      <div class="mb-4 md:mb-0">
+                        <h3 class="text-lg font-semibold text-slate-100 mb-2">{{ commission.title }}</h3>
+                        <div class="flex items-center space-x-4 mb-3">
+                          <div class="flex items-center">
+                            <div class="w-2 h-2 bg-emerald-500 rounded-full mr-2"></div>
+                            <span class="text-slate-300 text-sm">Artist: {{ commission.artist }}</span>
+                          </div>
+                        </div>
+                        <div class="flex items-center">
+                          <span class="text-amber-400 text-sm mr-3 font-medium">Status:</span>
+                          <span
+                            class="px-3 py-1 rounded-full text-xs font-medium border"
+                            [class]="getStatusClass(commission.status)"
+                          >
+                            {{ commission.status }}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <div class="flex flex-col items-end">
-                      <span class="font-bold text-lg bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent">
-                        ${{ commission.price }}
-                      </span>
-                      <p class="text-yellow-400 text-sm">Due: {{ commission.dueDate }}</p>
-                      <a
-                        [routerLink]="['/commissions', commission.id]"
-                        class="mt-2 px-4 py-2 bg-green-700 border border-green-500 rounded-lg text-yellow-200 hover:bg-green-600 transition-all text-sm"
-                        [attr.aria-label]="'View details for commission ' + commission.title"
-                      >
-                        View Details
-                      </a>
+                      <div class="flex flex-col items-end space-y-3">
+                        <span class="font-bold text-2xl text-amber-400">${{ commission.price }}</span>
+                        <div class="flex items-center text-emerald-400 text-sm">
+                          <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                          </svg>
+                          Due: {{ commission.dueDate }}
+                        </div>
+                        <a
+                          [routerLink]="['/commissions', commission.id]"
+                          class="group relative overflow-hidden px-6 py-2 bg-slate-600/50 border border-slate-500/50 rounded-xl text-slate-200 hover:bg-slate-500/50 transition-all text-sm font-medium"
+                          [attr.aria-label]="'View details for commission ' + commission.title"
+                        >
+                          <span class="relative z-10">View Details</span>
+                          <div class="absolute inset-0 bg-slate-500/50 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </article>
               </div>
-            </section>
-          </div>
-        </div>
-      </div>
-    </main>
-  
-    <!-- Footer -->
-    <footer class="bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-yellow-100 py-16 border-t border-green-600" role="contentinfo">
-      <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <div class="flex items-center mb-4">
-              <svg
-                class="h-8 w-8 text-yellow-300 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                ></path>
-              </svg>
-              <h3
-                class="text-2xl font-serif font-bold bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent"
-              >
-                ARTISTRY
-              </h3>
             </div>
-            <p class="text-yellow-300 leading-relaxed">
-              Connecting art lovers with unique creations from talented artists worldwide.
-              Discover, collect, and commission original artwork.
-            </p>
-          </div>
-  
-          <div>
-            <h4 class="text-lg font-medium mb-6 text-yellow-100">Quick Links</h4>
-            <ul class="space-y-3">
-              <li>
-                <a href="#" class="text-yellow-300 hover:text-yellow-100 transition-colors"
-                  >Home</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-yellow-300 hover:text-yellow-100 transition-colors"
-                  >Gallery</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-yellow-300 hover:text-yellow-100 transition-colors"
-                  >Artists</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-yellow-300 hover:text-yellow-100 transition-colors"
-                  >About</a
-                >
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="text-yellow-300 hover:text-yellow-100 transition-colors"
-                  >Contact</a
-                >
-              </li>
-            </ul>
-          </div>
-  
-          <div>
-            <h4 class="text-lg font-medium mb-6 text-yellow-100">Contact</h4>
-            <address class="not-italic text-yellow-300 space-y-2">
-              <p>123 Gallery Street</p>
-              <p>New York, NY 10001</p>
-              <p class="mt-4">infoartistry.com</p>
-              <p>(555) 123-4567</p>
-            </address>
-          </div>
-  
-          <div>
-            <h4 class="text-lg font-medium mb-6 text-yellow-100">Newsletter</h4>
-            <p class="text-yellow-300 mb-4">
-              Subscribe to receive updates on new artworks and upcoming exhibitions.
-            </p>
-            <form class="flex" (ngSubmit)="subscribeNewsletter($event)">
-              <label for="dashboard-newsletter-email" class="sr-only">Email address</label>
-              <input
-                id="dashboard-newsletter-email"
-                type="email"
-                placeholder="Your email"
-                required
-                class="px-4 py-2 bg-green-700 text-yellow-100 placeholder-yellow-400 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full border border-green-500"
-                [(ngModel)]="newsletterEmail"
-                name="email"
-              />
-              <button
-                type="submit"
-                class="px-4 py-2 bg-gradient-to-r from-yellow-600 to-yellow-500 text-green-900 font-medium rounded-r-xl hover:from-yellow-500 hover:to-yellow-400 transition-all border border-yellow-500"
-                aria-label="Subscribe to newsletter"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
-  
-        <div
-          class="border-t border-green-600 mt-12 pt-8 text-center text-yellow-300 text-sm"
-        >
-          <p>
-            &copy; {{ getCurrentYear() }} ARTISTRY. All rights reserved. | 
-            <a href="/terms" class="hover:text-yellow-100 transition-colors">Terms & Conditions</a> | 
-            <a href="/privacy" class="hover:text-yellow-100 transition-colors">Privacy Policy</a>
-          </p>
+          </section>
         </div>
       </div>
-    </footer>
-  </div>
+    </div>
+  </main>
+</div>
