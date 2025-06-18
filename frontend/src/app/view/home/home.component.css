@@ -7,20 +7,55 @@
   aspect-ratio: 3 / 4;
 }
 
-/* Custom scrollbar for cart */
+/* Custom scrollbar for cart with green and gold theme */
 .overflow-y-auto::-webkit-scrollbar {
   width: 6px;
 }
 
 .overflow-y-auto::-webkit-scrollbar-track {
-  background: #374151;
+  background: #166534; /* green-800 */
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb {
-  background: #6b7280;
+  background: #ca8a04; /* yellow-600 */
   border-radius: 3px;
 }
 
 .overflow-y-auto::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: #eab308; /* yellow-500 */
+}
+
+/* Additional green and gold themed styles */
+.text-shadow-gold {
+  text-shadow: 0 2px 4px rgba(202, 138, 4, 0.3);
+}
+
+.shadow-green {
+  box-shadow: 0 10px 25px rgba(22, 101, 52, 0.3);
+}
+
+.border-gradient-gold {
+  border-image: linear-gradient(45deg, #ca8a04, #eab308) 1;
+}
+
+/* Custom focus styles for form elements */
+.focus-gold:focus {
+  outline: none;
+  ring: 2px solid #eab308;
+  border-color: transparent;
+}
+
+/* Hover effects for interactive elements */
+.hover-lift:hover {
+  transform: translateY(-2px);
+  transition: transform 0.3s ease;
+}
+
+/* Custom gradient backgrounds */
+.bg-green-gold-gradient {
+  background: linear-gradient(135deg, #166534 0%, #15803d 50%, #ca8a04 100%);
+}
+
+.bg-gold-green-gradient {
+  background: linear-gradient(135deg, #eab308 0%, #ca8a04 50%, #166534 100%);
 }

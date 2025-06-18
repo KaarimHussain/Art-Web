@@ -1,0 +1,292 @@
+/* Shared styles for all art marketplace pages */
+
+/* Component-specific styles */
+.aspect-\[4\/3\] {
+    aspect-ratio: 4 / 3;
+  }
+  
+  .aspect-\[3\/4\] {
+    aspect-ratio: 3 / 4;
+  }
+  
+  /* Custom scrollbar with green and gold theme */
+  .overflow-y-auto::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .overflow-y-auto::-webkit-scrollbar-track {
+    background: #166534; /* green-800 */
+  }
+  
+  .overflow-y-auto::-webkit-scrollbar-thumb {
+    background: #ca8a04; /* yellow-600 */
+    border-radius: 3px;
+  }
+  
+  .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+    background: #eab308; /* yellow-500 */
+  }
+  
+  /* Additional green and gold themed styles */
+  .text-shadow-gold {
+    text-shadow: 0 2px 4px rgba(202, 138, 4, 0.3);
+  }
+  
+  .shadow-green {
+    box-shadow: 0 10px 25px rgba(22, 101, 52, 0.3);
+  }
+  
+  .border-gradient-gold {
+    border-image: linear-gradient(45deg, #ca8a04, #eab308) 1;
+  }
+  
+  /* Custom focus styles for form elements */
+  .focus-gold:focus {
+    outline: none;
+    ring: 2px solid #eab308;
+    border-color: transparent;
+  }
+  
+  /* Hover effects for interactive elements */
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    transition: transform 0.3s ease;
+  }
+  
+  /* Custom gradient backgrounds */
+  .bg-green-gold-gradient {
+    background: linear-gradient(135deg, #166534 0%, #15803d 50%, #ca8a04 100%);
+  }
+  
+  .bg-gold-green-gradient {
+    background: linear-gradient(135deg, #eab308 0%, #ca8a04 50%, #166534 100%);
+  }
+  
+  /* Art marketplace specific styles */
+  .artwork-card-hover {
+    transition: all 0.3s ease;
+  }
+  
+  .artwork-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(22, 101, 52, 0.4);
+  }
+  
+  /* Filter button animations */
+  .filter-button {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .filter-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(234, 179, 8, 0.2), transparent);
+    transition: left 0.5s;
+  }
+  
+  .filter-button:hover::before {
+    left: 100%;
+  }
+  
+  /* Rating stars animation */
+  .rating-star {
+    transition: all 0.2s ease;
+  }
+  
+  .rating-star:hover {
+    transform: scale(1.2);
+  }
+  
+  /* Image zoom effect */
+  .image-zoom {
+    transition: transform 0.5s ease;
+  }
+  
+  .image-zoom:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Loading animation for images */
+  .image-loading {
+    background: linear-gradient(90deg, #166534, #15803d, #166534);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+  
+  @keyframes loading {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  
+  /* Custom table styles */
+  .custom-table {
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  .custom-table th:first-child {
+    border-top-left-radius: 0.75rem;
+  }
+  
+  .custom-table th:last-child {
+    border-top-right-radius: 0.75rem;
+  }
+  
+  /* Status badge styles */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid;
+  }
+  
+  .status-delivered {
+    background-color: rgba(34, 197, 94, 0.1);
+    color: rgb(34, 197, 94);
+    border-color: rgba(34, 197, 94, 0.3);
+  }
+  
+  .status-shipped {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: rgb(59, 130, 246);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+  
+  .status-processing {
+    background-color: rgba(234, 179, 8, 0.1);
+    color: rgb(234, 179, 8);
+    border-color: rgba(234, 179, 8, 0.3);
+  }
+  
+  .status-cancelled {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: rgb(239, 68, 68);
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+  
+  /* Responsive design helpers */
+  @media (max-width: 768px) {
+    .mobile-stack {
+      flex-direction: column;
+    }
+    
+    .mobile-full-width {
+      width: 100%;
+    }
+    
+    .mobile-text-center {
+      text-align: center;
+    }
+  }
+  
+  /* Animation for page transitions */
+  .page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Custom dropdown styles */
+  .custom-dropdown {
+    position: relative;
+  }
+  
+  .custom-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #166534, #15803d);
+    border: 1px solid #16a34a;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px rgba(22, 101, 52, 0.3);
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+  
+  .custom-dropdown:hover .custom-dropdown-menu,
+  .custom-dropdown.active .custom-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  /* Wishlist heart animation */
+  .wishlist-heart {
+    transition: all 0.3s ease;
+  }
+  
+  .wishlist-heart.active {
+    color: #eab308;
+    transform: scale(1.2);
+  }
+  
+  .wishlist-heart:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Commission progress bar */
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #166534;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ca8a04, #eab308);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+  }
+  
+  /* Notification styles */
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .notification.show {
+    transform: translateX(0);
+  }
+  
+  .notification.success {
+    background: linear-gradient(135deg, #166534, #15803d);
+    border: 1px solid #16a34a;
+    color: #fef3c7;
+  }
+  
+  .notification.error {
+    background: linear-gradient(135deg, #991b1b, #dc2626);
+    border: 1px solid #ef4444;
+    color: #fef2f2;
+  }
+

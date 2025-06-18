@@ -1,0 +1,580 @@
+<div class="min-h-screen bg-gradient-to-br from-green-900 via-green-800 to-green-700">
+    <!-- Navigation Header -->
+    <header
+      class="sticky top-0 z-50 bg-green-900/95 backdrop-blur-sm border-b border-green-600 shadow-lg"
+      role="banner"
+    >
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <a
+              href="#"
+              class="text-2xl font-serif font-bold bg-gradient-to-r from-yellow-300 to-yellow-500 bg-clip-text text-transparent"
+              aria-label="ARTISTRY - Home"
+            >
+              ARTISTRY
+            </a>
+          </div>
+  
+          <nav class="hidden md:flex space-x-8" role="navigation" aria-label="Main navigation">
+            <a
+              href="#"
+              class="text-sm font-medium text-yellow-200 hover:text-yellow-100 transition-colors"
+              >Gallery</a
+            >
+            <a
+              href="#"
+              class="text-sm font-medium text-yellow-200 hover:text-yellow-100 transition-colors"
+              >Artists</a
+            >
+            <a
+              href="#"
+              class="text-sm font-medium text-yellow-200 hover:text-yellow-100 transition-colors"
+              >Commissions</a
+            >
+            <a
+              href="#"
+              class="text-sm font-medium text-yellow-200 hover:text-yellow-100 transition-colors"
+              >About</a
+            >
+          </nav>
+  
+          <div class="flex items-center space-x-4">
+            <button
+              (click)="openCart()"
+              class="p-2 rounded-full hover:bg-gradient-to-r hover:from-green-700 hover:to-green-600 transition-all"
+              aria-label="Open shopping cart"
+              type="button"
+            >
+              <svg
+                class="h-5 w-5 text-yellow-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9"
+                ></path>
+              </svg>
+            </button>
+            <a
+              href="/login"
+              class="text-sm font-medium text-yellow-200 hover:text-yellow-100 transition-colors"
+              >Login</a
+            >
+            <button
+              class="md:hidden p-2 rounded-full hover:bg-gradient-to-r hover:from-green-700 hover:to-green-600 transition-all"
+              aria-label="Open mobile menu"
+              type="button"
+            >
+              <svg
+                class="h-5 w-5 text-yellow-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+  
+    <!-- Main Content -->
+    <main role="main">
+      <!-- Artwork Detail Section -->
+      <section class="py-12" aria-labelledby="artwork-title">
+        <div class="container mx-auto px-4">
+          <!-- Breadcrumb Navigation -->
+          <nav class="flex items-center text-sm mb-8" aria-label="Breadcrumb">
+            <ol class="flex items-center">
+              <li>
+                <a href="/" class="text-yellow-300 hover:text-yellow-100 transition-colors">Home</a>
+              </li>
+              <li>
+                <svg class="h-4 w-4 mx-2 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </li>
+              <li>
+                <a href="/gallery" class="text-yellow-300 hover:text-yellow-100 transition-colors">Gallery</a>
+              </li>
+              <li>
+                <svg class="h-4 w-4 mx-2 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+              </li>
+              <li>
+                <span class="text-yellow-100" aria-current="page">{{ artwork.title }}</span>
+              </li>
+            </ol>
+          </nav>
+  
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Artwork Image Section -->
+            <div class="space-y-4">
+              <div class="relative aspect-[4/3] bg-gradient-to-br from-green-800 to-green-900 rounded-2xl overflow-hidden border border-green-600 shadow-2xl">
+                <img
+                  [src]="artwork.images[selectedImageIndex]"
+                  [alt]="artwork.title + ' by ' + artwork.artist"
+                  class="w-full h-full object-contain cursor-zoom-in"
+                  (click)="openZoomView()"
+                  loading="eager"
+                />
+                <button
+                  (click)="openZoomView()"
+                  class="absolute bottom-4 right-4 p-3 bg-green-800/70 rounded-full hover:bg-yellow-600/90 transition-all z-10 text-yellow-200"
+                  aria-label="Zoom image"
+                  type="button"
+                >
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                  </svg>
+                </button>
+              </div>
+  
+              <!-- Thumbnail Gallery -->
+              <div class="flex space-x-3 overflow-x-auto pb-2" role="tablist" aria-label="Artwork images">
+                <button
+                  *ngFor="let image of artwork.images; let i = index; trackBy: trackByImageIndex"
+                  (click)="selectImage(i)"
+                  class="relative min-w-[80px] h-20 bg-green-800 rounded-lg overflow-hidden border transition-all"
+                  [class]="selectedImageIndex === i ? 'border-yellow-500 ring-2 ring-yellow-500' : 'border-green-600'"
+                  [attr.aria-label]="'View image ' + (i + 1) + ' of ' + artwork.images.length"
+                  [attr.aria-selected]="selectedImageIndex === i"
+                  role="tab"
+                  type="button"
+                >
+                  <img [src]="image" [alt]="artwork.title + ' view ' + (i + 1)" class="w-full h-full object-cover" loading="lazy" />
+                </button>
+              </div>
+            </div>
+  
+            <!-- Artwork Details Section -->
+            <div class="space-y-6">
+              <div>
+                <h1 id="artwork-title" class="text-3xl md:text-4xl font-serif font-bold text-yellow-100 mb-2">
+                  {{ artwork.title }}
+                </h1>
+                <div class="flex items-center space-x-4">
+                  <div class="flex items-center" role="img" [attr.aria-label]="artwork.rating + ' out of 5 stars, ' + artwork.reviews + ' reviews'">
+                    <svg class="h-5 w-5 text-yellow-400 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <span class="text-yellow-300 ml-1">{{ artwork.rating }}</span>
+                    <span class="text-yellow-400 ml-1">({{ artwork.reviews }} reviews)</span>
+                  </div>
+                  <span class="text-yellow-300">{{ artwork.sold }} sold</span>
+                </div>
+              </div>
+  
+              <!-- Price and Add to Cart -->
+              <div class="flex items-center justify-between bg-green-800/50 p-4 rounded-xl border border-green-600">
+                <div>
+                  <span class="text-yellow-300 text-sm">Price</span>
+                  <div class="flex items-center">
+                    <span class="text-3xl font-bold bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent">
+                      ${{ artwork.price }}
+                    </span>
+                    <span *ngIf="artwork.originalPrice" class="text-sm text-yellow-500 line-through ml-2">
+                      ${{ artwork.originalPrice }}
+                    </span>
+                  </div>
+                </div>
+                <div class="flex space-x-3">
+                  <button
+                    (click)="toggleWishlist(artwork.id)"
+                    class="p-3 bg-green-700 border border-green-500 rounded-xl hover:bg-green-600 transition-all"
+                    [class]="artwork.inWishlist ? 'text-yellow-400' : 'text-yellow-300'"
+                    [attr.aria-label]="artwork.inWishlist ? 'Remove from wishlist' : 'Add to wishlist'"
+                    type="button"
+                  >
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      ></path>
+                    </svg>
+                  </button>
+                  <button
+                    (click)="addToCart(artwork)"
+                    class="flex items-center justify-center px-6 py-3 bg-gradient-to-r from-yellow-600 to-yellow-500 text-green-900 rounded-xl hover:from-yellow-500 hover:to-yellow-400 transform hover:scale-105 transition-all font-medium border border-yellow-500"
+                    [attr.aria-label]="'Add ' + artwork.title + ' to cart for $' + artwork.price"
+                    type="button"
+                  >
+                    <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9"
+                      ></path>
+                    </svg>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+  
+              <!-- Artwork Details -->
+              <div class="space-y-4">
+                <div>
+                  <h2 class="text-lg font-medium text-yellow-100 mb-2">Description</h2>
+                  <p class="text-yellow-300 leading-relaxed">
+                    {{ artwork.description }}
+                  </p>
+                </div>
+  
+                <!-- Artwork Specifications -->
+                <div class="grid grid-cols-2 gap-4 bg-green-800/30 p-4 rounded-xl border border-green-600">
+                  <div>
+                    <span class="text-yellow-400 text-sm">Medium</span>
+                    <p class="text-yellow-200">{{ artwork.medium }}</p>
+                  </div>
+                  <div>
+                    <span class="text-yellow-400 text-sm">Dimensions</span>
+                    <p class="text-yellow-200">{{ artwork.dimensions }}</p>
+                  </div>
+                  <div>
+                    <span class="text-yellow-400 text-sm">Year</span>
+                    <p class="text-yellow-200">{{ artwork.year }}</p>
+                  </div>
+                  <div>
+                    <span class="text-yellow-400 text-sm">Style</span>
+                    <p class="text-yellow-200">{{ artwork.style }}</p>
+                  </div>
+                </div>
+  
+                <!-- Artist Info -->
+                <div class="flex items-center space-x-4 bg-green-800/30 p-4 rounded-xl border border-green-600">
+                  <div class="h-16 w-16 rounded-full overflow-hidden border border-green-500">
+                    <img [src]="artwork.artistImage" [alt]="artwork.artist + ' profile picture'" class="h-full w-full object-cover" loading="lazy" />
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-lg font-medium text-yellow-100">{{ artwork.artist }}</h3>
+                    <p class="text-yellow-300 text-sm">{{ artwork.artistLocation }}</p>
+                  </div>
+                  <a
+                    [routerLink]="['/artist', artwork.artistId]"
+                    class="px-4 py-2 bg-green-700 border border-green-500 rounded-lg text-yellow-200 hover:bg-green-600 transition-all text-sm"
+                    [attr.aria-label]="'View ' + artwork.artist + ' profile'"
+                  >
+                    View Profile
+                  </a>
+                </div>
+  
+                <!-- Commission Request -->
+                <div class="bg-gradient-to-r from-green-700 to-green-800 p-4 rounded-xl border border-green-600">
+                  <h3 class="text-lg font-medium text-yellow-100 mb-2">Request a Custom Commission</h3>
+                  <p class="text-yellow-300 text-sm mb-3">
+                    Love this artist's style? Request a custom artwork tailored to your preferences.
+                  </p>
+                  <button
+                    (click)="requestCommission()"
+                    class="w-full py-3 bg-gradient-to-r from-yellow-600 to-yellow-500 text-green-900 rounded-xl hover:from-yellow-500 hover:to-yellow-400 transition-all font-medium border border-yellow-500"
+                    [attr.aria-label]="'Request custom commission from ' + artwork.artist"
+                    type="button"
+                  >
+                    Request Commission
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Reviews Section -->
+          <section class="mt-16" aria-labelledby="reviews-heading">
+            <h2 id="reviews-heading" class="text-2xl font-serif font-bold text-yellow-100 mb-6">Customer Reviews</h2>
+            
+            <div class="flex items-center justify-between mb-8">
+              <div class="flex items-center">
+                <div class="flex" role="img" [attr.aria-label]="artwork.rating + ' out of 5 stars overall rating'">
+                  <svg *ngFor="let i of [1, 2, 3, 4, 5]; trackBy: trackByStarIndex" class="h-8 w-8 text-yellow-400 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                </div>
+                <span class="text-3xl font-bold text-yellow-100 ml-3">{{ artwork.rating }}</span>
+                <span class="text-yellow-300 ml-2">based on {{ artwork.reviews }} reviews</span>
+              </div>
+              <button
+                (click)="writeReview()"
+                class="px-6 py-3 bg-gradient-to-r from-yellow-600 to-yellow-500 text-green-900 rounded-xl hover:from-yellow-500 hover:to-yellow-400 transition-all font-medium border border-yellow-500"
+                aria-label="Write a review for this artwork"
+                type="button"
+              >
+                Write a Review
+              </button>
+            </div>
+  
+            <!-- Review List -->
+            <div class="space-y-6">
+              <article *ngFor="let review of artwork.reviewList; trackBy: trackByReviewId" class="bg-green-800/30 p-6 rounded-xl border border-green-600">
+                <div class="flex justify-between mb-3">
+                  <div class="flex items-center">
+                    <div class="h-10 w-10 rounded-full overflow-hidden border border-green-500 mr-3">
+                      <img [src]="review.userImage" [alt]="review.userName + ' profile picture'" class="h-full w-full object-cover" loading="lazy" />
+                    </div>
+                    <div>
+                      <h3 class="font-medium text-yellow-100">{{ review.userName }}</h3>
+                      <time class="text-yellow-400 text-xs" [dateTime]="review.dateTime">{{ review.date }}</time>
+                    </div>
+                  </div>
+                  <div class="flex" role="img" [attr.aria-label]="review.rating + ' out of 5 stars'">
+                    <svg *ngFor="let i of [1, 2, 3, 4, 5]; trackBy: trackByStarIndex" 
+                         [class]="i <= review.rating ? 'h-5 w-5 text-yellow-400 fill-current' : 'h-5 w-5 text-green-600'" 
+                         viewBox="0 0 24 24"
+                         aria-hidden="true">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  </div>
+                </div>
+                <h4 class="font-medium text-yellow-200 mb-2">{{ review.title }}</h4>
+                <p class="text-yellow-300">{{ review.comment }}</p>
+                <div *ngIf="review.images && review.images.length > 0" class="flex space-x-2 mt-3">
+                  <div *ngFor="let image of review.images; trackBy: trackByReviewImageIndex" class="h-16 w-16 rounded-lg overflow-hidden border border-green-500">
+                    <img [src]="image" [alt]="'Review image by ' + review.userName" class="h-full w-full object-cover" loading="lazy" />
+                  </div>
+                </div>
+              </article>
+            </div>
+  
+            <!-- Pagination -->
+            <nav class="flex justify-center mt-8" aria-label="Reviews pagination">
+              <div class="inline-flex rounded-xl overflow-hidden border border-green-600">
+                <button 
+                  (click)="previousReviewPage()"
+                  [disabled]="currentReviewPage === 1"
+                  class="px-4 py-2 bg-green-800 text-yellow-200 hover:bg-green-700 transition-all border-r border-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label="Previous reviews page"
+                  type="button"
+                >
+                  Previous
+                </button>
+                <button 
+                  *ngFor="let page of getReviewPageNumbers(); trackBy: trackByPageNumber"
+                  (click)="goToReviewPage(page)"
+                  [class]="page === currentReviewPage ? 'px-4 py-2 bg-gradient-to-r from-yellow-600 to-yellow-500 text-green-900 font-medium' : 'px-4 py-2 bg-green-800 text-yellow-200 hover:bg-green-700 transition-all'"
+                  [attr.aria-label]="'Go to reviews page ' + page"
+                  [attr.aria-current]="page === currentReviewPage ? 'page' : null"
+                  type="button"
+                >
+                  {{ page }}
+                </button>
+                <button 
+                  (click)="nextReviewPage()"
+                  [disabled]="currentReviewPage === totalReviewPages"
+                  class="px-4 py-2 bg-green-800 text-yellow-200 hover:bg-green-700 transition-all border-l border-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label="Next reviews page"
+                  type="button"
+                >
+                  Next
+                </button>
+              </div>
+            </nav>
+          </section>
+  
+          <!-- Related Artworks -->
+          <section class="mt-16" aria-labelledby="related-heading">
+            <h2 id="related-heading" class="text-2xl font-serif font-bold text-yellow-100 mb-6">You May Also Like</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" role="list" aria-label="Related artworks">
+              <article
+                *ngFor="let relatedArt of relatedArtworks; trackBy: trackByArtworkId"
+                class="group relative bg-gradient-to-br from-green-800 to-green-900 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 border border-green-600"
+                role="listitem"
+              >
+                <a [routerLink]="['/artwork', relatedArt.id]" class="block" [attr.aria-label]="'View details for ' + relatedArt.title">
+                  <div class="relative aspect-[3/4] overflow-hidden">
+                    <img
+                      [src]="relatedArt.image"
+                      [alt]="relatedArt.title + ' by ' + relatedArt.artist"
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                  </div>
+                </a>
+                <div class="p-4">
+                  <h3 class="text-base font-medium text-yellow-100 truncate">
+                    {{ relatedArt.title }}
+                  </h3>
+                  <div class="flex items-center justify-between mt-2">
+                    <p class="text-yellow-300 text-sm">
+                      By {{ relatedArt.artist }}
+                    </p>
+                    <span class="font-bold text-lg bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent">
+                      ${{ relatedArt.price }}
+                    </span>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-green-900 via-green-800 to-green-700 text-yellow-100 py-16 border-t border-green-600" role="contentinfo">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center mb-4">
+              <svg
+                class="h-8 w-8 text-yellow-300 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                ></path>
+              </svg>
+              <h3
+                class="text-2xl font-serif font-bold bg-gradient-to-r from-yellow-200 to-yellow-400 bg-clip-text text-transparent"
+              >
+                ARTISTRY
+              </h3>
+            </div>
+            <p class="text-yellow-300 leading-relaxed">
+              Connecting art lovers with unique creations from talented artists worldwide.
+              Discover, collect, and commission original artwork.
+            </p>
+          </div>
+  
+          <div>
+            <h4 class="text-lg font-medium mb-6 text-yellow-100">Quick Links</h4>
+            <ul class="space-y-3">
+              <li>
+                <a href="#" class="text-yellow-300 hover:text-yellow-100 transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-yellow-300 hover:text-yellow-100 transition-colors"
+                  >Gallery</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-yellow-300 hover:text-yellow-100 transition-colors"
+                  >Artists</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-yellow-300 hover:text-yellow-100 transition-colors"
+                  >About</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-yellow-300 hover:text-yellow-100 transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+  
+          <div>
+            <h4 class="text-lg font-medium mb-6 text-yellow-100">Contact</h4>
+            <address class="not-italic text-yellow-300 space-y-2">
+              <p>123 Gallery Street</p>
+              <p>New York, NY 10001</p>
+              <p class="mt-4">infoartistry.com</p>
+              <p>(555) 123-4567</p>
+            </address>
+          </div>
+  
+          <div>
+            <h4 class="text-lg font-medium mb-6 text-yellow-100">Newsletter</h4>
+            <p class="text-yellow-300 mb-4">
+              Subscribe to receive updates on new artworks and upcoming exhibitions.
+            </p>
+            <form class="flex" (ngSubmit)="subscribeNewsletter($event)">
+              <label for="footer-newsletter-email" class="sr-only">Email address</label>
+              <input
+                id="footer-newsletter-email"
+                type="email"
+                placeholder="Your email"
+                required
+                class="px-4 py-2 bg-green-700 text-yellow-100 placeholder-yellow-400 rounded-l-xl focus:outline-none focus:ring-2 focus:ring-yellow-500 w-full border border-green-500"
+                [(ngModel)]="newsletterEmail"
+                name="email"
+              />
+              <button
+                type="submit"
+                class="px-4 py-2 bg-gradient-to-r from-yellow-600 to-yellow-500 text-green-900 font-medium rounded-r-xl hover:from-yellow-500 hover:to-yellow-400 transition-all border border-yellow-500"
+                aria-label="Subscribe to newsletter"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+  
+        <div
+          class="border-t border-green-600 mt-12 pt-8 text-center text-yellow-300 text-sm"
+        >
+          <p>
+            &copy; {{ getCurrentYear() }} ARTISTRY. All rights reserved. | 
+            <a href="/terms" class="hover:text-yellow-100 transition-colors">Terms & Conditions</a> | 
+            <a href="/privacy" class="hover:text-yellow-100 transition-colors">Privacy Policy</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  
+    <!-- Image Zoom Modal -->
+    <div *ngIf="showZoomModal" class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="zoom-modal-title">
+      <div class="relative w-full h-full flex items-center justify-center">
+        <h2 id="zoom-modal-title" class="sr-only">Zoomed view of {{ artwork.title }}</h2>
+        <button
+          (click)="closeZoomView()"
+          class="absolute top-4 right-4 p-3 bg-green-800/70 rounded-full hover:bg-yellow-600/90 transition-all z-10 text-yellow-200"
+          aria-label="Close zoom view"
+          type="button"
+        >
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+        <img
+          [src]="artwork.images[selectedImageIndex]"
+          [alt]="artwork.title + ' by ' + artwork.artist + ' - zoomed view'"
+          class="max-w-full max-h-full object-contain"
+        />
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2" role="tablist" aria-label="Image navigation">
+          <button
+            *ngFor="let image of artwork.images; let i = index; trackBy: trackByImageIndex"
+            (click)="selectImage(i)"
+            class="w-3 h-3 rounded-full transition-all"
+            [class]="selectedImageIndex === i ? 'bg-yellow-400' : 'bg-green-600'"
+            [attr.aria-label]="'View image ' + (i + 1)"
+            [attr.aria-selected]="selectedImageIndex === i"
+            role="tab"
+            type="button"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </div>
