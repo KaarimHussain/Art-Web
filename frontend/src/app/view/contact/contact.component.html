@@ -1,1 +1,321 @@
-<p>contact works!</p>
+<div class="contact-container">
+  <!-- Hero Section -->
+  <section class="contact-hero">
+    <div class="hero-background">
+      <div class="geometric-pattern"></div>
+      <div class="gradient-overlay"></div>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Let's Create Something
+          <span class="highlight">Amazing</span> Together
+        </h1>
+        <p class="hero-subtitle">
+          Ready to capture your story? Get in touch and let's discuss your
+          vision.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section class="contact-form-section">
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Contact Form -->
+        <div class="form-container">
+          <div class="form-header">
+            <h2 class="form-title">Send us a Message</h2>
+            <p class="form-subtitle">We'd love to hear about your project</p>
+          </div>
+
+          <form
+            class="contact-form"
+            [formGroup]="contactForm"
+            (ngSubmit)="onSubmit()"
+          >
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  formControlName="firstName"
+                  [class.error]="isFieldInvalid('firstName')"
+                  placeholder="Enter your first name"
+                />
+                <div class="error-message" *ngIf="isFieldInvalid('firstName')">
+                  First name is required
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  formControlName="lastName"
+                  [class.error]="isFieldInvalid('lastName')"
+                  placeholder="Enter your last name"
+                />
+                <div class="error-message" *ngIf="isFieldInvalid('lastName')">
+                  Last name is required
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  [class.error]="isFieldInvalid('email')"
+                  placeholder="your@email.com"
+                />
+                <div class="error-message" *ngIf="isFieldInvalid('email')">
+                  <span *ngIf="contactForm.get('email')?.errors?.['required']"
+                    >Email is required</span
+                  >
+                  <span *ngIf="contactForm.get('email')?.errors?.['email']"
+                    >Please enter a valid email</span
+                  >
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  formControlName="phone"
+                  placeholder="+1 (555) 123-4567"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <select
+                id="subject"
+                formControlName="subject"
+                [class.error]="isFieldInvalid('subject')"
+              >
+                <option value="">Select a subject</option>
+                <option value="portrait-session">
+                  Portrait Session Booking
+                </option>
+                <option value="wedding">Wedding Photography</option>
+                <option value="corporate">Corporate Headshots</option>
+                <option value="family">Family Portraits</option>
+                <option value="commercial">Commercial Project</option>
+                <option value="other">Other Inquiry</option>
+              </select>
+              <div class="error-message" *ngIf="isFieldInvalid('subject')">
+                Please select a subject
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="budget">Budget Range</label>
+              <select id="budget" formControlName="budget">
+                <option value="">Select budget range</option>
+                <option value="under-500">Under $500</option>
+                <option value="500-1000">$500 - $1,000</option>
+                <option value="1000-2500">$1,000 - $2,500</option>
+                <option value="2500-5000">$2,500 - $5,000</option>
+                <option value="over-5000">Over $5,000</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea
+                id="message"
+                formControlName="message"
+                [class.error]="isFieldInvalid('message')"
+                placeholder="Tell us about your vision, preferred dates, and any specific requirements..."
+                rows="6"
+              ></textarea>
+              <div class="error-message" *ngIf="isFieldInvalid('message')">
+                Please tell us about your project
+              </div>
+            </div>
+
+            <div class="form-group checkbox-group">
+              <label class="checkbox-label">
+                <input type="checkbox" formControlName="newsletter" />
+                <span class="checkmark"></span>
+                Subscribe to our newsletter for photography tips and special
+                offers
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary submit-btn"
+              [disabled]="contactForm.invalid || isSubmitting"
+              [class.loading]="isSubmitting"
+            >
+              <span *ngIf="!isSubmitting">
+                <i class="fas fa-paper-plane"></i>
+                Send Message
+              </span>
+              <span *ngIf="isSubmitting">
+                <i class="fas fa-spinner fa-spin"></i>
+                Sending...
+              </span>
+            </button>
+          </form>
+
+          <!-- Success Message -->
+          <div class="success-message" *ngIf="showSuccessMessage">
+            <i class="fas fa-check-circle"></i>
+            <h3>Message Sent Successfully!</h3>
+            <p>
+              Thank you for reaching out. We'll get back to you within 24 hours.
+            </p>
+          </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+          <div class="info-card">
+            <h3 class="info-title">Get in Touch</h3>
+            <div class="info-items">
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="info-content">
+                  <h4>Studio Address</h4>
+                  <p>123 Creative Avenue<br />Art District, NY 10001</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="info-content">
+                  <h4>Phone</h4>
+                  <p>+1 (555) 123-4567</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="info-content">
+                  <h4>Email</h4>
+                  <p>hello{{ "@" }}portraitstudio.com</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="info-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div class="info-content">
+                  <h4>Business Hours</h4>
+                  <p>
+                    Mon - Fri: 9:00 AM - 6:00 PM<br />
+                    Sat: 10:00 AM - 4:00 PM<br />
+                    Sun: By Appointment
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-card">
+            <h3 class="social-title">Follow Our Work</h3>
+            <div class="social-links">
+              <a href="#" class="social-link instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+              </a>
+              <a href="#" class="social-link facebook">
+                <i class="fab fa-facebook"></i>
+                <span>Facebook</span>
+              </a>
+              <a href="#" class="social-link behance">
+                <i class="fab fa-behance"></i>
+                <span>Behance</span>
+              </a>
+              <a href="#" class="social-link linkedin">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="response-card">
+            <div class="response-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h4>Quick Response</h4>
+            <p>
+              We typically respond to all inquiries within 2-4 hours during
+              business hours.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <p class="section-subtitle">Quick answers to common questions</p>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item" *ngFor="let faq of faqs; let i = index">
+          <div
+            class="faq-question"
+            (click)="toggleFaq(i)"
+            [class.active]="faq.isOpen"
+          >
+            <h4>{{ faq.question }}</h4>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer" [class.open]="faq.isOpen">
+            <p>{{ faq.answer }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <div class="container">
+      <div class="map-header">
+        <h2 class="map-title">Visit Our Studio</h2>
+        <p class="map-subtitle">
+          Located in the heart of the creative district
+        </p>
+      </div>
+      <div class="map-container">
+        <div class="map-placeholder">
+          <i class="fas fa-map-marked-alt"></i>
+          <p>Interactive Map</p>
+          <small>123 Creative Avenue, Art District, NY 10001</small>
+        </div>
+        <div class="map-info">
+          <h3>Easy to Find</h3>
+          <ul>
+            <li><i class="fas fa-subway"></i> 2 blocks from Metro Station</li>
+            <li><i class="fas fa-parking"></i> Free parking available</li>
+            <li><i class="fas fa-wheelchair"></i> Wheelchair accessible</li>
+            <li><i class="fas fa-coffee"></i> Café nearby for breaks</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

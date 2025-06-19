@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import CartItem from '../../models/CartItems';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-  isCartOpen = false;
-  isLoggedIn = false;
+  isLoggedIn = true;
   // Static Data Cart
   cartItems: CartItem[] = [
     {
@@ -30,14 +29,6 @@ export class NavbarComponent {
       image: '/placeholder.svg?height=100&width=100',
     },
   ];
-
-  openCart(): void {
-    this.isCartOpen = true;
-  }
-
-  closeCart(): void {
-    this.isCartOpen = false;
-  }
 
   isLogged(): void {
     this.isLoggedIn = this.isLoggedIn ? true : false;

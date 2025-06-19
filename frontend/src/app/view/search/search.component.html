@@ -1,0 +1,539 @@
+<div class="search-container">
+  <!-- Search Hero Section -->
+  <section class="search-hero">
+    <div class="hero-background">
+      <div class="geometric-pattern"></div>
+      <div class="gradient-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="container">
+        <h1 class="hero-title">
+          Discover <span class="highlight">Amazing</span> Portraits
+        </h1>
+        <p class="hero-subtitle">
+          Search through our extensive collection of professional portrait
+          photography
+        </p>
+
+        <!-- Main Search Bar -->
+        <div class="main-search">
+          <div class="search-input-container">
+            <i class="fas fa-search search-icon"></i>
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search for portraits, styles, or artists..."
+              [(ngModel)]="searchQuery"
+              (input)="onSearchInput($event)"
+              (keyup.enter)="performSearch()"
+            />
+            <button
+              class="search-btn"
+              (click)="performSearch()"
+              [disabled]="isSearching"
+            >
+              <i class="fas fa-arrow-right" *ngIf="!isSearching"></i>
+              <i class="fas fa-spinner fa-spin" *ngIf="isSearching"></i>
+            </button>
+          </div>
+
+          <!-- Quick Filters -->
+          <div class="quick-filters">
+            <button
+              class="filter-chip"
+              [class.active]="selectedCategory === category.id"
+              *ngFor="let category of quickCategories"
+              (click)="selectQuickCategory(category.id)"
+            >
+              <i [class]="category.icon"></i>
+              {{ category.name }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Results Section -->
+  <section class="search-results-section">
+    <div class="container">
+      <!-- Search Header -->
+      <div class="search-header">
+        <div class="results-info">
+          <h2 class="results-title" *ngIf="searchResults.length > 0">
+            {{ searchResults.length }} Results Found
+            <span class="search-term" *ngIf="searchQuery"
+              >"{{ searchQuery }}"</span
+            >
+          </h2>
+          <h2
+            class="results-title"
+            *ngIf="searchResults.length === 0 && !isSearching && hasSearched"
+          >
+            No Results Found
+            <span class="search-term" *ngIf="searchQuery"
+              >"{{ searchQuery }}"</span
+            >
+          </h2>
+          <h2 class="results-title" *ngIf="!hasSearched">Popular Portraits</h2>
+        </div>
+
+        <div class="search-controls">
+          <!-- View Toggle -->
+          <div class="view-toggle">
+            <button
+              class="view-btn"
+              [class.active]="viewMode === 'grid'"
+              (click)="setViewMode('grid')"
+              title="Grid View"
+            >
+              <i class="fas fa-th"></i>
+            </button>
+            <button
+              class="view-btn"
+              [class.active]="viewMode === 'list'"
+              (click)="setViewMode('list')"
+              title="List View"
+            >
+              <i class="fas fa-list"></i>
+            </button>
+          </div>
+
+          <!-- Sort Dropdown -->
+          <div class="sort-dropdown">
+            <select
+              [(ngModel)]="sortBy"
+              (change)="onSortChange()"
+              class="sort-select"
+            >
+              <option value="relevance">Sort by Relevance</option>
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="popular">Most Popular</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+
+          <!-- Filter Toggle -->
+          <button class="filter-toggle-btn" (click)="toggleFilters()">
+            <i class="fas fa-filter"></i>
+            Filters
+            <span class="filter-count" *ngIf="activeFiltersCount > 0">{{
+              activeFiltersCount
+            }}</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Active Filters -->
+      <div class="active-filters" *ngIf="activeFilters.length > 0">
+        <div class="filter-tags">
+          <span class="filter-tag" *ngFor="let filter of activeFilters">
+            {{ filter.label }}
+            <button class="remove-filter" (click)="removeFilter(filter)">
+              <i class="fas fa-times"></i>
+            </button>
+          </span>
+        </div>
+        <button class="clear-all-filters" (click)="clearAllFilters()">
+          Clear All
+        </button>
+      </div>
+
+      <!-- Main Content -->
+      <div class="search-content" [class.filters-open]="showFilters">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar" [class.open]="showFilters">
+          <div class="filters-header">
+            <h3>Filters</h3>
+            <button class="close-filters" (click)="toggleFilters()">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+
+          <div class="filters-content">
+            <!-- Category Filter -->
+            <div class="filter-group">
+              <h4 class="filter-title">Category</h4>
+              <div class="filter-options">
+                <label
+                  class="filter-option"
+                  *ngFor="let category of categories"
+                >
+                  <input
+                    type="checkbox"
+                    [checked]="selectedCategories.includes(category.id)"
+                    (change)="toggleCategory(category.id)"
+                  />
+                  <span class="checkmark"></span>
+                  <span class="option-label">{{ category.name }}</span>
+                  <span class="option-count">({{ category.count }})</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Price Range Filter -->
+            <div class="filter-group">
+              <h4 class="filter-title">Price Range</h4>
+              <div class="price-range">
+                <div class="price-inputs">
+                  <input
+                    type="number"
+                    placeholder="Min"
+                    [(ngModel)]="priceRange.min"
+                    (input)="onPriceChange()"
+                    class="price-input"
+                  />
+                  <span class="price-separator">-</span>
+                  <input
+                    type="number"
+                    placeholder="Max"
+                    [(ngModel)]="priceRange.max"
+                    (input)="onPriceChange()"
+                    class="price-input"
+                  />
+                </div>
+                <div class="price-slider">
+                  <input
+                    type="range"
+                    min="0"
+                    max="1000"
+                    [(ngModel)]="priceRange.min"
+                    (input)="onPriceChange()"
+                    class="slider slider-min"
+                  />
+                  <input
+                    type="range"
+                    min="0"
+                    max="1000"
+                    [(ngModel)]="priceRange.max"
+                    (input)="onPriceChange()"
+                    class="slider slider-max"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Style Filter -->
+            <div class="filter-group">
+              <h4 class="filter-title">Style</h4>
+              <div class="filter-options">
+                <label class="filter-option" *ngFor="let style of styles">
+                  <input
+                    type="checkbox"
+                    [checked]="selectedStyles.includes(style.id)"
+                    (change)="toggleStyle(style.id)"
+                  />
+                  <span class="checkmark"></span>
+                  <span class="option-label">{{ style.name }}</span>
+                  <span class="option-count">({{ style.count }})</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Rating Filter -->
+            <div class="filter-group">
+              <h4 class="filter-title">Rating</h4>
+              <div class="rating-filters">
+                <label
+                  class="rating-option"
+                  *ngFor="let rating of ratingOptions"
+                >
+                  <input
+                    type="radio"
+                    name="rating"
+                    [value]="rating.value"
+                    [(ngModel)]="selectedRating"
+                    (change)="onRatingChange()"
+                  />
+                  <span class="radio-mark"></span>
+                  <div class="stars">
+                    <i
+                      class="fas fa-star"
+                      *ngFor="let star of rating.stars"
+                    ></i>
+                    <span class="rating-text">& Up</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Availability Filter -->
+            <div class="filter-group">
+              <h4 class="filter-title">Availability</h4>
+              <div class="filter-options">
+                <label class="filter-option">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="filters.inStock"
+                    (change)="onFilterChange()"
+                  />
+                  <span class="checkmark"></span>
+                  <span class="option-label">In Stock Only</span>
+                </label>
+                <label class="filter-option">
+                  <input
+                    type="checkbox"
+                    [(ngModel)]="filters.onSale"
+                    (change)="onFilterChange()"
+                  />
+                  <span class="checkmark"></span>
+                  <span class="option-label">On Sale</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Results Grid -->
+        <main class="results-main">
+          <!-- Loading State -->
+          <div class="loading-state" *ngIf="isSearching">
+            <div class="loading-grid">
+              <div
+                class="loading-card"
+                *ngFor="let item of [1, 2, 3, 4, 5, 6, 7, 8]"
+              >
+                <div class="loading-image"></div>
+                <div class="loading-content">
+                  <div class="loading-line"></div>
+                  <div class="loading-line short"></div>
+                  <div class="loading-line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty State -->
+          <div
+            class="empty-state"
+            *ngIf="searchResults.length === 0 && !isSearching && hasSearched"
+          >
+            <div class="empty-content">
+              <i class="fas fa-search empty-icon"></i>
+              <h3 class="empty-title">No Results Found</h3>
+              <p class="empty-description">
+                We couldn't find any portraits matching your search criteria.
+                Try adjusting your filters or search terms.
+              </p>
+              <div class="empty-actions">
+                <button class="btn btn-primary" (click)="clearAllFilters()">
+                  Clear Filters
+                </button>
+                <button class="btn btn-secondary" (click)="resetSearch()">
+                  Browse All
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results Grid View -->
+          <div
+            class="results-grid"
+            *ngIf="
+              searchResults.length > 0 && viewMode === 'grid' && !isSearching
+            "
+          >
+            <div
+              class="portrait-card"
+              *ngFor="let portrait of searchResults"
+              (click)="viewPortrait(portrait.id)"
+            >
+              <div class="card-image">
+                <img
+                  [src]="portrait.image"
+                  [alt]="portrait.title"
+                  loading="lazy"
+                />
+                <div class="card-overlay">
+                  <div class="overlay-actions">
+                    <button
+                      class="action-btn wishlist-btn"
+                      (click)="toggleWishlist(portrait, $event)"
+                    >
+                      <i
+                        class="fas fa-heart"
+                        [class.active]="portrait.isWishlisted"
+                      ></i>
+                    </button>
+                    <button
+                      class="action-btn preview-btn"
+                      (click)="previewPortrait(portrait, $event)"
+                    >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                  <div class="overlay-info">
+                    <span class="category-badge">{{ portrait.category }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-content">
+                <h3 class="card-title">{{ portrait.title }}</h3>
+                <p class="card-artist">by {{ portrait.artist }}</p>
+                <div class="card-rating">
+                  <div class="stars">
+                    <i
+                      class="fas fa-star"
+                      *ngFor="let star of portrait.ratingStars"
+                    ></i>
+                  </div>
+                  <span class="rating-text">({{ portrait.reviews }})</span>
+                </div>
+                <div class="card-footer">
+                  <div class="price">
+                    <span class="current-price">${{ portrait.price }}</span>
+                    <span class="original-price" *ngIf="portrait.originalPrice"
+                      >${{ portrait.originalPrice }}</span
+                    >
+                  </div>
+                  <button
+                    class="add-to-cart-btn"
+                    (click)="addToCart(portrait, $event)"
+                  >
+                    <i class="fas fa-shopping-cart"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Results List View -->
+          <div
+            class="results-list"
+            *ngIf="
+              searchResults.length > 0 && viewMode === 'list' && !isSearching
+            "
+          >
+            <div
+              class="portrait-list-item"
+              *ngFor="let portrait of searchResults"
+              (click)="viewPortrait(portrait.id)"
+            >
+              <div class="list-image">
+                <img
+                  [src]="portrait.image"
+                  [alt]="portrait.title"
+                  loading="lazy"
+                />
+              </div>
+              <div class="list-content">
+                <div class="list-header">
+                  <h3 class="list-title">{{ portrait.title }}</h3>
+                  <div class="list-actions">
+                    <button
+                      class="action-btn wishlist-btn"
+                      (click)="toggleWishlist(portrait, $event)"
+                    >
+                      <i
+                        class="fas fa-heart"
+                        [class.active]="portrait.isWishlisted"
+                      ></i>
+                    </button>
+                    <button
+                      class="action-btn preview-btn"
+                      (click)="previewPortrait(portrait, $event)"
+                    >
+                      <i class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+                <p class="list-artist">by {{ portrait.artist }}</p>
+                <p class="list-description">{{ portrait.description }}</p>
+                <div class="list-meta">
+                  <span class="category-badge">{{ portrait.category }}</span>
+                  <div class="rating">
+                    <div class="stars">
+                      <i
+                        class="fas fa-star"
+                        *ngFor="let star of portrait.ratingStars"
+                      ></i>
+                    </div>
+                    <span class="rating-text">({{ portrait.reviews }})</span>
+                  </div>
+                </div>
+                <div class="list-footer">
+                  <div class="price">
+                    <span class="current-price">${{ portrait.price }}</span>
+                    <span class="original-price" *ngIf="portrait.originalPrice"
+                      >${{ portrait.originalPrice }}</span
+                    >
+                  </div>
+                  <button
+                    class="add-to-cart-btn"
+                    (click)="addToCart(portrait, $event)"
+                  >
+                    <i class="fas fa-shopping-cart"></i>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div
+            class="pagination"
+            *ngIf="searchResults.length > 0 && totalPages > 1"
+          >
+            <button
+              class="page-btn prev-btn"
+              [disabled]="currentPage === 1"
+              (click)="goToPage(currentPage - 1)"
+            >
+              <i class="fas fa-chevron-left"></i>
+              Previous
+            </button>
+
+            <div class="page-numbers">
+              <button
+                class="page-number"
+                [class.active]="page === currentPage"
+                *ngFor="let page of visiblePages"
+                (click)="goToPage(page)"
+              >
+                {{ page }}
+              </button>
+            </div>
+
+            <button
+              class="page-btn next-btn"
+              [disabled]="currentPage === totalPages"
+              (click)="goToPage(currentPage + 1)"
+            >
+              Next
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Suggestions -->
+  <section
+    class="suggestions-section"
+    *ngIf="!hasSearched || (searchResults.length === 0 && !isSearching)"
+  >
+    <div class="container">
+      <h2 class="suggestions-title">Popular Searches</h2>
+      <div class="suggestions-grid">
+        <button
+          class="suggestion-card"
+          *ngFor="let suggestion of popularSearches"
+          (click)="searchSuggestion(suggestion.query)"
+        >
+          <div class="suggestion-image">
+            <img [src]="suggestion.image" [alt]="suggestion.title" />
+          </div>
+          <div class="suggestion-content">
+            <h4>{{ suggestion.title }}</h4>
+            <p>{{ suggestion.count }} results</p>
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

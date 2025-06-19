@@ -1,1 +1,216 @@
-<p>about works!</p>
+<div class="about-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-background">
+      <div class="geometric-pattern"></div>
+      <div class="gradient-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="container">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            <span class="highlight">Capturing</span> Life's Most
+            <span class="highlight">Beautiful</span> Moments
+          </h1>
+          <p class="hero-subtitle">
+            We are passionate artists dedicated to creating timeless portraits
+            that tell your unique story through the lens of creativity and
+            emotion.
+          </p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">10K+</span>
+              <span class="stat-label">Happy Clients</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">15+</span>
+              <span class="stat-label">Years Experience</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">50K+</span>
+              <span class="stat-label">Portraits Created</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img
+            src="/api/placeholder/600/400"
+            alt="Studio Portrait"
+            class="main-image"
+          />
+          <div class="floating-card">
+            <i class="fas fa-camera"></i>
+            <span>Professional Studio</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="mission-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Mission</h2>
+        <p class="section-subtitle">Transforming moments into masterpieces</p>
+      </div>
+      <div class="mission-grid">
+        <div class="mission-card">
+          <div class="mission-icon">
+            <i class="fas fa-heart"></i>
+          </div>
+          <h3>Passion Driven</h3>
+          <p>
+            Every portrait we create is infused with passion and dedication to
+            capture the essence of our subjects.
+          </p>
+        </div>
+        <div class="mission-card">
+          <div class="mission-icon">
+            <i class="fas fa-star"></i>
+          </div>
+          <h3>Excellence</h3>
+          <p>
+            We strive for perfection in every shot, ensuring each portrait meets
+            the highest standards of quality.
+          </p>
+        </div>
+        <div class="mission-card">
+          <div class="mission-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>Connection</h3>
+          <p>
+            Building meaningful relationships with our clients to create
+            portraits that truly reflect their personality.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Meet Our Artists</h2>
+        <p class="section-subtitle">
+          The creative minds behind every masterpiece
+        </p>
+      </div>
+      <div class="team-grid">
+        <div class="team-member" *ngFor="let member of teamMembers">
+          <div class="member-image">
+            <img [src]="member.image" [alt]="member.name" />
+            <div class="member-overlay">
+              <div class="social-links">
+                <a [href]="member.social.instagram" class="social-link">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a [href]="member.social.linkedin" class="social-link">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a [href]="member.social.behance" class="social-link">
+                  <i class="fab fa-behance"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="member-info">
+            <h3 class="member-name">{{ member.name }}</h3>
+            <p class="member-role">{{ member.role }}</p>
+            <p class="member-bio">{{ member.bio }}</p>
+            <div class="member-specialties">
+              <span
+                class="specialty"
+                *ngFor="let specialty of member.specialties"
+              >
+                {{ specialty }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journey Section -->
+  <section class="journey-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Our Journey</h2>
+        <p class="section-subtitle">A timeline of growth and achievement</p>
+      </div>
+      <div class="timeline">
+        <div
+          class="timeline-item"
+          *ngFor="let milestone of milestones; let i = index"
+          [class.reverse]="i % 2 === 1"
+        >
+          <div class="timeline-content">
+            <div class="timeline-year">{{ milestone.year }}</div>
+            <h3 class="timeline-title">{{ milestone.title }}</h3>
+            <p class="timeline-description">{{ milestone.description }}</p>
+            <div class="timeline-achievements">
+              <span
+                class="achievement"
+                *ngFor="let achievement of milestone.achievements"
+              >
+                {{ achievement }}
+              </span>
+            </div>
+          </div>
+          <div class="timeline-image">
+            <img [src]="milestone.image" [alt]="milestone.title" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Awards Section -->
+  <section class="awards-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Recognition & Awards</h2>
+        <p class="section-subtitle">Honored for our commitment to excellence</p>
+      </div>
+      <div class="awards-grid">
+        <div class="award-card" *ngFor="let award of awards">
+          <div class="award-icon">
+            <i [class]="award.icon"></i>
+          </div>
+          <h3 class="award-title">{{ award.title }}</h3>
+          <p class="award-organization">{{ award.organization }}</p>
+          <p class="award-year">{{ award.year }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-background">
+      <div class="geometric-pattern"></div>
+      <div class="gradient-overlay"></div>
+    </div>
+    <div class="container">
+      <div class="cta-content">
+        <h2 class="cta-title">Ready to Create Your Masterpiece?</h2>
+        <p class="cta-subtitle">
+          Let's work together to capture your unique story
+        </p>
+        <div class="cta-buttons">
+          <button class="btn btn-primary" routerLink="/contact">
+            <i class="fas fa-calendar"></i>
+            Book a Session
+          </button>
+          <button class="btn btn-secondary" routerLink="/shop">
+            <i class="fas fa-images"></i>
+            View Portfolio
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

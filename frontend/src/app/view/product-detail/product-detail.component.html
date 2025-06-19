@@ -1,0 +1,734 @@
+<div class="min-h-screen bg-slate-900 relative overflow-hidden">
+  <!-- Creative Background Pattern -->
+  <div class="fixed inset-0 opacity-5">
+    <div
+      class="absolute top-20 left-10 w-32 h-32 border-2 border-emerald-600 rotate-45 rounded-2xl"
+    ></div>
+    <div
+      class="absolute top-40 right-20 w-24 h-24 bg-amber-500 rounded-full opacity-10"
+    ></div>
+    <div
+      class="absolute bottom-40 left-1/4 w-16 h-16 border border-emerald-500 rotate-12 rounded-xl"
+    ></div>
+    <div
+      class="absolute top-1/3 right-1/3 w-20 h-20 border-2 border-amber-400 rounded-full"
+    ></div>
+    <div
+      class="absolute bottom-20 right-10 w-28 h-28 border border-emerald-600 -rotate-12 rounded-3xl"
+    ></div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="flex items-center justify-center min-h-screen">
+    <div class="text-center">
+      <div class="inline-block relative">
+        <div
+          class="w-16 h-16 border-4 border-slate-700 border-t-amber-500 rounded-full animate-spin"
+        ></div>
+        <div
+          class="absolute inset-0 w-16 h-16 border-4 border-transparent border-t-emerald-500 rounded-full animate-spin"
+          style="animation-delay: 0.3s"
+        ></div>
+      </div>
+      <p class="text-slate-300 mt-4">Loading portrait details...</p>
+    </div>
+  </div>
+
+  <!-- Portrait Not Found -->
+  <div
+    *ngIf="!isLoading && !portrait"
+    class="flex items-center justify-center min-h-screen"
+  >
+    <div class="text-center">
+      <div
+        class="w-20 h-20 bg-slate-800/50 rounded-2xl flex items-center justify-center mx-auto mb-6"
+      >
+        <svg
+          class="w-10 h-10 text-slate-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+          ></path>
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-slate-100 mb-4">Portrait Not Found</h2>
+      <p class="text-slate-400 mb-6">
+        The portrait you're looking for doesn't exist or has been removed.
+      </p>
+      <button
+        (click)="goBack()"
+        class="px-6 py-3 bg-emerald-600 text-slate-100 rounded-xl hover:bg-emerald-500 transition-all font-medium"
+      >
+        Go Back to Gallery
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main *ngIf="!isLoading && portrait" class="relative z-10">
+    <!-- Breadcrumb Navigation -->
+    <nav class="container mx-auto px-4 py-6">
+      <div class="flex items-center space-x-2 text-sm">
+        <a
+          (click)="navigateTo('/')"
+          class="text-slate-400 hover:text-amber-400 transition-colors cursor-pointer"
+          >Home</a
+        >
+        <svg
+          class="w-4 h-4 text-slate-600"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+        <a
+          (click)="navigateTo('/shop')"
+          class="text-slate-400 hover:text-amber-400 transition-colors cursor-pointer"
+          >Gallery</a
+        >
+        <svg
+          class="w-4 h-4 text-slate-600"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M9 5l7 7-7 7"
+          ></path>
+        </svg>
+        <span class="text-amber-400">{{ portrait?.title }}</span>
+      </div>
+    </nav>
+
+    <div class="container mx-auto px-4 pb-12">
+      <div class="grid lg:grid-cols-2 gap-12 xl:gap-16">
+        <!-- Left Side - Image Gallery -->
+        <div class="relative">
+          <!-- Main Image Display -->
+          <div class="relative mb-6">
+            <div
+              class="absolute -inset-4 bg-emerald-600/10 rounded-3xl rotate-1"
+            ></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl overflow-hidden border border-slate-700/30"
+            >
+              <div class="aspect-[4/5] relative overflow-hidden group">
+                <img
+                  [src]="selectedImage"
+                  [alt]="
+                    (portrait?.title || 'Portrait') +
+                    ' by ' +
+                    (portrait?.artist || 'Unknown Artist')
+                  "
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+
+                <!-- Image Overlay Controls -->
+                <div
+                  class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/20 transition-all duration-300"
+                >
+                  <div
+                    class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300"
+                  >
+                    <button
+                      (click)="openImageViewer()"
+                      class="p-3 bg-slate-800/80 backdrop-blur-sm rounded-xl text-slate-100 hover:bg-slate-700/80 transition-all border border-slate-600/50"
+                      title="View full size"
+                    >
+                      <svg
+                        class="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                        ></path>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Category Badge -->
+                <div class="absolute top-4 left-4">
+                  <span
+                    [class]="
+                      'px-4 py-2 text-sm font-semibold rounded-full ' +
+                      getCategoryBadgeClass(portrait?.category || '')
+                    "
+                  >
+                    {{ portrait?.category }}
+                  </span>
+                </div>
+
+                <!-- Popular Badge -->
+                <div
+                  *ngIf="portrait?.isPopular"
+                  class="absolute top-4 left-1/2 transform -translate-x-1/2"
+                >
+                  <span
+                    class="px-4 py-2 bg-amber-500 text-slate-900 text-sm font-semibold rounded-full flex items-center"
+                  >
+                    <svg
+                      class="w-4 h-4 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                    Popular Choice
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Thumbnail Gallery -->
+          <div
+            class="flex space-x-3 overflow-x-auto pb-2"
+            *ngIf="portrait?.images && portrait.images.length > 1"
+          >
+            <button
+              *ngFor="let image of portrait.images; let i = index"
+              (click)="selectImage(image)"
+              [class]="
+                'flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ' +
+                (selectedImage === image
+                  ? 'border-amber-500'
+                  : 'border-slate-600/50 hover:border-slate-500')
+              "
+            >
+              <img
+                [src]="image"
+                [alt]="'View ' + (i + 1)"
+                class="w-full h-full object-cover"
+              />
+            </button>
+          </div>
+
+          <!-- Image Info -->
+          <div
+            class="mt-6 p-4 bg-slate-800/50 rounded-xl border border-slate-700/30"
+          >
+            <div class="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span class="text-slate-400">Dimensions:</span>
+                <p class="text-slate-100 font-medium">
+                  {{ portrait?.dimensions || "N/A" }}
+                </p>
+              </div>
+              <div>
+                <span class="text-slate-400">Medium:</span>
+                <p class="text-slate-100 font-medium">
+                  {{ portrait?.medium || "N/A" }}
+                </p>
+              </div>
+              <div>
+                <span class="text-slate-400">Year:</span>
+                <p class="text-slate-100 font-medium">
+                  {{ getYear(portrait?.dateCreated || "") }}
+                </p>
+              </div>
+              <div>
+                <span class="text-slate-400">Edition:</span>
+                <p class="text-slate-100 font-medium">
+                  {{ portrait?.edition || "Original" }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side - Portrait Details -->
+        <div class="space-y-8">
+          <!-- Portrait Header -->
+          <div class="relative">
+            <div
+              class="absolute -inset-3 bg-amber-500/5 rounded-2xl -rotate-1"
+            ></div>
+            <div class="relative">
+              <div class="flex items-start justify-between mb-4">
+                <div>
+                  <h1
+                    class="text-3xl md:text-4xl font-serif font-bold text-slate-100 mb-2"
+                  >
+                    {{ portrait?.title || "Untitled Portrait" }}
+                  </h1>
+                  <p class="text-xl text-slate-300">
+                    by {{ portrait?.artist || "Unknown Artist" }}
+                  </p>
+                </div>
+                <button
+                  (click)="toggleWishlist()"
+                  [class]="
+                    'p-3 rounded-xl border-2 transition-all ' +
+                    (portrait?.isInWishlist
+                      ? 'bg-emerald-600 border-emerald-500 text-slate-100'
+                      : 'bg-slate-800/50 border-slate-600 text-slate-300 hover:border-emerald-500')
+                  "
+                  title="Add to wishlist"
+                >
+                  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Rating and Reviews -->
+              <div class="flex items-center space-x-4 mb-6">
+                <div class="flex items-center">
+                  <div class="flex items-center mr-2">
+                    <svg
+                      *ngFor="let star of getStarArray(portrait?.rating || 0)"
+                      class="w-5 h-5 text-amber-400"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                      />
+                    </svg>
+                  </div>
+                  <span class="text-slate-100 font-medium">{{
+                    portrait?.rating || 0
+                  }}</span>
+                </div>
+                <div class="w-px h-4 bg-slate-600"></div>
+                <span class="text-slate-400 text-sm"
+                  >{{ portrait?.reviewCount || 0 }} reviews</span
+                >
+                <div class="w-px h-4 bg-slate-600"></div>
+                <span class="text-slate-400 text-sm"
+                  >{{ portrait?.views || 0 }} views</span
+                >
+              </div>
+
+              <!-- Price -->
+              <div class="mb-8">
+                <div class="flex items-baseline space-x-4">
+                  <span class="text-4xl font-bold text-amber-400"
+                    >${{ portrait?.price || 0 }}</span
+                  >
+                  <span
+                    *ngIf="hasDiscount()"
+                    class="text-xl text-slate-500 line-through"
+                    >${{ portrait?.originalPrice }}</span
+                  >
+
+                  <span
+                    *ngIf="hasDiscount()"
+                    class="px-3 py-1 bg-emerald-600/20 text-emerald-400 text-sm rounded-full border border-emerald-600/30"
+                  >
+                    {{ getDiscountPercentage() }}% OFF
+                  </span>
+                </div>
+                <p class="text-slate-400 text-sm mt-2">
+                  Free shipping worldwide • 30-day return policy
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Purchase Options -->
+          <div class="relative">
+            <div
+              class="absolute -inset-3 bg-emerald-600/5 rounded-2xl rotate-1"
+            ></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 p-6"
+            >
+              <h3 class="text-lg font-semibold text-slate-100 mb-4">
+                Purchase Options
+              </h3>
+
+              <!-- Size Selection -->
+              <div class="mb-6">
+                <label class="block text-sm font-medium text-slate-300 mb-3"
+                  >Size & Format</label
+                >
+                <div class="grid grid-cols-1 gap-3">
+                  <label
+                    *ngFor="let option of sizeOptions; let i = index"
+                    class="relative cursor-pointer group"
+                  >
+                    <input
+                      type="radio"
+                      [value]="option.id"
+                      [(ngModel)]="selectedSizeOption"
+                      name="sizeOption"
+                      class="sr-only peer"
+                    />
+                    <div
+                      class="p-4 bg-slate-700/50 border border-slate-600/50 rounded-xl peer-checked:bg-emerald-600/20 peer-checked:border-emerald-500/50 transition-all duration-300 group-hover:bg-slate-600/50"
+                    >
+                      <div class="flex items-center justify-between">
+                        <div>
+                          <p class="font-medium text-slate-100">
+                            {{ option.name }}
+                          </p>
+                          <p class="text-sm text-slate-400">
+                            {{ option.dimensions }}
+                          </p>
+                        </div>
+                        <div class="text-right">
+                          <p class="font-bold text-amber-400">
+                            ${{ option.price }}
+                          </p>
+                          <p
+                            *ngIf="
+                              option.originalPrice &&
+                              option.originalPrice > option.price
+                            "
+                            class="text-sm text-slate-500 line-through"
+                          >
+                            ${{ option.originalPrice }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Quantity -->
+              <div class="mb-6">
+                <label class="block text-sm font-medium text-slate-300 mb-3"
+                  >Quantity</label
+                >
+                <div class="flex items-center space-x-3">
+                  <button
+                    (click)="decreaseQuantity()"
+                    [disabled]="quantity <= 1"
+                    class="p-2 bg-slate-700/50 border border-slate-600/50 rounded-lg hover:bg-slate-600/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <svg
+                      class="w-4 h-4 text-slate-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M20 12H4"
+                      ></path>
+                    </svg>
+                  </button>
+                  <span
+                    class="px-4 py-2 bg-slate-700/50 border border-slate-600/50 rounded-lg text-slate-100 font-medium min-w-[3rem] text-center"
+                  >
+                    {{ quantity }}
+                  </span>
+                  <button
+                    (click)="increaseQuantity()"
+                    [disabled]="quantity >= maxQuantity"
+                    class="p-2 bg-slate-700/50 border border-slate-600/50 rounded-lg hover:bg-slate-600/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <svg
+                      class="w-4 h-4 text-slate-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 4v16m8-8H4"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <p class="text-xs text-slate-400 mt-2">
+                  {{ maxQuantity }} available
+                </p>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="space-y-3">
+                <button
+                  (click)="addToCart()"
+                  class="w-full py-4 bg-emerald-600 text-slate-100 rounded-xl hover:bg-emerald-500 transition-all font-semibold text-lg group relative overflow-hidden"
+                >
+                  <span class="relative z-10 flex items-center justify-center">
+                    <svg
+                      class="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 11-4 0v-6m4 0V9a2 2 0 10-4 0v4.01"
+                      ></path>
+                    </svg>
+                    Add to Cart - ${{ getTotalPrice() }}
+                  </span>
+                  <div
+                    class="absolute inset-0 bg-emerald-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                  ></div>
+                </button>
+
+                <button
+                  (click)="buyNow()"
+                  class="w-full py-4 bg-amber-500 text-slate-900 rounded-xl hover:bg-amber-400 transition-all font-semibold text-lg group relative overflow-hidden"
+                >
+                  <span class="relative z-10 flex items-center justify-center">
+                    <svg
+                      class="w-5 h-5 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                      ></path>
+                    </svg>
+                    Buy Now
+                  </span>
+                  <div
+                    class="absolute inset-0 bg-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                  ></div>
+                </button>
+              </div>
+
+              <!-- Additional Options -->
+              <div class="mt-6 pt-6 border-t border-slate-700/50">
+                <div class="flex items-center justify-between text-sm">
+                  <button
+                    class="text-slate-400 hover:text-emerald-400 transition-colors flex items-center"
+                  >
+                    <svg
+                      class="w-4 h-4 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      ></path>
+                    </svg>
+                    Ask a Question
+                  </button>
+                  <button
+                    class="text-slate-400 hover:text-emerald-400 transition-colors flex items-center"
+                  >
+                    <svg
+                      class="w-4 h-4 mr-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"
+                      ></path>
+                    </svg>
+                    Share
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Portrait Description -->
+          <div class="relative">
+            <div
+              class="absolute -inset-3 bg-amber-500/5 rounded-2xl -rotate-1"
+            ></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 p-6"
+            >
+              <h3 class="text-lg font-semibold text-slate-100 mb-4">
+                About This Portrait
+              </h3>
+              <p class="text-slate-300 leading-relaxed mb-6">
+                {{ portrait?.description || "No description available." }}
+              </p>
+
+              <!-- Tags -->
+              <div
+                class="flex flex-wrap gap-2"
+                *ngIf="portrait?.tags && portrait.tags.length > 0"
+              >
+                <span
+                  *ngFor="let tag of portrait.tags"
+                  class="px-3 py-1 bg-slate-700/50 text-slate-300 text-sm rounded-full border border-slate-600/30"
+                >
+                  {{ tag }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Artist Information -->
+          <div class="relative">
+            <div
+              class="absolute -inset-3 bg-emerald-600/5 rounded-2xl rotate-1"
+            ></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 p-6"
+            >
+              <div class="flex items-start space-x-4 mb-4">
+                <div
+                  class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-amber-500"
+                >
+                  <img
+                    [src]="
+                      portrait?.artistInfo?.profileImage ||
+                      '/placeholder.svg?height=64&width=64'
+                    "
+                    [alt]="(portrait?.artist || 'Artist') + ' profile'"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-lg font-semibold text-slate-100">
+                    {{ portrait?.artist || "Unknown Artist" }}
+                  </h3>
+                  <p class="text-slate-400 text-sm mb-2">
+                    {{
+                      portrait?.artistInfo?.location || "Professional Artist"
+                    }}
+                  </p>
+                  <div
+                    class="flex items-center space-x-4 text-sm text-slate-400"
+                  >
+                    <span
+                      >{{ portrait?.artistInfo?.worksCount || 0 }} works</span
+                    >
+                    <span
+                      >{{
+                        portrait?.artistInfo?.followersCount || 0
+                      }}
+                      followers</span
+                    >
+                  </div>
+                </div>
+                <button
+                  (click)="followArtist()"
+                  [class]="
+                    'px-4 py-2 rounded-xl font-medium transition-all ' +
+                    (isFollowingArtist
+                      ? 'bg-emerald-600 text-slate-100 hover:bg-emerald-500'
+                      : 'bg-slate-700/50 text-slate-300 border border-slate-600/50 hover:bg-slate-600/50')
+                  "
+                >
+                  {{ isFollowingArtist ? "Following" : "Follow" }}
+                </button>
+              </div>
+
+              <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                {{
+                  portrait?.artistInfo?.bio ||
+                    "Passionate artist dedicated to capturing the essence and beauty of human emotion through portraiture."
+                }}
+              </p>
+
+              <button
+                (click)="viewArtistProfile()"
+                class="text-amber-400 hover:text-amber-300 transition-colors text-sm font-medium"
+              >
+                View Full Profile →
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Related Portraits Section -->
+      <section
+        class="mt-16"
+        *ngIf="relatedPortraits && relatedPortraits.length > 0"
+      >
+        <div class="relative mb-8">
+          <div
+            class="absolute -inset-3 bg-emerald-600/5 rounded-2xl rotate-1"
+          ></div>
+          <div class="relative text-center">
+            <h2 class="text-3xl font-serif font-bold text-slate-100 mb-4">
+              You Might Also Like
+            </h2>
+            <p class="text-slate-300">
+              Discover more stunning portraits from our collection
+            </p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <article
+            *ngFor="let relatedPortrait of relatedPortraits; let i = index"
+            class="group relative cursor-pointer"
+            (click)="viewRelatedPortrait(relatedPortrait)"
+          >
+            <div
+              [class]="
+                'absolute -inset-2 rounded-xl transition-all duration-300 ' +
+                (i % 2 === 0
+                  ? 'bg-emerald-600/10 rotate-1 group-hover:rotate-2'
+                  : 'bg-amber-500/10 -rotate-1 group-hover:-rotate-2')
+              "
+            ></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700/30 group-hover:border-slate-600/50 transition-all"
+            >
+              <div class="aspect-[3/4] overflow-hidden">
+                <img
+                  [src]="relatedPortrait.imageUrl"
+                  [alt]="relatedPortrait.title"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+              </div>
+              <div class="p-4">
+                <h3
+                  class="font-semibold text-slate-100 mb-1 group-hover:text-amber-400 transition-colors"
+                >
+                  {{ relatedPortrait.title }}
+                </h3>
+                <p class="text-slate-400 text-sm mb-2">
+                  {{ relatedPortrait.artist }}
+                </p>
+                <p class="text-amber-400 font-bold">
+                  ${{ relatedPortrait.price }}
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

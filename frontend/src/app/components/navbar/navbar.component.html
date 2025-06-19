@@ -71,22 +71,14 @@
         <!-- Cart Button (shown when logged in) -->
         <ng-container *ngIf="isLoggedIn; else authButtons">
           <button
-            (click)="openCart()"
+            routerLink="/cart"
             class="relative p-3 rounded-full hover:bg-slate-800/50 transition-all duration-300 group"
           >
-            <svg
-              class="h-6 w-6 text-slate-300 group-hover:text-amber-400 transition-colors"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <span
+              class="material-icons text-1xl text-slate-300 group-hover:text-amber-400 transition-colors"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9"
-              ></path>
-            </svg>
+              shopping_cart
+            </span>
             <span
               *ngIf="cartItems.length > 0"
               class="absolute -top-1 -right-1 bg-amber-500 text-slate-900 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
@@ -95,6 +87,16 @@
             <div
               class="absolute -bottom-8 -right-2 w-4 h-4 bg-emerald-600 rotate-45 opacity-0 group-hover:opacity-20 transition-all duration-300"
             ></div>
+          </button>
+          <button
+            routerLink="/user-dashboard"
+            class="relative p-3 rounded-full hover:bg-slate-800/50 transition-all duration-300 group"
+          >
+          <span class="material-icons text-1xl text-slate-300 group-hover:text-amber-400 transition-colors">person</span>
+            <div
+              class="absolute -bottom-8 -right-2 w-4 h-4 bg-emerald-600 rotate-45 opacity-0 group-hover:opacity-20 transition-all duration-300"
+            >
+          </div>
           </button>
         </ng-container>
 
