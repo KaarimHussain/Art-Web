@@ -10,6 +10,7 @@ import { CollectionDetailComponent } from './view/collection-detail/collection-d
 import { CartComponent } from './view/cart/cart.component';
 import { ContactComponent } from './view/contact/contact.component';
 import { AboutComponent } from './view/about/about.component';
+import { AdminDashboardComponent } from './view/admin-dashboard/admin-dashboard.component';
 
 export const routes: Routes = [
   {
@@ -47,6 +48,10 @@ export const routes: Routes = [
   {
     path: 'user-dashboard',
     component: UserDashboardComponent,
+  },
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboardComponent,
   },
   {
     path: 'contact',
