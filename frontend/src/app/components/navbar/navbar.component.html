@@ -1,122 +1,202 @@
-<!-- Navigation -->
 <header
-  class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-xl border-b border-emerald-800/20"
+  class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-emerald-800/30 shadow-lg shadow-slate-900/20"
 >
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
-      <div class="flex items-center relative">
+      <!-- Enhanced Logo -->
+      <a
+        routerLink="/"
+        class="text-2xl font-serif font-bold text-amber-400 tracking-wider relative group transition-all duration-300 hover:scale-105"
+      >
+        <span class="relative z-10">Portrait</span>
         <div
-          class="absolute -left-4 -top-2 w-12 h-12 border-2 border-amber-500 rotate-45 opacity-20"
+          class="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-emerald-400/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
         ></div>
+      </a>
+
+      <!-- Enhanced Toggle Button -->
+      <button
+        (click)="toggleMenu()"
+        class="md:hidden relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group z-50 border border-slate-700/50 hover:border-amber-400/50"
+      >
+        <span
+          class="material-icons text-xl text-slate-300 group-hover:text-amber-400 transition-colors duration-300"
+        >
+          {{ isMenuOpen ? "close" : "menu" }}
+        </span>
+      </button>
+
+      <!-- Enhanced Desktop Nav -->
+      <nav class="hidden md:flex space-x-8 items-center">
         <a
           routerLink="/"
-          class="text-3xl font-serif font-bold text-amber-400 tracking-wider relative z-10"
+          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group"
         >
-          PORTRAIT
+          <span class="relative z-10">Home</span>
+          <div
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300"
+          ></div>
         </a>
-      </div>
-
-      <nav class="hidden md:flex space-x-12">
         <a
           routerLink="/shop"
-          class="text-sm font-medium text-slate-300 hover:text-amber-400 transition-all duration-300 relative group"
+          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group"
         >
-          Shop
+          <span class="relative z-10">Shop</span>
           <div
-            class="absolute -bottom-2 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
-          ></div>
-          <div
-            class="absolute -top-8 -left-2 w-6 h-6 border border-emerald-600 rotate-45 opacity-0 group-hover:opacity-30 transition-all duration-300"
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300"
           ></div>
         </a>
         <a
           routerLink="/collection"
-          class="text-sm font-medium text-slate-300 hover:text-amber-400 transition-all duration-300 relative group"
+          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group"
         >
-          Collections
+          <span class="relative z-10">Collection</span>
           <div
-            class="absolute -bottom-2 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
-          ></div>
-          <div
-            class="absolute -top-8 -left-2 w-6 h-6 border border-emerald-600 rotate-45 opacity-0 group-hover:opacity-30 transition-all duration-300"
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300"
           ></div>
         </a>
         <a
-          routerLink="/about"
-          class="text-sm font-medium text-slate-300 hover:text-amber-400 transition-all duration-300 relative group"
+          routerLink="/blog"
+          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group"
         >
-          About
+          <span class="relative z-10">Blog</span>
           <div
-            class="absolute -bottom-2 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
-          ></div>
-          <div
-            class="absolute -top-8 -left-2 w-6 h-6 border border-emerald-600 rotate-45 opacity-0 group-hover:opacity-30 transition-all duration-300"
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300"
           ></div>
         </a>
         <a
           routerLink="/contact"
-          class="text-sm font-medium text-slate-300 hover:text-amber-400 transition-all duration-300 relative group"
+          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group"
         >
-          Contact
+          <span class="relative z-10">Contact</span>
           <div
-            class="absolute -bottom-2 left-0 w-0 h-0.5 bg-amber-400 group-hover:w-full transition-all duration-300"
-          ></div>
-          <div
-            class="absolute -top-8 -left-2 w-6 h-6 border border-emerald-600 rotate-45 opacity-0 group-hover:opacity-30 transition-all duration-300"
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300"
           ></div>
         </a>
-      </nav>
 
-      <div class="flex items-center space-x-4">
-        <!-- Cart Button (shown when logged in) -->
-        <ng-container *ngIf="isLoggedIn; else authButtons">
+        <!-- Enhanced Action Buttons -->
+        <div
+          class="flex items-center space-x-3 ml-6 pl-6 border-l border-slate-700/50"
+        >
           <button
             routerLink="/cart"
-            class="relative p-3 rounded-full hover:bg-slate-800/50 transition-all duration-300 group"
+            class="relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-amber-400/50 hover:shadow-lg hover:shadow-amber-400/20"
           >
             <span
-              class="material-icons text-1xl text-slate-300 group-hover:text-amber-400 transition-colors"
-            >
-              shopping_cart
-            </span>
-            <span
-              *ngIf="cartItems.length > 0"
-              class="absolute -top-1 -right-1 bg-amber-500 text-slate-900 text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center"
-              >{{ cartItems.length }}</span
+              class="material-icons text-slate-300 group-hover:text-amber-400 transition-colors duration-300"
+              >shopping_cart</span
             >
             <div
-              class="absolute -bottom-8 -right-2 w-4 h-4 bg-emerald-600 rotate-45 opacity-0 group-hover:opacity-20 transition-all duration-300"
+              class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             ></div>
           </button>
           <button
             routerLink="/user-dashboard"
-            class="relative p-3 rounded-full hover:bg-slate-800/50 transition-all duration-300 group"
+            class="relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-amber-400/50 hover:shadow-lg hover:shadow-amber-400/20"
           >
-          <span class="material-icons text-1xl text-slate-300 group-hover:text-amber-400 transition-colors">person</span>
-            <div
-              class="absolute -bottom-8 -right-2 w-4 h-4 bg-emerald-600 rotate-45 opacity-0 group-hover:opacity-20 transition-all duration-300"
+            <span
+              class="material-icons text-slate-300 group-hover:text-amber-400 transition-colors duration-300"
+              >person</span
             >
-          </div>
           </button>
-        </ng-container>
+        </div>
+      </nav>
+    </div>
+  </div>
 
-        <!-- Login/Signup Buttons (shown when not logged in) -->
-        <ng-template #authButtons>
-          <div class="flex space-x-3">
-            <a
-              routerLink="/login"
-              class="px-4 py-2 text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors"
+  <!-- Enhanced Mobile Menu -->
+  <div
+    class="md:hidden fixed inset-0 bg-slate-900/95 backdrop-blur-xl z-40 h-full transition-all duration-300"
+    [class.opacity-0]="!isMenuOpen"
+    [class.opacity-100]="isMenuOpen"
+    [class.pointer-events-none]="!isMenuOpen"
+    [class.pointer-events-auto]="isMenuOpen"
+    [class.translate-y-full]="!isMenuOpen"
+    [class.translate-y-0]="isMenuOpen"
+  >
+    <div
+      class="flex flex-col min-h-[700px] pt-24 px-6 bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-800/90"
+    >
+      <!-- Mobile Navigation Links -->
+      <div class="space-y-4">
+        <a
+          routerLink="/"
+          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group"
+        >
+          <span class="flex items-center">
+            <span
+              class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400"
+              >home</span
             >
-              Login
-            </a>
-            <a
-              routerLink="/signup"
-              class="px-4 py-2 text-sm font-medium bg-amber-500 text-slate-900 rounded-md hover:bg-amber-400 transition-colors"
+            Home
+          </span>
+        </a>
+        <a
+          routerLink="/shop"
+          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group"
+        >
+          <span class="flex items-center">
+            <span
+              class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400"
+              >store</span
             >
-              Sign Up
-            </a>
-          </div>
-        </ng-template>
+            Shop
+          </span>
+        </a>
+        <a
+          routerLink="/collection"
+          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group"
+        >
+          <span class="flex items-center">
+            <span
+              class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400"
+              >work</span
+            >
+            Collection
+          </span>
+        </a>
+        <a
+          routerLink="/blog"
+          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group"
+        >
+          <span class="flex items-center">
+            <span
+              class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400"
+              >article</span
+            >
+            Blog
+          </span>
+        </a>
+        <a
+          routerLink="/contact"
+          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group"
+        >
+          <span class="flex items-center">
+            <span
+              class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400"
+              >contact_mail</span
+            >
+            Contact
+          </span>
+        </a>
+      </div>
+
+      <!-- Enhanced Mobile Action Buttons -->
+      <div class="flex flex-col mt-auto mb-12 gap-4">
+        <button
+          routerLink="/cart"
+          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 rounded-2xl py-4 px-6 text-black font-semibold transition-all duration-300 shadow-lg shadow-amber-400/30 hover:shadow-xl hover:shadow-amber-400/40 hover:scale-105"
+        >
+          <span class="material-icons mr-3">shopping_cart</span>
+          Cart
+        </button>
+        <button
+          routerLink="/user-dashboard"
+          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-emerald-600/30 hover:shadow-xl hover:shadow-emerald-600/40 hover:scale-105"
+        >
+          <span class="material-icons mr-3">person</span>
+          Profile
+        </button>
       </div>
     </div>
   </div>

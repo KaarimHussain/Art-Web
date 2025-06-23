@@ -1,15 +1,11 @@
 <div class="contact-container">
   <!-- Hero Section -->
   <section class="contact-hero">
-    <div class="hero-background">
-      <div class="geometric-pattern"></div>
-      <div class="gradient-overlay"></div>
-    </div>
     <div class="container">
       <div class="hero-content">
         <h1 class="hero-title">
           Let's Create Something
-          <span class="highlight">Amazing</span> Together
+          <span class="text-amber-400">Amazing</span> Together
         </h1>
         <p class="hero-subtitle">
           Ready to capture your story? Get in touch and let's discuss your
@@ -23,298 +19,530 @@
   <section class="contact-form-section">
     <div class="container">
       <div class="contact-grid">
-        <!-- Contact Form -->
-        <div class="form-container">
-          <div class="form-header">
-            <h2 class="form-title">Send us a Message</h2>
-            <p class="form-subtitle">We'd love to hear about your project</p>
-          </div>
-
-          <form
-            class="contact-form"
-            [formGroup]="contactForm"
-            (ngSubmit)="onSubmit()"
+        <!-- Your Creative Header Section (unchanged) -->
+        <section class="relative mb-12">
+          <div
+            class="absolute -inset-4 bg-emerald-500/10 rounded-3xl -rotate-1"
+          ></div>
+          <div
+            class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8"
           >
-            <div class="form-row">
-              <div class="form-group">
-                <label for="firstName">First Name *</label>
-                <input
-                  type="text"
-                  id="firstName"
-                  formControlName="firstName"
-                  [class.error]="isFieldInvalid('firstName')"
-                  placeholder="Enter your first name"
-                />
-                <div class="error-message" *ngIf="isFieldInvalid('firstName')">
-                  First name is required
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="lastName">Last Name *</label>
-                <input
-                  type="text"
-                  id="lastName"
-                  formControlName="lastName"
-                  [class.error]="isFieldInvalid('lastName')"
-                  placeholder="Enter your last name"
-                />
-                <div class="error-message" *ngIf="isFieldInvalid('lastName')">
-                  Last name is required
-                </div>
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input
-                  type="email"
-                  id="email"
-                  formControlName="email"
-                  [class.error]="isFieldInvalid('email')"
-                  placeholder="your@email.com"
-                />
-                <div class="error-message" *ngIf="isFieldInvalid('email')">
-                  <span *ngIf="contactForm.get('email')?.errors?.['required']"
-                    >Email is required</span
-                  >
-                  <span *ngIf="contactForm.get('email')?.errors?.['email']"
-                    >Please enter a valid email</span
-                  >
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  formControlName="phone"
-                  placeholder="+1 (555) 123-4567"
-                />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="subject">Subject *</label>
-              <select
-                id="subject"
-                formControlName="subject"
-                [class.error]="isFieldInvalid('subject')"
+            <div
+              class="absolute top-6 right-6 w-8 h-8 border-2 border-amber-600/30 rotate-45 rounded-xl"
+            ></div>
+            <div class="text-start relative z-10">
+              <h1
+                class="text-4xl md:text-5xl font-serif font-bold text-slate-100 mb-4"
               >
-                <option value="">Select a subject</option>
-                <option value="portrait-session">
-                  Portrait Session Booking
-                </option>
-                <option value="wedding">Wedding Photography</option>
-                <option value="corporate">Corporate Headshots</option>
-                <option value="family">Family Portraits</option>
-                <option value="commercial">Commercial Project</option>
-                <option value="other">Other Inquiry</option>
-              </select>
-              <div class="error-message" *ngIf="isFieldInvalid('subject')">
-                Please select a subject
+                Send us a
+                <span class="text-amber-400">Message</span>
+              </h1>
+              <p class="text-xl text-slate-300 max-w-2xl">
+                We'd love to hear about your project
+              </p>
+              <!-- Contact Form -->
+              <form
+                class="contact-form mt-4"
+                [formGroup]="contactForm"
+                (ngSubmit)="onSubmit()"
+              >
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="firstName">First Name *</label>
+                    <input
+                      type="text"
+                      id="firstName"
+                      formControlName="firstName"
+                      [class.error]="isFieldInvalid('firstName')"
+                      placeholder="Enter your first name"
+                    />
+                    <div
+                      class="error-message"
+                      *ngIf="isFieldInvalid('firstName')"
+                    >
+                      First name is required
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name *</label>
+                    <input
+                      type="text"
+                      id="lastName"
+                      formControlName="lastName"
+                      [class.error]="isFieldInvalid('lastName')"
+                      placeholder="Enter your last name"
+                    />
+                    <div
+                      class="error-message"
+                      *ngIf="isFieldInvalid('lastName')"
+                    >
+                      Last name is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input
+                      type="email"
+                      id="email"
+                      formControlName="email"
+                      [class.error]="isFieldInvalid('email')"
+                      placeholder="your@email.com"
+                    />
+                    <div class="error-message" *ngIf="isFieldInvalid('email')">
+                      <span
+                        *ngIf="contactForm.get('email')?.errors?.['required']"
+                        >Email is required</span
+                      >
+                      <span *ngIf="contactForm.get('email')?.errors?.['email']"
+                        >Please enter a valid email</span
+                      >
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      formControlName="phone"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="subject">Subject *</label>
+                  <select
+                    id="subject"
+                    formControlName="subject"
+                    [class.error]="isFieldInvalid('subject')"
+                  >
+                    <option value="">Select a subject</option>
+                    <option value="portrait-session">
+                      Portrait Session Booking
+                    </option>
+                    <option value="wedding">Wedding Photography</option>
+                    <option value="corporate">Corporate Headshots</option>
+                    <option value="family">Family Portraits</option>
+                    <option value="commercial">Commercial Project</option>
+                    <option value="other">Other Inquiry</option>
+                  </select>
+                  <div class="error-message" *ngIf="isFieldInvalid('subject')">
+                    Please select a subject
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="budget">Budget Range</label>
+                  <select id="budget" formControlName="budget">
+                    <option value="">Select budget range</option>
+                    <option value="under-500">Under $500</option>
+                    <option value="500-1000">$500 - $1,000</option>
+                    <option value="1000-2500">$1,000 - $2,500</option>
+                    <option value="2500-5000">$2,500 - $5,000</option>
+                    <option value="over-5000">Over $5,000</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="message">Message *</label>
+                  <textarea
+                    id="message"
+                    formControlName="message"
+                    [class.error]="isFieldInvalid('message')"
+                    placeholder="Tell us about your vision, preferred dates, and any specific requirements..."
+                    rows="6"
+                  ></textarea>
+                  <div class="error-message" *ngIf="isFieldInvalid('message')">
+                    Please tell us about your project
+                  </div>
+                </div>
+
+                <div class="form-group checkbox-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" formControlName="newsletter" />
+                    <span class="checkmark"></span>
+                    Subscribe to our newsletter for photography tips and special
+                    offers
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  class="btn btn-primary submit-btn"
+                  [disabled]="contactForm.invalid || isSubmitting"
+                  [class.loading]="isSubmitting"
+                >
+                  <span *ngIf="!isSubmitting">
+                    <i class="fas fa-paper-plane"></i>
+                    Send Message
+                  </span>
+                  <span *ngIf="isSubmitting">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Sending...
+                  </span>
+                </button>
+              </form>
+
+              <!-- Success Message -->
+              <div class="success-message" *ngIf="showSuccessMessage">
+                <i class="fas fa-check-circle"></i>
+                <h3>Message Sent Successfully!</h3>
+                <p>
+                  Thank you for reaching out. We'll get back to you within 24
+                  hours.
+                </p>
               </div>
             </div>
-
-            <div class="form-group">
-              <label for="budget">Budget Range</label>
-              <select id="budget" formControlName="budget">
-                <option value="">Select budget range</option>
-                <option value="under-500">Under $500</option>
-                <option value="500-1000">$500 - $1,000</option>
-                <option value="1000-2500">$1,000 - $2,500</option>
-                <option value="2500-5000">$2,500 - $5,000</option>
-                <option value="over-5000">Over $5,000</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="message">Message *</label>
-              <textarea
-                id="message"
-                formControlName="message"
-                [class.error]="isFieldInvalid('message')"
-                placeholder="Tell us about your vision, preferred dates, and any specific requirements..."
-                rows="6"
-              ></textarea>
-              <div class="error-message" *ngIf="isFieldInvalid('message')">
-                Please tell us about your project
-              </div>
-            </div>
-
-            <div class="form-group checkbox-group">
-              <label class="checkbox-label">
-                <input type="checkbox" formControlName="newsletter" />
-                <span class="checkmark"></span>
-                Subscribe to our newsletter for photography tips and special
-                offers
-              </label>
-            </div>
-
-            <button
-              type="submit"
-              class="btn btn-primary submit-btn"
-              [disabled]="contactForm.invalid || isSubmitting"
-              [class.loading]="isSubmitting"
-            >
-              <span *ngIf="!isSubmitting">
-                <i class="fas fa-paper-plane"></i>
-                Send Message
-              </span>
-              <span *ngIf="isSubmitting">
-                <i class="fas fa-spinner fa-spin"></i>
-                Sending...
-              </span>
-            </button>
-          </form>
-
-          <!-- Success Message -->
-          <div class="success-message" *ngIf="showSuccessMessage">
-            <i class="fas fa-check-circle"></i>
-            <h3>Message Sent Successfully!</h3>
-            <p>
-              Thank you for reaching out. We'll get back to you within 24 hours.
-            </p>
+            <div
+              class="absolute -bottom-4 -left-4 w-12 h-12 bg-amber-600/20 rotate-45 rounded-xl"
+            ></div>
           </div>
-        </div>
+        </section>
 
-        <!-- Contact Info -->
+        <!-- Updated Contact Info with Abstract Style -->
         <div class="contact-info">
-          <div class="info-card">
-            <h3 class="info-title">Get in Touch</h3>
-            <div class="info-items">
-              <div class="info-item">
-                <div class="info-icon">
-                  <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <div class="info-content">
-                  <h4>Studio Address</h4>
-                  <p>123 Creative Avenue<br />Art District, NY 10001</p>
-                </div>
-              </div>
+          <!-- Get in Touch Card -->
+          <section class="relative mb-8">
+            <div
+              class="absolute -inset-3 bg-emerald-500/10 rounded-3xl rotate-1"
+            ></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-6"
+            >
+              <div
+                class="absolute top-4 right-4 w-6 h-6 border-2 border-amber-600/30 rotate-45 rounded-lg"
+              ></div>
+              <div class="relative z-10">
+                <h3 class="text-2xl font-serif font-bold text-slate-100 mb-6">
+                  Get in Touch
+                </h3>
+                <div class="space-y-6">
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-amber-500 rounded-xl flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-map-marker-alt text-white text-lg"></i>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-semibold text-slate-100 mb-1">
+                        Studio Address
+                      </h4>
+                      <p class="text-slate-300">
+                        123 Creative Avenue<br />Art District, NY 10001
+                      </p>
+                    </div>
+                  </div>
 
-              <div class="info-item">
-                <div class="info-icon">
-                  <i class="fas fa-phone"></i>
-                </div>
-                <div class="info-content">
-                  <h4>Phone</h4>
-                  <p>+1 (555) 123-4567</p>
-                </div>
-              </div>
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-amber-500 rounded-xl flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-phone text-white text-lg"></i>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-semibold text-slate-100 mb-1">
+                        Phone
+                      </h4>
+                      <p class="text-slate-300">+1 (555) 123-4567</p>
+                    </div>
+                  </div>
 
-              <div class="info-item">
-                <div class="info-icon">
-                  <i class="fas fa-envelope"></i>
-                </div>
-                <div class="info-content">
-                  <h4>Email</h4>
-                  <p>hello{{ "@" }}portraitstudio.com</p>
-                </div>
-              </div>
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-amber-500 rounded-xl flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-envelope text-white text-lg"></i>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-semibold text-slate-100 mb-1">
+                        Email
+                      </h4>
+                      <p class="text-slate-300">
+                        hello{{ "@" }}portraitstudio.com
+                      </p>
+                    </div>
+                  </div>
 
-              <div class="info-item">
-                <div class="info-icon">
-                  <i class="fas fa-clock"></i>
-                </div>
-                <div class="info-content">
-                  <h4>Business Hours</h4>
-                  <p>
-                    Mon - Fri: 9:00 AM - 6:00 PM<br />
-                    Sat: 10:00 AM - 4:00 PM<br />
-                    Sun: By Appointment
-                  </p>
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-amber-500 rounded-xl flex items-center justify-center flex-shrink-0"
+                    >
+                      <i class="fas fa-clock text-white text-lg"></i>
+                    </div>
+                    <div>
+                      <h4 class="text-lg font-semibold text-slate-100 mb-1">
+                        Business Hours
+                      </h4>
+                      <p class="text-slate-300">
+                        Mon - Fri: 9:00 AM - 6:00 PM<br />
+                        Sat: 10:00 AM - 4:00 PM<br />
+                        Sun: By Appointment
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div
+                class="absolute -bottom-3 -right-3 w-8 h-8 bg-amber-600/20 rotate-45 rounded-lg"
+              ></div>
             </div>
-          </div>
+          </section>
 
-          <div class="social-card">
-            <h3 class="social-title">Follow Our Work</h3>
-            <div class="social-links">
-              <a href="#" class="social-link instagram">
-                <i class="fab fa-instagram"></i>
-                <span>Instagram</span>
-              </a>
-              <a href="#" class="social-link facebook">
-                <i class="fab fa-facebook"></i>
-                <span>Facebook</span>
-              </a>
-              <a href="#" class="social-link behance">
-                <i class="fab fa-behance"></i>
-                <span>Behance</span>
-              </a>
-              <a href="#" class="social-link linkedin">
-                <i class="fab fa-linkedin"></i>
-                <span>LinkedIn</span>
-              </a>
+          <!-- Social Media Card -->
+          <section class="relative mb-8">
+            <div
+              class="absolute -inset-3 bg-amber-500/10 rounded-3xl -rotate-1"
+            ></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-6"
+            >
+              <div
+                class="absolute top-4 left-4 w-6 h-6 border-2 border-emerald-600/30 rotate-45 rounded-lg"
+              ></div>
+              <div class="relative z-10">
+                <h3 class="text-2xl font-serif font-bold text-slate-100 mb-6">
+                  Follow Our Work
+                </h3>
+                <div class="space-y-3">
+                  <a
+                    href="#"
+                    class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-2xl border border-slate-600/30 hover:border-pink-500/50 transition-all duration-300 hover:translate-x-2"
+                  >
+                    <i class="fab fa-instagram text-2xl text-pink-500"></i>
+                    <span class="text-slate-100 font-medium">Instagram</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-2xl border border-slate-600/30 hover:border-blue-500/50 transition-all duration-300 hover:translate-x-2"
+                  >
+                    <i class="fab fa-facebook text-2xl text-blue-500"></i>
+                    <span class="text-slate-100 font-medium">Facebook</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-2xl border border-slate-600/30 hover:border-blue-600/50 transition-all duration-300 hover:translate-x-2"
+                  >
+                    <i class="fab fa-behance text-2xl text-blue-600"></i>
+                    <span class="text-slate-100 font-medium">Behance</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-2xl border border-slate-600/30 hover:border-blue-700/50 transition-all duration-300 hover:translate-x-2"
+                  >
+                    <i class="fab fa-linkedin text-2xl text-blue-700"></i>
+                    <span class="text-slate-100 font-medium">LinkedIn</span>
+                  </a>
+                </div>
+              </div>
+              <div
+                class="absolute -bottom-3 -left-3 w-8 h-8 bg-emerald-600/20 rotate-45 rounded-lg"
+              ></div>
             </div>
-          </div>
+          </section>
 
-          <div class="response-card">
-            <div class="response-icon">
-              <i class="fas fa-clock"></i>
+          <!-- Quick Response Card -->
+          <section class="relative">
+            <div
+              class="absolute -inset-3 bg-amber-500/10 rounded-3xl rotate-2"
+            ></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-6 text-center"
+            >
+              <div
+                class="absolute top-4 right-4 w-6 h-6 border-2 border-emerald-600/30 rotate-45 rounded-lg"
+              ></div>
+              <div class="relative z-10">
+                <div
+                  class="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <i class="fas fa-clock text-white text-2xl"></i>
+                </div>
+                <h4 class="text-xl font-serif font-bold text-amber-400 mb-3">
+                  Quick Response
+                </h4>
+                <p class="text-slate-300">
+                  We typically respond to all inquiries within 2-4 hours during
+                  business hours.
+                </p>
+              </div>
+              <div
+                class="absolute -bottom-3 -left-3 w-8 h-8 bg-amber-600/20 rotate-45 rounded-lg"
+              ></div>
             </div>
-            <h4>Quick Response</h4>
-            <p>
-              We typically respond to all inquiries within 2-4 hours during
-              business hours.
-            </p>
-          </div>
+          </section>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FAQ Section -->
+  <!-- Updated FAQ Section -->
   <section class="faq-section">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="section-subtitle">Quick answers to common questions</p>
-      </div>
-      <div class="faq-grid">
-        <div class="faq-item" *ngFor="let faq of faqs; let i = index">
+      <!-- FAQ Header -->
+      <section class="relative mb-16 text-center">
+        <div
+          class="absolute -inset-4 bg-emerald-500/10 rounded-3xl rotate-1"
+        ></div>
+        <div
+          class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8"
+        >
           <div
-            class="faq-question"
-            (click)="toggleFaq(i)"
-            [class.active]="faq.isOpen"
-          >
-            <h4>{{ faq.question }}</h4>
-            <i class="fas fa-chevron-down"></i>
+            class="absolute top-6 right-6 w-8 h-8 border-2 border-amber-600/30 rotate-45 rounded-xl"
+          ></div>
+          <div class="relative z-10">
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-slate-100 mb-4"
+            >
+              Frequently Asked <span class="text-amber-400">Questions</span>
+            </h2>
+            <p class="text-xl text-slate-300">
+              Quick answers to common questions
+            </p>
           </div>
-          <div class="faq-answer" [class.open]="faq.isOpen">
-            <p>{{ faq.answer }}</p>
+          <div
+            class="absolute -bottom-4 -left-4 w-12 h-12 bg-amber-600/20 rotate-45 rounded-xl"
+          ></div>
+        </div>
+      </section>
+
+      <!-- FAQ Items -->
+      <div class="max-w-4xl mx-auto space-y-4">
+        <div class="relative" *ngFor="let faq of faqs; let i = index">
+          <div
+            class="absolute -inset-2 bg-emerald-500/5 rounded-2xl"
+            [class.rotate-1]="i % 2 === 0"
+            [class.-rotate-1]="i % 2 === 1"
+          ></div>
+          <div
+            class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 overflow-hidden"
+          >
+            <div
+              class="p-6 cursor-pointer flex justify-between items-center hover:bg-slate-700/30 transition-all duration-300"
+              (click)="toggleFaq(i)"
+            >
+              <h4 class="text-lg font-semibold text-slate-100 pr-4">
+                {{ faq.question }}
+              </h4>
+              <i
+                class="fas fa-chevron-down text-emerald-400 transition-transform duration-300"
+                [class.rotate-180]="faq.isOpen"
+              ></i>
+            </div>
+            <div
+              class="overflow-hidden transition-all duration-300"
+              [class.max-h-0]="!faq.isOpen"
+              [class.max-h-96]="faq.isOpen"
+            >
+              <div class="p-6 pt-0 border-t border-slate-700/30">
+                <p class="text-slate-300 leading-relaxed">{{ faq.answer }}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Map Section -->
+  <!-- Updated Map Section -->
   <section class="map-section">
     <div class="container">
-      <div class="map-header">
-        <h2 class="map-title">Visit Our Studio</h2>
-        <p class="map-subtitle">
-          Located in the heart of the creative district
-        </p>
-      </div>
-      <div class="map-container">
-        <div class="map-placeholder">
-          <i class="fas fa-map-marked-alt"></i>
-          <p>Interactive Map</p>
-          <small>123 Creative Avenue, Art District, NY 10001</small>
+      <!-- Map Header -->
+      <section class="relative mb-16 text-center">
+        <div
+          class="absolute -inset-4 bg-amber-500/10 rounded-3xl -rotate-1"
+        ></div>
+        <div
+          class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8"
+        >
+          <div
+            class="absolute top-6 left-6 w-8 h-8 border-2 border-emerald-600/30 rotate-45 rounded-xl"
+          ></div>
+          <div class="relative z-10">
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-slate-100 mb-4"
+            >
+              Visit Our <span class="text-amber-400">Studio</span>
+            </h2>
+            <p class="text-xl text-slate-300">
+              Located in the heart of the creative district
+            </p>
+          </div>
+          <div
+            class="absolute -bottom-4 -right-4 w-12 h-12 bg-emerald-600/20 rotate-45 rounded-xl"
+          ></div>
         </div>
-        <div class="map-info">
-          <h3>Easy to Find</h3>
-          <ul>
-            <li><i class="fas fa-subway"></i> 2 blocks from Metro Station</li>
-            <li><i class="fas fa-parking"></i> Free parking available</li>
-            <li><i class="fas fa-wheelchair"></i> Wheelchair accessible</li>
-            <li><i class="fas fa-coffee"></i> Café nearby for breaks</li>
-          </ul>
-        </div>
+      </section>
+
+      <!-- Map Container -->
+      <div class="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <!-- Map Placeholder -->
+        <section class="relative">
+          <div
+            class="absolute -inset-3 bg-emerald-500/10 rounded-3xl rotate-1"
+          ></div>
+          <div
+            class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 h-96 flex flex-col items-center justify-center text-center"
+          >
+            <div
+              class="absolute top-4 right-4 w-6 h-6 border-2 border-amber-600/30 rotate-45 rounded-lg"
+            ></div>
+            <i class="fas fa-map-marked-alt text-6xl text-emerald-400 mb-4"></i>
+            <p class="text-2xl font-semibold text-slate-100 mb-2">
+              Interactive Map
+            </p>
+            <small class="text-slate-300"
+              >123 Creative Avenue, Art District, NY 10001</small
+            >
+            <div
+              class="absolute -bottom-3 -left-3 w-8 h-8 bg-emerald-600/20 rotate-45 rounded-lg"
+            ></div>
+          </div>
+        </section>
+
+        <!-- Map Info -->
+        <section class="relative">
+          <div
+            class="absolute -inset-3 bg-amber-500/10 rounded-3xl -rotate-1"
+          ></div>
+          <div
+            class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8"
+          >
+            <div
+              class="absolute top-4 left-4 w-6 h-6 border-2 border-emerald-600/30 rotate-45 rounded-lg"
+            ></div>
+            <div class="relative z-10">
+              <h3 class="text-2xl font-serif font-bold text-slate-100 mb-6">
+                Easy to Find
+              </h3>
+              <div class="space-y-4">
+                <div class="flex items-center gap-4">
+                  <i class="fas fa-subway text-emerald-400 text-xl w-6"></i>
+                  <span class="text-slate-300"
+                    >2 blocks from Metro Station</span
+                  >
+                </div>
+                <div class="flex items-center gap-4">
+                  <i class="fas fa-parking text-emerald-400 text-xl w-6"></i>
+                  <span class="text-slate-300">Free parking available</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <i class="fas fa-wheelchair text-emerald-400 text-xl w-6"></i>
+                  <span class="text-slate-300">Wheelchair accessible</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <i class="fas fa-coffee text-emerald-400 text-xl w-6"></i>
+                  <span class="text-slate-300">Café nearby for breaks</span>
+                </div>
+              </div>
+            </div>
+            <div
+              class="absolute -bottom-3 -right-3 w-8 h-8 bg-amber-600/20 rotate-45 rounded-lg"
+            ></div>
+          </div>
+        </section>
       </div>
     </div>
   </section>

@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
+import Product from '../../models/Product';
 
 interface Portrait {
   id: number;
@@ -186,6 +189,8 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private productService: ProductService,
+    private cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -201,27 +206,94 @@ export class ProductDetailComponent implements OnInit {
   loadPortrait(id: number): void {
     this.isLoading = true
 
-    // Simulate API call
-    setTimeout(() => {
-      this.portrait = this.mockPortraits.find((p) => p.id === id) || null
-
-      if (this.portrait) {
-        this.selectedImage = this.portrait.images[0]
-        this.loadRelatedPortraits()
+    // Fetch product from API
+    this.productService.getProductById(id).subscribe(
+      (product) => {
+        if (product) {
+          // Map product to portrait
+          this.portrait = this.mapProductToPortrait(product);
+          this.selectedImage = this.portrait.images[0];
+          this.loadRelatedPortraits();
+        } else {
+          // If product not found, fallback to mock data
+          this.portrait = this.mockPortraits.find((p) => p.id === id) || null;
+          if (this.portrait) {
+            this.selectedImage = this.portrait.images[0];
+            this.loadRelatedPortraits();
+          }
+        }
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error loading product details:', error);
+        // Fallback to mock data on error
+        this.portrait = this.mockPortraits.find((p) => p.id === id) || null;
+        if (this.portrait) {
+          this.selectedImage = this.portrait.images[0];
+          this.loadRelatedPortraits();
+        }
+        this.isLoading = false;
       }
+    );
+  }
 
-      this.isLoading = false
-    }, 800)
+  // Map Product model to Portrait interface
+  private mapProductToPortrait(product: Product): Portrait {
+    return {
+      id: product.id,
+      title: product.name,
+      artist: 'Artist', // Default value
+      price: product.price,
+      originalPrice: product.originalPrice || undefined,
+      imageUrl: product.image,
+      images: [product.image], // Use the main image as the only image for now
+      category: product.category,
+      description: product.description,
+      rating: product.rating,
+      reviewCount: 0, // Default value
+      views: 0, // Default value
+      isPopular: product.popular,
+      isInWishlist: false, // Default value
+      dimensions: '24x36 inches', // Default value
+      medium: 'Digital Print', // Default value
+      dateCreated: new Date().toISOString().split('T')[0], // Default to today
+      tags: [product.category], // Default value
+      artistInfo: {
+        profileImage: '/placeholder.svg?height=64&width=64',
+        location: 'Unknown',
+        bio: 'Artist information not available',
+        worksCount: 0,
+        followersCount: 0
+      }
+    };
   }
 
   /**
    * Load related portraits
    */
   loadRelatedPortraits(): void {
-    if (!this.portrait) return
+    if (!this.portrait) return;
 
-    // Mock related portraits - filter out current portrait
-    this.relatedPortraits = this.mockPortraits.filter((p) => p.id !== this.portrait!.id).slice(0, 4)
+    // Fetch related products by category
+    if (this.portrait.category) {
+      this.productService.getProductsByCategory(this.portrait.category).subscribe(
+        (products) => {
+          // Filter out current product and map to portraits
+          this.relatedPortraits = products
+            .filter(product => product.id !== this.portrait!.id)
+            .map(product => this.mapProductToPortrait(product))
+            .slice(0, 4);
+        },
+        (error) => {
+          console.error('Error loading related products:', error);
+          // Fallback to mock data
+          this.relatedPortraits = this.mockPortraits.filter((p) => p.id !== this.portrait!.id).slice(0, 4);
+        }
+      );
+    } else {
+      // Fallback to mock data if no category
+      this.relatedPortraits = this.mockPortraits.filter((p) => p.id !== this.portrait!.id).slice(0, 4);
+    }
   }
 
   /**
@@ -326,15 +398,39 @@ export class ProductDetailComponent implements OnInit {
    * Add to cart
    */
   addToCart(): void {
-    const selectedOption = this.getSelectedSizeOption()
+    if (!this.portrait) return;
+    
+    const selectedOption = this.getSelectedSizeOption();
     console.log("Adding to cart:", {
       portrait: this.portrait,
       sizeOption: selectedOption,
       quantity: this.quantity,
       totalPrice: this.getTotalPrice(),
-    })
+    });
 
-    alert(`Added ${this.quantity}x ${this.portrait?.title} (${selectedOption.name}) to cart!`)
+    // Create a product object from portrait
+    const product: Product = {
+      id: this.portrait.id,
+      name: `${this.portrait.title} (${selectedOption.name})`,
+      description: this.portrait.description,
+      price: selectedOption.price,
+      originalPrice: selectedOption.originalPrice,
+      image: this.portrait.imageUrl,
+      category: this.portrait.category,
+      rating: this.portrait.rating,
+      popular: this.portrait.isPopular
+    };
+
+    // Use cart service to add to cart
+    this.cartService.addToCart(product, this.quantity).subscribe(
+      (success) => {
+        if (success) {
+          alert(`Added ${this.quantity}x ${this.portrait?.title} (${selectedOption.name}) to cart!`);
+        } else {
+          alert('Failed to add item to cart. Please try again.');
+        }
+      }
+    );
   }
 
   /**

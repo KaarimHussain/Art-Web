@@ -2,6 +2,8 @@ import { Component, type OnInit } from "@angular/core"
 import { CommonModule } from "@angular/common"
 import { FormsModule } from "@angular/forms"
 import { Router } from "@angular/router"
+import { CartService } from "../../services/cart.service"
+import CartItem from "../../models/CartItems"
 
 interface Portrait {
   id: number
@@ -18,15 +20,21 @@ interface SizeOption {
   price: number
 }
 
-interface CartItem {
-  id: string
-  portrait: Portrait
+// Local cart item interface that extends the model CartItem
+interface CartItemExtended {
+  id: number
+  name: string
+  price: number
+  quantity: number
+  image: string
+  // Additional properties for UI
   selectedSizeId: string
   selectedSize: SizeOption
   availableSizes: SizeOption[]
-  quantity: number
   selected: boolean
   addedDate: string
+  // Portrait info
+  portrait: Portrait
 }
 
 @Component({
@@ -37,7 +45,7 @@ interface CartItem {
   styleUrl: "./cart.component.css",
 })
 export class CartComponent implements OnInit {
-  cartItems: CartItem[] = []
+  cartItems: CartItemExtended[] = []
   promoCode = ""
   promoMessage = ""
   promoSuccess = false
@@ -87,7 +95,10 @@ export class CartComponent implements OnInit {
     FIRST15: { discount: 0.15, message: "First-time buyer 15% discount applied!" },
   }
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private cartService: CartService
+  ) { }
 
   ngOnInit(): void {
     this.loadCartItems()
@@ -97,57 +108,124 @@ export class CartComponent implements OnInit {
    * Load cart items (mock data for demo)
    */
   loadCartItems(): void {
-    // Mock cart items - in real app, this would come from a service
+    // Subscribe to cart items from the CartService
+    this.cartService.getCartItems().subscribe(
+      (items) => {
+        if (items.length > 0) {
+          // Map API cart items to extended cart items with UI properties
+          this.cartItems = items.map(item => this.mapToExtendedCartItem(item));
+        } else {
+          // If cart is empty, use mock data for demo purposes
+          this.loadMockCartItems();
+        }
+      },
+      (error) => {
+        console.error('Error loading cart items:', error);
+        // Fallback to mock data on error
+        this.loadMockCartItems();
+      }
+    );
+  }
+
+  /**
+   * Map API CartItem to CartItemExtended
+   */
+  private mapToExtendedCartItem(item: CartItem): CartItemExtended {
+    // Determine size based on price
+    let selectedSizeId = 'medium';
+    let selectedSize = this.sizeOptions[1]; // Default to medium
+
+    // Try to match price to a size option
+    const matchingSize = this.sizeOptions.find(size => size.price === item.price);
+    if (matchingSize) {
+      selectedSizeId = matchingSize.id;
+      selectedSize = matchingSize;
+    }
+
+    return {
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+      image: item.image,
+      selectedSizeId: selectedSizeId,
+      selectedSize: selectedSize,
+      availableSizes: [...this.sizeOptions],
+      selected: true,
+      addedDate: new Date().toISOString().split('T')[0],
+      portrait: {
+        id: item.id,
+        title: item.name,
+        artist: 'Artist', // Default value
+        imageUrl: item.image,
+        category: 'Portrait' // Default value
+      }
+    };
+  }
+
+  /**
+   * Load mock cart items for demo purposes
+   */
+  private loadMockCartItems(): void {
     this.cartItems = [
       {
-        id: "cart-1",
+        id: 101,
+        name: "Evening Grace",
+        price: 299,
+        quantity: 1,
+        image: "/placeholder.svg?height=300&width=300",
+        selectedSizeId: "medium",
+        selectedSize: this.sizeOptions[1], // Medium
+        availableSizes: [...this.sizeOptions],
+        selected: true,
+        addedDate: "2024-01-15",
         portrait: {
           id: 101,
           title: "Evening Grace",
           artist: "Sarah Johnson",
           imageUrl: "/placeholder.svg?height=300&width=300",
           category: "Portrait",
-        },
-        selectedSizeId: "medium",
-        selectedSize: this.sizeOptions[1], // Medium
-        availableSizes: [...this.sizeOptions],
-        quantity: 1,
-        selected: true,
-        addedDate: "2024-01-15",
+        }
       },
       {
-        id: "cart-2",
+        id: 102,
+        name: "Family Harmony",
+        price: 449,
+        quantity: 2,
+        image: "/placeholder.svg?height=300&width=300",
+        selectedSizeId: "large",
+        selectedSize: this.sizeOptions[2], // Large
+        availableSizes: [...this.sizeOptions],
+        selected: true,
+        addedDate: "2024-01-14",
         portrait: {
           id: 102,
           title: "Family Harmony",
           artist: "Michael Chen",
           imageUrl: "/placeholder.svg?height=300&width=300",
           category: "Family",
-        },
-        selectedSizeId: "large",
-        selectedSize: this.sizeOptions[2], // Large
-        availableSizes: [...this.sizeOptions],
-        quantity: 2,
-        selected: true,
-        addedDate: "2024-01-14",
+        }
       },
       {
-        id: "cart-3",
+        id: 103,
+        name: "Wedding Bliss",
+        price: 699,
+        quantity: 1,
+        image: "/placeholder.svg?height=300&width=300",
+        selectedSizeId: "xlarge",
+        selectedSize: this.sizeOptions[3], // Extra Large
+        availableSizes: [...this.sizeOptions],
+        selected: false,
+        addedDate: "2024-01-13",
         portrait: {
           id: 103,
           title: "Wedding Bliss",
           artist: "Emma Rodriguez",
           imageUrl: "/placeholder.svg?height=300&width=300",
           category: "Wedding",
-        },
-        selectedSizeId: "xlarge",
-        selectedSize: this.sizeOptions[3], // Extra Large
-        availableSizes: [...this.sizeOptions],
-        quantity: 1,
-        selected: false,
-        addedDate: "2024-01-13",
-      },
-    ]
+        }
+      }
+    ];
   }
 
   /**
@@ -160,7 +238,7 @@ export class CartComponent implements OnInit {
   /**
    * Get total for a specific item
    */
-  getItemTotal(item: CartItem): number {
+  getItemTotal(item: CartItemExtended): number {
     return item.selectedSize.price * item.quantity
   }
 
@@ -216,40 +294,97 @@ export class CartComponent implements OnInit {
   /**
    * Update item size
    */
-  updateItemSize(item: CartItem): void {
-    const selectedSize = item.availableSizes.find((size) => size.id === item.selectedSizeId)
+  updateItemSize(item: CartItemExtended): void {
+    const selectedSize = item.availableSizes.find((size: SizeOption) => size.id === item.selectedSizeId)
     if (selectedSize) {
       item.selectedSize = selectedSize
+      
+      // Update the item price in the cart service
+      this.cartService.updateQuantity(item.id, item.quantity).subscribe(
+        (success: boolean) => {
+          if (!success) {
+            console.error('Failed to update item size');
+          }
+        },
+        (error: any) => {
+          console.error('Error updating item size:', error);
+        }
+      );
     }
   }
 
   /**
    * Increase item quantity
    */
-  increaseQuantity(item: CartItem): void {
+  increaseQuantity(item: CartItemExtended): void {
     if (item.quantity < 10) {
       item.quantity++
+      
+      // Update the item quantity in the cart service
+      this.cartService.updateQuantity(item.id, item.quantity).subscribe(
+        (success: boolean) => {
+          if (!success) {
+            // Revert the change if update fails
+            item.quantity--;
+            console.error('Failed to increase quantity');
+          }
+        },
+        (error: any) => {
+          // Revert the change on error
+          item.quantity--;
+          console.error('Error increasing quantity:', error);
+        }
+      );
     }
   }
 
   /**
    * Decrease item quantity
    */
-  decreaseQuantity(item: CartItem): void {
+  decreaseQuantity(item: CartItemExtended): void {
     if (item.quantity > 1) {
       item.quantity--
+      
+      // Update the item quantity in the cart service
+      this.cartService.updateQuantity(item.id, item.quantity).subscribe(
+        (success: boolean) => {
+          if (!success) {
+            // Revert the change if update fails
+            item.quantity++;
+            console.error('Failed to decrease quantity');
+          }
+        },
+        (error: any) => {
+          // Revert the change on error
+          item.quantity++;
+          console.error('Error decreasing quantity:', error);
+        }
+      );
     }
   }
 
   /**
    * Remove item from cart
    */
-  removeFromCart(item: CartItem): void {
-    const index = this.cartItems.findIndex((cartItem) => cartItem.id === item.id)
-    if (index > -1) {
-      this.cartItems.splice(index, 1)
-      alert(`${item.portrait.title} removed from cart`)
-    }
+  removeFromCart(item: CartItemExtended): void {
+    // Use CartService to remove item from cart
+    this.cartService.removeFromCart(item.id).subscribe(
+      (success) => {
+        if (success) {
+          const index = this.cartItems.findIndex((cartItem) => cartItem.id === item.id);
+          if (index > -1) {
+            this.cartItems.splice(index, 1);
+            alert(`${item.portrait.title} removed from cart`);
+          }
+        } else {
+          alert('Failed to remove item from cart. Please try again.');
+        }
+      },
+      (error) => {
+        console.error('Error removing item from cart:', error);
+        alert('Failed to remove item from cart. Please try again.');
+      }
+    );
   }
 
   /**
@@ -257,11 +392,24 @@ export class CartComponent implements OnInit {
    */
   clearCart(): void {
     if (confirm("Are you sure you want to clear your cart? This action cannot be undone.")) {
-      this.cartItems = []
-      this.appliedDiscount = 0
-      this.promoCode = ""
-      this.promoMessage = ""
-      alert("Cart cleared successfully")
+      // Use CartService to clear cart
+      this.cartService.clearCart().subscribe(
+        (success) => {
+          if (success) {
+            this.cartItems = [];
+            this.appliedDiscount = 0;
+            this.promoCode = "";
+            this.promoMessage = "";
+            alert("Cart cleared successfully");
+          } else {
+            alert('Failed to clear cart. Please try again.');
+          }
+        },
+        (error) => {
+          console.error('Error clearing cart:', error);
+          alert('Failed to clear cart. Please try again.');
+        }
+      );
     }
   }
 
@@ -354,7 +502,7 @@ export class CartComponent implements OnInit {
   /**
    * Track by function for ngFor
    */
-  trackByCartItemId(index: number, item: CartItem): string {
+  trackByCartItemId(index: number, item: CartItemExtended): number {
     return item.id
   }
 }

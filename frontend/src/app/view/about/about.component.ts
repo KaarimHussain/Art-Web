@@ -1,11 +1,35 @@
+import { CommonModule } from "@angular/common"
 import { Component, type OnInit } from "@angular/core"
 
 @Component({
   selector: "app-about",
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: "./about.component.html",
   styleUrls: ["./about.component.css"],
 })
 export class AboutComponent implements OnInit {
+  missionItems = [
+    {
+      title: "Passion Driven",
+      description:
+        "Every portrait we create is infused with passion and dedication to capture the essence of our subjects.",
+      icon: "fas fa-heart",
+    },
+    {
+      title: "Excellence",
+      description:
+        "We strive for perfection in every shot, ensuring each portrait meets the highest standards of quality.",
+      icon: "fas fa-star",
+    },
+    {
+      title: "Connection",
+      description:
+        "Building meaningful relationships with our clients to create portraits that truly reflect their personality.",
+      icon: "fas fa-users",
+    },
+  ]
+
   teamMembers = [
     {
       name: "Alexandra Chen",

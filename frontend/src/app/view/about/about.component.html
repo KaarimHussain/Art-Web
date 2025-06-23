@@ -1,16 +1,24 @@
 <div class="about-container">
-  <!-- Hero Section -->
+  <!-- Enhanced Hero Section (keeping existing design) -->
   <section class="hero-section">
     <div class="hero-background">
-      <div class="geometric-pattern"></div>
-      <div class="gradient-overlay"></div>
+      <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
+      </div>
     </div>
     <div class="hero-content">
       <div class="container">
         <div class="hero-text">
+          <div class="hero-badge">
+            <i class="fas fa-camera"></i>
+            <span>Professional Photography Studio</span>
+          </div>
           <h1 class="hero-title">
-            <span class="highlight">Capturing</span> Life's Most
-            <span class="highlight">Beautiful</span> Moments
+            <span class="text-amber-400">Capturing</span> Life's Most
+            <span class="text-amber-400">Beautiful</span> Moments
           </h1>
           <p class="hero-subtitle">
             We are passionate artists dedicated to creating timeless portraits
@@ -19,114 +27,70 @@
           </p>
           <div class="hero-stats">
             <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fas fa-users"></i>
+              </div>
               <span class="stat-number">10K+</span>
               <span class="stat-label">Happy Clients</span>
             </div>
             <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
               <span class="stat-number">15+</span>
               <span class="stat-label">Years Experience</span>
             </div>
             <div class="stat-item">
+              <div class="stat-icon">
+                <i class="fas fa-images"></i>
+              </div>
               <span class="stat-number">50K+</span>
               <span class="stat-label">Portraits Created</span>
             </div>
           </div>
+          <div class="hero-actions">
+            <button class="btn btn-primary" routerLink="/contact">
+              <i class="fas fa-calendar"></i>
+              Book a Session
+            </button>
+            <button class="btn btn-outline" routerLink="/portfolio">
+              <i class="fas fa-play"></i>
+              Watch Our Story
+            </button>
+          </div>
         </div>
         <div class="hero-image">
-          <img
-            src="/api/placeholder/600/400"
-            alt="Studio Portrait"
-            class="main-image"
-          />
-          <div class="floating-card">
-            <i class="fas fa-camera"></i>
-            <span>Professional Studio</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Mission Section -->
-  <section class="mission-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Our Mission</h2>
-        <p class="section-subtitle">Transforming moments into masterpieces</p>
-      </div>
-      <div class="mission-grid">
-        <div class="mission-card">
-          <div class="mission-icon">
-            <i class="fas fa-heart"></i>
-          </div>
-          <h3>Passion Driven</h3>
-          <p>
-            Every portrait we create is infused with passion and dedication to
-            capture the essence of our subjects.
-          </p>
-        </div>
-        <div class="mission-card">
-          <div class="mission-icon">
-            <i class="fas fa-star"></i>
-          </div>
-          <h3>Excellence</h3>
-          <p>
-            We strive for perfection in every shot, ensuring each portrait meets
-            the highest standards of quality.
-          </p>
-        </div>
-        <div class="mission-card">
-          <div class="mission-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <h3>Connection</h3>
-          <p>
-            Building meaningful relationships with our clients to create
-            portraits that truly reflect their personality.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Team Section -->
-  <section class="team-section">
-    <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Meet Our Artists</h2>
-        <p class="section-subtitle">
-          The creative minds behind every masterpiece
-        </p>
-      </div>
-      <div class="team-grid">
-        <div class="team-member" *ngFor="let member of teamMembers">
-          <div class="member-image">
-            <img [src]="member.image" [alt]="member.name" />
-            <div class="member-overlay">
-              <div class="social-links">
-                <a [href]="member.social.instagram" class="social-link">
-                  <i class="fab fa-instagram"></i>
-                </a>
-                <a [href]="member.social.linkedin" class="social-link">
-                  <i class="fab fa-linkedin"></i>
-                </a>
-                <a [href]="member.social.behance" class="social-link">
-                  <i class="fab fa-behance"></i>
-                </a>
+          <div class="image-container">
+            <img
+              src="/api/placeholder/600/400"
+              alt="Studio Portrait"
+              class="main-image"
+            />
+            <div class="image-overlay">
+              <div class="play-button">
+                <i class="fas fa-play"></i>
               </div>
             </div>
           </div>
-          <div class="member-info">
-            <h3 class="member-name">{{ member.name }}</h3>
-            <p class="member-role">{{ member.role }}</p>
-            <p class="member-bio">{{ member.bio }}</p>
-            <div class="member-specialties">
-              <span
-                class="specialty"
-                *ngFor="let specialty of member.specialties"
-              >
-                {{ specialty }}
-              </span>
+          <div class="floating-card">
+            <div class="card-icon">
+              <i class="fas fa-camera"></i>
+            </div>
+            <div class="card-content">
+              <span class="card-title">Professional Studio</span>
+              <span class="card-subtitle">State-of-the-art equipment</span>
+            </div>
+          </div>
+          <div class="floating-stats">
+            <div class="mini-stat">
+              <span class="mini-number">4.9</span>
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -134,83 +98,532 @@
     </div>
   </section>
 
-  <!-- Journey Section -->
+  <!-- Enhanced Mission Section with Abstract Containers -->
+  <section class="mission-section">
+    <div class="container">
+      <!-- Mission Header -->
+      <section class="relative mb-16 text-center">
+        <div
+          class="absolute -inset-4 bg-emerald-500/10 rounded-3xl rotate-1"
+        ></div>
+        <div
+          class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8"
+        >
+          <div
+            class="absolute top-6 right-6 w-8 h-8 border-2 border-amber-600/30 rotate-45 rounded-xl"
+          ></div>
+          <div class="relative z-10">
+            <div class="section-badge">
+              <i class="fas fa-heart"></i>
+              <span>Our Mission</span>
+            </div>
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-slate-100 mb-4"
+            >
+              Transforming moments into
+              <span class="text-amber-400">masterpieces</span>
+            </h2>
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+              Every photograph tells a story. We're here to help you tell yours
+              with passion, creativity, and unmatched expertise.
+            </p>
+          </div>
+          <div
+            class="absolute -bottom-4 -left-4 w-12 h-12 bg-amber-600/20 rotate-45 rounded-xl"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Mission Cards -->
+      <div class="max-w-4xl mx-auto space-y-6">
+        <div
+          class="relative"
+          *ngFor="let mission of missionItems; let i = index"
+        >
+          <div
+            class="absolute -inset-3 bg-emerald-500/5 rounded-2xl"
+            [class.rotate-1]="i % 2 === 0"
+            [class.-rotate-1]="i % 2 === 1"
+          ></div>
+          <div
+            class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 p-6"
+          >
+            <div
+              class="absolute top-4 right-4 w-6 h-6 border-2 border-amber-600/30 rotate-45 rounded-lg"
+            ></div>
+            <div class="flex items-center gap-6 relative z-10">
+              <div
+                class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-amber-500 rounded-2xl flex items-center justify-center flex-shrink-0"
+              >
+                <i [class]="mission.icon" class="text-white text-2xl"></i>
+              </div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between mb-2">
+                  <h3 class="text-2xl font-serif font-bold text-slate-100">
+                    {{ mission.title }}
+                  </h3>
+                  <span class="text-4xl font-bold text-emerald-500/20">{{
+                    "0" + (i + 1)
+                  }}</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed">
+                  {{ mission.description }}
+                </p>
+              </div>
+            </div>
+            <div
+              class="absolute -bottom-3 -left-3 w-8 h-8 bg-emerald-600/20 rotate-45 rounded-lg"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Team Section with Abstract Containers -->
+  <section class="team-section">
+    <div class="container">
+      <!-- Team Header -->
+      <section class="relative mb-16 text-center">
+        <div
+          class="absolute -inset-4 bg-amber-500/10 rounded-3xl -rotate-1"
+        ></div>
+        <div
+          class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8"
+        >
+          <div
+            class="absolute top-6 left-6 w-8 h-8 border-2 border-emerald-600/30 rotate-45 rounded-xl"
+          ></div>
+          <div class="relative z-10">
+            <div class="section-badge">
+              <i class="fas fa-users"></i>
+              <span>Our Team</span>
+            </div>
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-slate-100 mb-4"
+            >
+              Meet Our <span class="text-amber-400">Artists</span>
+            </h2>
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+              The creative minds behind every masterpiece, bringing years of
+              experience and artistic vision to your portraits.
+            </p>
+          </div>
+          <div
+            class="absolute -bottom-4 -right-4 w-12 h-12 bg-emerald-600/20 rotate-45 rounded-xl"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Team Members -->
+      <div class="max-w-5xl mx-auto space-y-8">
+        <div class="relative" *ngFor="let member of teamMembers; let i = index">
+          <div
+            class="absolute -inset-4 bg-emerald-500/5 rounded-3xl"
+            [class.rotate-1]="i % 2 === 0"
+            [class.-rotate-1]="i % 2 === 1"
+          ></div>
+          <div
+            class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 overflow-hidden"
+          >
+            <div
+              class="absolute top-6 right-6 w-8 h-8 border-2 border-amber-600/30 rotate-45 rounded-xl"
+            ></div>
+            <div class="flex flex-col lg:flex-row">
+              <!-- Member Image -->
+              <div class="lg:w-80 h-80 relative overflow-hidden">
+                <img
+                  [src]="member.image"
+                  [alt]="member.name"
+                  class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-br from-emerald-500/80 to-amber-500/80 opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center"
+                >
+                  <div class="text-center mb-4">
+                    <h4 class="text-xl font-bold text-white mb-2">
+                      {{ member.name }}
+                    </h4>
+                    <p class="text-white/90">{{ member.role }}</p>
+                  </div>
+                  <div class="flex gap-3">
+                    <a
+                      [href]="member.social.instagram"
+                      class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                    >
+                      <i class="fab fa-instagram"></i>
+                    </a>
+                    <a
+                      [href]="member.social.linkedin"
+                      class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                    >
+                      <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a
+                      [href]="member.social.behance"
+                      class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                    >
+                      <i class="fab fa-behance"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Member Info -->
+              <div class="flex-1 p-8 relative z-10">
+                <div class="flex items-start justify-between mb-4">
+                  <div>
+                    <h3
+                      class="text-2xl font-serif font-bold text-slate-100 mb-2"
+                    >
+                      {{ member.name }}
+                    </h3>
+                    <p
+                      class="text-amber-400 font-semibold uppercase tracking-wider text-sm"
+                    >
+                      {{ member.role }}
+                    </p>
+                  </div>
+                  <span class="text-5xl font-bold text-emerald-500/20">{{
+                    "0" + (i + 1)
+                  }}</span>
+                </div>
+
+                <p class="text-slate-300 leading-relaxed mb-6">
+                  {{ member.bio }}
+                </p>
+
+                <div class="flex flex-wrap gap-2 mb-6">
+                  <span
+                    class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-sm rounded-full"
+                    *ngFor="let specialty of member.specialties"
+                  >
+                    {{ specialty }}
+                  </span>
+                </div>
+
+                <div class="flex justify-end">
+                  <button
+                    class="px-6 py-2 border-2 border-emerald-500/30 text-emerald-400 rounded-full hover:bg-emerald-500/10 hover:border-emerald-500 transition-all duration-300 flex items-center gap-2"
+                  >
+                    <i class="fas fa-envelope"></i>
+                    Contact
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="absolute -bottom-4 -left-4 w-12 h-12 bg-amber-600/20 rotate-45 rounded-xl"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Journey Section with Abstract Containers -->
   <section class="journey-section">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Our Journey</h2>
-        <p class="section-subtitle">A timeline of growth and achievement</p>
-      </div>
-      <div class="timeline">
+      <!-- Journey Header -->
+      <section class="relative mb-16 text-center">
         <div
-          class="timeline-item"
-          *ngFor="let milestone of milestones; let i = index"
-          [class.reverse]="i % 2 === 1"
+          class="absolute -inset-4 bg-emerald-500/10 rounded-3xl rotate-2"
+        ></div>
+        <div
+          class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8"
         >
-          <div class="timeline-content">
-            <div class="timeline-year">{{ milestone.year }}</div>
-            <h3 class="timeline-title">{{ milestone.title }}</h3>
-            <p class="timeline-description">{{ milestone.description }}</p>
-            <div class="timeline-achievements">
-              <span
-                class="achievement"
-                *ngFor="let achievement of milestone.achievements"
-              >
-                {{ achievement }}
-              </span>
+          <div
+            class="absolute top-6 right-6 w-8 h-8 border-2 border-amber-600/30 rotate-45 rounded-xl"
+          ></div>
+          <div class="relative z-10">
+            <div class="section-badge">
+              <i class="fas fa-route"></i>
+              <span>Our Journey</span>
             </div>
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-slate-100 mb-4"
+            >
+              A timeline of growth and
+              <span class="text-amber-400">achievement</span>
+            </h2>
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+              From humble beginnings to international recognition, discover the
+              milestones that shaped our creative journey.
+            </p>
           </div>
-          <div class="timeline-image">
-            <img [src]="milestone.image" [alt]="milestone.title" />
+          <div
+            class="absolute -bottom-4 -left-4 w-12 h-12 bg-amber-600/20 rotate-45 rounded-xl"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Timeline Items -->
+      <div class="max-w-4xl mx-auto space-y-12">
+        <div
+          class="relative"
+          *ngFor="let milestone of milestones; let i = index"
+        >
+          <div
+            class="absolute -inset-4 bg-amber-500/5 rounded-3xl"
+            [class.rotate-1]="i % 2 === 0"
+            [class.-rotate-1]="i % 2 === 1"
+          ></div>
+          <div
+            class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8"
+          >
+            <div
+              class="absolute top-6 left-6 w-8 h-8 border-2 border-emerald-600/30 rotate-45 rounded-xl"
+            ></div>
+
+            <div
+              class="flex flex-col lg:flex-row gap-8 items-center relative z-10"
+            >
+              <!-- Timeline Content -->
+              <div class="flex-1 order-2 lg:order-1">
+                <div class="flex items-center gap-4 mb-4">
+                  <div
+                    class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-amber-500 rounded-full flex items-center justify-center text-white font-bold"
+                  >
+                    {{ "0" + (i + 1) }}
+                  </div>
+                  <div class="text-3xl font-bold text-amber-400">
+                    {{ milestone.year }}
+                  </div>
+                </div>
+
+                <h3 class="text-2xl font-serif font-bold text-slate-100 mb-4">
+                  {{ milestone.title }}
+                </h3>
+                <p class="text-slate-300 leading-relaxed mb-6">
+                  {{ milestone.description }}
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-1 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white text-sm rounded-full flex items-center gap-2"
+                    *ngFor="let achievement of milestone.achievements"
+                  >
+                    <i class="fas fa-check text-xs"></i>
+                    {{ achievement }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Timeline Image -->
+              <div class="lg:w-96 order-1 lg:order-2">
+                <div class="relative rounded-2xl overflow-hidden">
+                  <img
+                    [src]="milestone.image"
+                    [alt]="milestone.title"
+                    class="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                  <div
+                    class="absolute top-4 left-4 bg-emerald-500/90 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-2"
+                  >
+                    <i class="fas fa-calendar"></i>
+                    {{ milestone.year }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="absolute -bottom-4 -right-4 w-12 h-12 bg-emerald-600/20 rotate-45 rounded-xl"
+            ></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Awards Section -->
+  <!-- Enhanced Awards Section with Abstract Containers -->
   <section class="awards-section">
     <div class="container">
-      <div class="section-header">
-        <h2 class="section-title">Recognition & Awards</h2>
-        <p class="section-subtitle">Honored for our commitment to excellence</p>
-      </div>
-      <div class="awards-grid">
-        <div class="award-card" *ngFor="let award of awards">
-          <div class="award-icon">
-            <i [class]="award.icon"></i>
+      <!-- Awards Header -->
+      <section class="relative mb-16 text-center">
+        <div
+          class="absolute -inset-4 bg-amber-500/10 rounded-3xl -rotate-2"
+        ></div>
+        <div
+          class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-8"
+        >
+          <div
+            class="absolute top-6 left-6 w-8 h-8 border-2 border-emerald-600/30 rotate-45 rounded-xl"
+          ></div>
+          <div class="relative z-10">
+            <div class="section-badge">
+              <i class="fas fa-trophy"></i>
+              <span>Recognition</span>
+            </div>
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-slate-100 mb-4"
+            >
+              Recognition & <span class="text-amber-400">Awards</span>
+            </h2>
+            <p class="text-xl text-slate-300 max-w-2xl mx-auto">
+              Honored for our commitment to excellence and innovation in
+              portrait photography.
+            </p>
           </div>
-          <h3 class="award-title">{{ award.title }}</h3>
-          <p class="award-organization">{{ award.organization }}</p>
-          <p class="award-year">{{ award.year }}</p>
+          <div
+            class="absolute -bottom-4 -right-4 w-12 h-12 bg-amber-600/20 rotate-45 rounded-xl"
+          ></div>
+        </div>
+      </section>
+
+      <!-- Awards Grid -->
+      <div class="max-w-4xl mx-auto space-y-6">
+        <div class="relative" *ngFor="let award of awards; let i = index">
+          <div
+            class="absolute -inset-3 bg-amber-500/5 rounded-2xl"
+            [class.rotate-1]="i % 2 === 0"
+            [class.-rotate-1]="i % 2 === 1"
+          ></div>
+          <div
+            class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 p-6"
+          >
+            <div
+              class="absolute top-4 right-4 w-6 h-6 border-2 border-emerald-600/30 rotate-45 rounded-lg"
+            ></div>
+
+            <div class="flex items-center gap-6 relative z-10">
+              <!-- Award Icon -->
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center flex-shrink-0"
+              >
+                <i [class]="award.icon" class="text-white text-3xl"></i>
+              </div>
+
+              <!-- Award Content -->
+              <div class="flex-1">
+                <div class="flex items-start justify-between mb-2">
+                  <div>
+                    <h3
+                      class="text-xl font-serif font-bold text-slate-100 mb-1"
+                    >
+                      {{ award.title }}
+                    </h3>
+                    <p class="text-emerald-400 font-semibold">
+                      {{ award.organization }}
+                    </p>
+                  </div>
+                  <div class="text-right">
+                    <div
+                      class="w-8 h-8 bg-amber-500 text-black rounded-full flex items-center justify-center text-sm font-bold mb-2"
+                    >
+                      {{ "0" + (i + 1) }}
+                    </div>
+                    <span class="text-slate-400 text-sm">{{ award.year }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Award Badge -->
+              <div
+                class="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center"
+              >
+                <i class="fas fa-medal text-emerald-400 text-xl"></i>
+              </div>
+            </div>
+
+            <div
+              class="absolute -bottom-3 -left-3 w-8 h-8 bg-emerald-600/20 rotate-45 rounded-lg"
+            ></div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Section -->
+  <!-- Enhanced CTA Section with Abstract Container -->
   <section class="cta-section">
     <div class="cta-background">
       <div class="geometric-pattern"></div>
+      <div class="floating-elements">
+        <div class="float-element element-1">
+          <i class="fas fa-camera"></i>
+        </div>
+        <div class="float-element element-2">
+          <i class="fas fa-heart"></i>
+        </div>
+        <div class="float-element element-3">
+          <i class="fas fa-star"></i>
+        </div>
+      </div>
       <div class="gradient-overlay"></div>
     </div>
     <div class="container">
-      <div class="cta-content">
-        <h2 class="cta-title">Ready to Create Your Masterpiece?</h2>
-        <p class="cta-subtitle">
-          Let's work together to capture your unique story
-        </p>
-        <div class="cta-buttons">
-          <button class="btn btn-primary" routerLink="/contact">
-            <i class="fas fa-calendar"></i>
-            Book a Session
-          </button>
-          <button class="btn btn-secondary" routerLink="/shop">
-            <i class="fas fa-images"></i>
-            View Portfolio
-          </button>
+      <!-- CTA Content with Abstract Container -->
+      <section class="relative">
+        <div
+          class="absolute -inset-6 bg-emerald-500/10 rounded-3xl rotate-1"
+        ></div>
+        <div
+          class="relative bg-slate-800/90 backdrop-blur-sm rounded-3xl border border-slate-700/30 p-12 text-center"
+        >
+          <div
+            class="absolute top-8 right-8 w-10 h-10 border-2 border-amber-600/30 rotate-45 rounded-xl"
+          ></div>
+
+          <div class="relative z-10">
+            <div class="cta-badge">
+              <i class="fas fa-sparkles"></i>
+              <span>Ready to Begin?</span>
+            </div>
+            <h2
+              class="text-4xl md:text-5xl font-serif font-bold text-slate-100 mb-6"
+            >
+              Ready to Create Your
+              <span class="text-amber-400">Masterpiece?</span>
+            </h2>
+            <p class="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+              Let's work together to capture your unique story and create
+              portraits that you'll treasure for a lifetime.
+            </p>
+
+            <div class="flex justify-center gap-8 mb-8 flex-wrap">
+              <div class="flex items-center gap-3 text-slate-300">
+                <i class="fas fa-check text-emerald-400"></i>
+                <span>Professional consultation</span>
+              </div>
+              <div class="flex items-center gap-3 text-slate-300">
+                <i class="fas fa-check text-emerald-400"></i>
+                <span>Custom styling & direction</span>
+              </div>
+              <div class="flex items-center gap-3 text-slate-300">
+                <i class="fas fa-check text-emerald-400"></i>
+                <span>High-resolution digital gallery</span>
+              </div>
+            </div>
+
+            <div class="flex justify-center gap-6 mb-8 flex-wrap">
+              <button class="btn btn-primary" routerLink="/contact">
+                <i class="fas fa-calendar"></i>
+                Book a Session
+              </button>
+              <button class="btn btn-secondary" routerLink="/portfolio">
+                <i class="fas fa-images"></i>
+                View Portfolio
+              </button>
+            </div>
+
+            <div class="flex justify-center gap-8 flex-wrap">
+              <div class="flex items-center gap-3 text-slate-400">
+                <i class="fas fa-phone text-emerald-400"></i>
+                <span>(555) 123-4567</span>
+              </div>
+              <div class="flex items-center gap-3 text-slate-400">
+                <i class="fas fa-envelope text-emerald-400"></i>
+                <span>asdgmail.com</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="absolute -bottom-6 -left-6 w-16 h-16 bg-amber-600/20 rotate-45 rounded-xl"
+          ></div>
         </div>
-      </div>
+      </section>
     </div>
   </section>
 </div>

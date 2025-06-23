@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, type OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProductService } from '../../services/product.service';
+import { CartService } from '../../services/cart.service';
+import Product from '../../models/Product';
 
 interface Portrait {
   id: number;
@@ -188,7 +191,11 @@ export class ShopComponent implements OnInit {
   // Filtered portraits based on current filters
   filteredPortraits: Portrait[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private productService: ProductService,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.loadPortraits();
@@ -200,11 +207,40 @@ export class ShopComponent implements OnInit {
   loadPortraits(): void {
     this.isLoading = true;
 
-    // Simulate API call delay
-    setTimeout(() => {
-      this.applyFilters();
-      this.isLoading = false;
-    }, 500);
+    // Fetch products from API
+    this.productService.getAllProducts().subscribe(
+      (products) => {
+        // Map products to portraits
+        this.allPortraits = products.map(product => this.mapProductToPortrait(product));
+        this.applyFilters();
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error loading products:', error);
+        this.isLoading = false;
+        // If API fails, use hardcoded data as fallback
+        this.applyFilters();
+      }
+    );
+  }
+
+  // Map Product model to Portrait interface
+  private mapProductToPortrait(product: Product): Portrait {
+    return {
+      id: product.id,
+      title: product.name,
+      artist: 'Artist', // This field is not in the Product model
+      price: product.price,
+      imageUrl: product.image,
+      category: product.category,
+      description: product.description,
+      rating: product.rating,
+      isPopular: product.popular,
+      isInWishlist: false, // Default value
+      dimensions: '24x36 inches', // Default value
+      medium: 'Digital Print', // Default value
+      dateCreated: new Date().toISOString().split('T')[0] // Default to today
+    };
   }
 
   /**
@@ -395,8 +431,28 @@ export class ShopComponent implements OnInit {
   addToCart(portrait: Portrait): void {
     console.log('Adding to cart:', portrait);
 
-    // You can implement cart service here
-    alert(`${portrait.title} added to cart!`);
+    // Create a product object from portrait
+    const product: Product = {
+      id: portrait.id,
+      name: portrait.title,
+      description: portrait.description,
+      price: portrait.price,
+      image: portrait.imageUrl,
+      category: portrait.category,
+      rating: portrait.rating,
+      popular: portrait.isPopular
+    };
+
+    // Use cart service to add to cart
+    this.cartService.addToCart(product).subscribe(
+      (success) => {
+        if (success) {
+          alert(`${portrait.title} added to cart!`);
+        } else {
+          alert('Failed to add item to cart. Please try again.');
+        }
+      }
+    );
   }
 
   /**

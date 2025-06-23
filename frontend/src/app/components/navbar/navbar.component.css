@@ -1,0 +1,21 @@
+.nav-primary-btn {
+  background-color: #fe9a00 !important;
+  width: 100%;
+  padding: 12px 20px;
+  color: black;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-primary-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px #bc7100;
+}
+.nav-link {
+  @apply text-sm font-medium text-slate-300 hover:text-amber-400 transition relative;
+}
+
+.mobile-link {
+  @apply text-xl font-medium text-slate-300 hover:text-amber-400 py-4 border-b border-slate-800;
+}
