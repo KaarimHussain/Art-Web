@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import CartItem from '../../models/CartItems';
 import Product from '../../models/Product';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 interface Portrait {
   id: number;
@@ -11,7 +13,7 @@ interface Portrait {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -149,16 +151,16 @@ export class HomeComponent {
     return this.activeProductFilter === 'all'
       ? this.products
       : this.products.filter(
-          (product) => product.category === this.activeProductFilter
-        );
+        (product) => product.category === this.activeProductFilter
+      );
   }
 
   get filteredPortraits(): Portrait[] {
     return this.activePortraitFilter === 'all'
       ? this.portraits
       : this.portraits.filter(
-          (portrait) => portrait.category === this.activePortraitFilter
-        );
+        (portrait) => portrait.category === this.activePortraitFilter
+      );
   }
 
   get subtotal(): number {

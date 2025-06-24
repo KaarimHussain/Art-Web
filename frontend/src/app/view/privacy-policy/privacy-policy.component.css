@@ -1,0 +1,129 @@
+/* Privacy Policy specific styles */
+.privacy-section {
+    scroll-margin-top: 100px;
+    /* Account for fixed header */
+}
+
+
+
+/* Enhanced bullet points for privacy content */
+.privacy-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.privacy-list li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.7;
+}
+
+.privacy-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    width: 8px;
+    height: 8px;
+    background: #eab308;
+    border-radius: 50%;
+    transform: rotate(45deg);
+}
+
+/* Rights summary cards */
+.rights-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.rights-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(234, 179, 8, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.rights-card:hover::before {
+    left: 100%;
+}
+
+/* Data protection icons */
+.protection-icon {
+    transition: all 0.3s ease;
+}
+
+.rights-card:hover .protection-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Enhanced section dividers */
+.section-divider {
+    position: relative;
+    margin: 3rem 0;
+}
+
+.section-divider::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #059669, #eab308);
+}
+
+.section-divider::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #eab308;
+    border-radius: 50%;
+}
+
+/* Cookie notice styling */
+.cookie-notice {
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .privacy-list li {
+        padding-left: 1.5rem;
+    }
+
+    .rights-card {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .privacy-list li::before {
+        background: #ffffff;
+        border: 2px solid #000000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+    .rights-card,
+    .protection-icon,
+    .section-content {
+        animation: none;
+        transition: none;
+    }
+}

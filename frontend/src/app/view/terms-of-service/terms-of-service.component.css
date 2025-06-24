@@ -1,0 +1,117 @@
+/* Terms of Service specific styles */
+.sticky {
+    position: sticky;
+    top: 2rem;
+}
+
+/* Enhanced scroll behavior for table of contents */
+.toc-button {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.toc-button::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background: #eab308;
+    transform: scaleY(0);
+    transition: transform 0.3s ease;
+    transform-origin: bottom;
+}
+
+.toc-button.active::before,
+.toc-button:hover::before {
+    transform: scaleY(1);
+}
+
+/* Section content animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-content {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.section-content:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.section-content:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+/* Enhanced typography for legal content */
+.legal-text {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.legal-text strong {
+    color: #f1f5f9;
+    font-weight: 600;
+}
+
+/* Custom list styles for subsections */
+.legal-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.legal-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.legal-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.75rem;
+    width: 6px;
+    height: 6px;
+    background: #eab308;
+    border-radius: 50%;
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced focus styles for accessibility */
+button:focus,
+a:focus {
+    outline: 2px solid #eab308;
+    outline-offset: 2px;
+}
+
+/* Print styles for PDF generation */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .print-break {
+        page-break-before: always;
+    }
+
+    body {
+        background: white !important;
+        color: black !important;
+    }
+}

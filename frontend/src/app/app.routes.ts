@@ -11,6 +11,12 @@ import { CartComponent } from './view/cart/cart.component';
 import { ContactComponent } from './view/contact/contact.component';
 import { AboutComponent } from './view/about/about.component';
 import { AdminDashboardComponent } from './view/admin-dashboard/admin-dashboard.component';
+import { BlogComponent } from './view/blog/blog.component';
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { TermsOfServiceComponent } from './view/terms-of-service/terms-of-service.component';
+import { PrivacyPolicyComponent } from './view/privacy-policy/privacy-policy.component';
+
 
 export const routes: Routes = [
   {
@@ -24,6 +30,10 @@ export const routes: Routes = [
   {
     path: 'signup',
     component: SignupComponent,
+  },
+  {
+    path: 'blog',
+    component: BlogComponent,
   },
   {
     path: 'shop',
@@ -61,4 +71,23 @@ export const routes: Routes = [
     path: 'about',
     component: AboutComponent,
   },
+  {
+    path: 'terms-of-service',
+    component: TermsOfServiceComponent,
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent,
+  },
 ];
+
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled', // OR 'top'
+      anchorScrolling: 'enabled',           // Optional: allow fragment links to scroll
+    }),
+  ],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}

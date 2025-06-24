@@ -221,7 +221,7 @@
                 <div class="p-8 pt-0">
                   <form (ngSubmit)="onSignup($event)" class="space-y-6">
                     <!-- Account Type Selection -->
-                    <div class="relative">
+                    <!-- <div class="relative">
                       <label
                         class="block text-sm font-semibold text-slate-300 mb-4"
                         >Account Type</label
@@ -307,7 +307,7 @@
                           </div>
                         </label>
                       </div>
-                    </div>
+                    </div> -->
 
                     <!-- Name Fields -->
                     <div class="grid grid-cols-2 gap-4">
@@ -322,7 +322,7 @@
                             type="text"
                             id="firstName"
                             class="w-full px-4 py-4 bg-slate-700/50 border border-slate-600/50 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-slate-100 placeholder-slate-400 peer"
-                            placeholder="John"
+                            placeholder="FirstName"
                             required
                           />
                           <div
@@ -341,7 +341,7 @@
                             type="text"
                             id="lastName"
                             class="w-full px-4 py-4 bg-slate-700/50 border border-slate-600/50 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-slate-100 placeholder-slate-400 peer"
-                            placeholder="Doe"
+                            placeholder="LastName"
                             required
                           />
                           <div
@@ -363,7 +363,7 @@
                           type="email"
                           id="email"
                           class="w-full px-6 py-4 bg-slate-700/50 border border-slate-600/50 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-slate-100 placeholder-slate-400 peer"
-                          placeholder="john@example.com"
+                          placeholder="email@example.com"
                           required
                         />
                         <div
@@ -387,7 +387,7 @@
                           type="tel"
                           id="phone"
                           class="w-full px-6 py-4 bg-slate-700/50 border border-slate-600/50 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all text-slate-100 placeholder-slate-400 peer"
-                          placeholder="(555) 123-4567"
+                          placeholder="Phone Number"
                           required
                         />
                         <div
@@ -579,13 +579,13 @@
                         >
                           I agree to the
                           <a
-                            href="/terms"
+                            routerLink="/terms-of-service"
                             class="text-amber-400 hover:text-amber-300 underline"
                             >Terms of Service</a
                           >
                           and
                           <a
-                            href="/privacy"
+                            routerLink="/privacy-policy"
                             class="text-amber-400 hover:text-amber-300 underline"
                             >Privacy Policy</a
                           >

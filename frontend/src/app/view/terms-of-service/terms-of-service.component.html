@@ -1,0 +1,205 @@
+<div class="min-h-screen bg-slate-900 relative overflow-hidden">
+    <!-- Creative Background Pattern -->
+    <div class="fixed inset-0 opacity-5">
+        <div class="absolute top-20 left-10 w-32 h-32 border-2 border-emerald-600 rotate-45"></div>
+        <div class="absolute top-40 right-20 w-24 h-24 bg-amber-500 rounded-full opacity-10"></div>
+        <div class="absolute bottom-40 left-1/4 w-16 h-16 border border-emerald-500 rotate-12"></div>
+        <div class="absolute top-1/3 right-1/3 w-20 h-20 border-2 border-amber-400 rounded-full"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 overflow-hidden">
+        <!-- Creative Background Elements -->
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-20 w-48 h-48 border-4 border-emerald-600/20 rotate-12 rounded-3xl"></div>
+            <div class="absolute bottom-20 right-32 w-32 h-32 border-2 border-amber-500/30 rotate-45"></div>
+            <div class="absolute top-1/2 left-10 w-24 h-24 bg-emerald-700/10 rounded-full"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block mb-6">
+                    <span
+                        class="px-6 py-2 bg-emerald-800/30 text-emerald-400 text-sm font-semibold rounded-full border border-emerald-600/50">
+                        Legal Documentation
+                    </span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-serif font-bold text-slate-100 mb-8 leading-tight">
+                    Terms of <span class="text-amber-400 relative">
+                        Service
+                        <div class="absolute -bottom-4 left-0 w-20 h-1 bg-amber-500"></div>
+                    </span>
+                </h1>
+                <p class="text-xl text-slate-300 mb-8 leading-relaxed max-w-2xl mx-auto">
+                    Please read these terms carefully before using our photography services. These terms govern your
+                    relationship with PORTRAIT.
+                </p>
+
+                <!-- Meta Information -->
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                        <span class="text-slate-300">Last Updated: {{ lastUpdated }}</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-amber-500 rounded-full"></div>
+                        <span class="text-slate-300">Effective Date: {{ effectiveDate }}</span>
+                    </div>
+                </div>
+
+                <!-- Download Button -->
+                <button (click)="downloadPDF()"
+                    class="group relative overflow-hidden px-8 py-4 bg-amber-500 text-slate-900 font-semibold rounded-2xl hover:bg-amber-400 transition-all duration-300 transform hover:scale-105">
+                    <span class="relative z-10 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 10v6m0 0l-4-4m4 4l4-4m-6 8h8a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                            </path>
+                        </svg>
+                        Download PDF
+                    </span>
+                    <div
+                        class="absolute inset-0 bg-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left">
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-20 bg-slate-800 relative">
+        <div class="container mx-auto px-4">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid lg:grid-cols-4 gap-12">
+                    <!-- Table of Contents -->
+                    <div class="lg:col-span-1">
+                        <div class="sticky top-8">
+                            <div class="relative">
+                                <div class="absolute -inset-4 bg-emerald-600/10 rounded-3xl rotate-1"></div>
+                                <div
+                                    class="relative bg-slate-900/80 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-6">
+                                    <h3 class="text-lg font-serif font-bold text-amber-400 mb-6">Table of Contents</h3>
+                                    <nav class="space-y-3">
+                                        <button *ngFor="let section of termsSection"
+                                            (click)="scrollToSection(section.id)" [class]="
+                          'block w-full text-left px-4 py-3 rounded-xl transition-all duration-300 ' +
+                          (activeSection === section.id 
+                            ? 'bg-amber-500/20 text-amber-400 border-l-4 border-amber-500' 
+                            : 'text-slate-300 hover:bg-slate-700/50 hover:text-amber-400')
+                        ">
+                                            {{ section.title }}
+                                        </button>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="lg:col-span-3">
+                        <div class="space-y-16">
+                            <div *ngFor="let section of termsSection; let i = index" [id]="section.id" class="relative">
+                                <!-- Section Header -->
+                                <div class="relative mb-8">
+                                    <div [class]="'absolute -top-4 -left-4 w-12 h-12 border-2 rotate-45 rounded-xl ' + 
+                                 (i % 2 === 0 ? 'border-emerald-600/30' : 'border-amber-500/30')"></div>
+                                    <h2 class="text-3xl font-serif font-bold text-slate-100 relative z-10">
+                                        {{ section.title }}
+                                    </h2>
+                                    <div [class]="'w-24 h-1 mt-4 ' + (i % 2 === 0 ? 'bg-emerald-500' : 'bg-amber-500')">
+                                    </div>
+                                </div>
+
+                                <!-- Section Content -->
+                                <div class="relative">
+                                    <div [class]="'absolute -inset-6 rounded-3xl transition-all duration-500 ' + 
+                                 (i % 2 === 0 ? 'bg-emerald-600/5' : 'bg-amber-500/5')"></div>
+                                    <div
+                                        class="relative bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-slate-700/30 p-8">
+                                        <!-- Main Content -->
+                                        <div class="space-y-6 mb-8">
+                                            <p *ngFor="let paragraph of section.content"
+                                                class="text-slate-300 leading-relaxed text-lg">
+                                                {{ paragraph }}
+                                            </p>
+                                        </div>
+
+                                        <!-- Subsections -->
+                                        <div *ngIf="section.subsections" class="space-y-8">
+                                            <div *ngFor="let subsection of section.subsections; let j = index"
+                                                class="relative">
+                                                <div class="flex items-center mb-4">
+                                                    <div
+                                                        [class]="'w-8 h-0.5 mr-4 ' + (i % 2 === 0 ? 'bg-emerald-500' : 'bg-amber-500')">
+                                                    </div>
+                                                    <h3 class="text-xl font-semibold text-slate-100">{{ subsection.title
+                                                        }}</h3>
+                                                </div>
+                                                <div class="pl-12 space-y-4">
+                                                    <p *ngFor="let paragraph of subsection.content"
+                                                        class="text-slate-300 leading-relaxed">
+                                                        {{ paragraph }}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-20 bg-slate-900 relative overflow-hidden">
+        <!-- Creative Background -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-20 left-1/4 w-32 h-32 border-2 border-emerald-600 rotate-45 rounded-2xl"></div>
+            <div class="absolute bottom-20 right-1/4 w-24 h-24 border border-amber-500 rotate-12 rounded-full"></div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-block relative mb-8">
+                    <div class="absolute -top-6 -left-6 w-16 h-16 border-2 border-amber-500/20 rotate-45 rounded-2xl">
+                    </div>
+                    <h2 class="text-4xl font-serif font-bold text-slate-100 relative z-10">
+                        Questions About Our <span class="text-amber-400">Terms?</span>
+                    </h2>
+                </div>
+                <div class="flex justify-center items-center space-x-4 mb-6">
+                    <div class="w-16 h-0.5 bg-emerald-600"></div>
+                    <div class="w-3 h-3 bg-amber-500 rotate-45"></div>
+                    <div class="w-16 h-0.5 bg-emerald-600"></div>
+                </div>
+                <p class="text-xl text-slate-300 mb-12 leading-relaxed">
+                    If you have any questions about these Terms of Service, please don't hesitate to contact us.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    <a href="mailto:legal@portrait.com"
+                        class="group relative overflow-hidden px-8 py-4 bg-emerald-700 text-slate-100 font-semibold rounded-2xl hover:bg-emerald-600 transition-all duration-300">
+                        <span class="relative z-10 flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                                </path>
+                            </svg>
+                            Email Legal Team
+                        </span>
+                        <div
+                            class="absolute inset-0 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left">
+                        </div>
+                    </a>
+                    <a routerLink="/contact"
+                        class="px-8 py-4 border-2 border-amber-500 text-amber-400 font-semibold rounded-2xl hover:bg-amber-500 hover:text-slate-900 transition-all duration-300">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
