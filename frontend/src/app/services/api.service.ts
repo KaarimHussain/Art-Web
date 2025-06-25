@@ -12,6 +12,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  // Authentication API
+  
+
   // Products API
   getAllProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiUrl}/products`);

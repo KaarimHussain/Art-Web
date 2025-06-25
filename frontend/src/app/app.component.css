@@ -8,6 +8,11 @@ html {
   scroll-behavior: smooth;
 }
 
+*::selection {
+  color: #111827;
+  background-color: gold;
+}
+
 /* Ensure proper stacking context */
 app-header {
   position: relative;

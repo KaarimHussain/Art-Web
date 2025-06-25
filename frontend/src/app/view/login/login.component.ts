@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { RouterLink } from '@angular/router';
-
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
+import { NotificationService } from '../../services/notification.service';
+import { LoginCredentials } from '../../models/Login';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -13,11 +16,10 @@ export class LoginComponent {
   // Form visibility toggles
   showPassword = false;
 
-  // Form data
-  loginForm = {
+  // Form data - FIXED: Using different variable name to avoid conflict
+  loginFormData = {
     email: '',
     password: '',
-    rememberMe: false,
   };
 
   // Loading state
@@ -26,7 +28,11 @@ export class LoginComponent {
   // Error handling
   errorMessage = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private auth: AuthService,
+    private notificationService: NotificationService
+  ) { }
 
   /**
    * Toggle password visibility
@@ -36,62 +42,84 @@ export class LoginComponent {
   }
 
   /**
-   * Handle form submission
+   * Handle form submission - FIXED
    */
   onLogin(event: Event): void {
     event.preventDefault();
 
     if (!this.validateForm()) {
+      console.log('Form validation failed');
       return;
     }
-
     this.isLoading = true;
     this.errorMessage = '';
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Login form submitted:', this.loginForm);
+    const loginData: LoginCredentials = {
+      email: this.loginFormData.email,
+      password: this.loginFormData.password,
+    };
 
-      // Simulate login logic
-      if (this.simulateLogin()) {
-        this.showSuccessMessage();
+    this.auth.login(loginData).subscribe({
+      next: (response) => {
+        console.log('Login response:', response);
 
-        // Redirect to dashboard
-        setTimeout(() => {
-          this.router.navigate(['/dashboard']);
-        }, 1500);
-      } else {
-        this.showErrorMessage('Invalid email or password. Please try again.');
-      }
+        if (response.token) {
+          this.notificationService.success('Welcome!', 'Login successful!');
+          this.isLoading = false;
 
-      this.isLoading = false;
-    }, 1500);
+          // Force update auth state to ensure navbar updates
+          this.auth.updateAuthState();
+          if (this.auth.checkIfAdmin()) {
+            this.router.navigate(['/admin-dashboard']);
+          }
+          this.router.navigate(['/user-dashboard']);
+        } else {
+          this.notificationService.error('Login Failed', 'No token received from server');
+          this.isLoading = false;
+        }
+      },
+      error: (error) => {
+        console.error('Login error:', error);
+        this.isLoading = false;
+        console.error(error.status);
+
+        if (error.status === 401) {
+          this.notificationService.error('Login Failed', 'Invalid credentials. Please try again.');
+        } else if (error.status === 500) {
+          this.notificationService.error('Server Error', 'Something went wrong on our end. Please try again.');
+        } else if (error.status === 400) {
+          this.notificationService.error('Bad Request', 'Unable to handle the request. Please try again later!');
+        } else {
+          this.notificationService.error('Network Error', 'Please check your connection and try again.');
+        }
+      },
+    });
   }
 
   /**
-   * Validate form data
+   * Validate form data - UPDATED
    */
   private validateForm(): boolean {
     // Reset error message
     this.errorMessage = '';
 
     // Check required fields
-    if (!this.loginForm.email.trim()) {
+    if (!this.loginFormData.email.trim()) {
       this.showErrorMessage('Email is required');
       return false;
     }
 
-    if (!this.isValidEmail(this.loginForm.email)) {
+    if (!this.isValidEmail(this.loginFormData.email)) {
       this.showErrorMessage('Please enter a valid email address');
       return false;
     }
 
-    if (!this.loginForm.password) {
+    if (!this.loginFormData.password) {
       this.showErrorMessage('Password is required');
       return false;
     }
 
-    if (this.loginForm.password.length < 6) {
+    if (this.loginFormData.password.length < 6) {
       this.showErrorMessage('Password must be at least 6 characters long');
       return false;
     }
@@ -108,51 +136,11 @@ export class LoginComponent {
   }
 
   /**
-   * Simulate login process
-   */
-  private simulateLogin(): boolean {
-    // For demo purposes, accept any valid email/password combination
-    // In real app, this would make an API call to your authentication service
-
-    // Demo credentials for testing
-    const demoCredentials = [
-      { email: 'demo@portrait.com', password: 'password123' },
-      { email: 'user@example.com', password: 'password' },
-      { email: 'test@test.com', password: 'test123' },
-    ];
-
-    // Check if credentials match demo accounts
-    const isValidCredentials = demoCredentials.some(
-      (cred) =>
-        cred.email === this.loginForm.email &&
-        cred.password === this.loginForm.password
-    );
-
-    // For demo, also accept any email with password length >= 6
-    return isValidCredentials || this.loginForm.password.length >= 6;
-  }
-
-  /**
-   * Show success message
-   */
-  private showSuccessMessage(): void {
-    console.log('Login successful! Redirecting to dashboard...');
-
-    // You can implement a toast notification service here
-    alert('Login successful! Welcome back!');
-  }
-
-  /**
    * Show error message
    */
   private showErrorMessage(message: string): void {
     this.errorMessage = message;
-    console.error('Login error:', message);
-
-    // Clear error message after 5 seconds
-    setTimeout(() => {
-      this.errorMessage = '';
-    }, 5000);
+    this.notificationService.error('Login Failed', message);
   }
 
   /**
@@ -162,12 +150,6 @@ export class LoginComponent {
     console.log('Google login initiated');
     // Implement Google OAuth integration
     // Example: this.authService.loginWithGoogle()
-
-    // For demo purposes
-    setTimeout(() => {
-      this.showSuccessMessage();
-      this.router.navigate(['/dashboard']);
-    }, 1000);
   }
 
   /**
@@ -177,12 +159,6 @@ export class LoginComponent {
     console.log('Facebook login initiated');
     // Implement Facebook OAuth integration
     // Example: this.authService.loginWithFacebook()
-
-    // For demo purposes
-    setTimeout(() => {
-      this.showSuccessMessage();
-      this.router.navigate(['/dashboard']);
-    }, 1000);
   }
 
   /**
@@ -206,13 +182,6 @@ export class LoginComponent {
     this.router.navigate(['/forgot-password']);
   }
 
-  /**
-   * Handle remember me toggle
-   */
-  onRememberMeToggle(): void {
-    this.loginForm.rememberMe = !this.loginForm.rememberMe;
-    console.log('Remember me:', this.loginForm.rememberMe);
-  }
 
   /**
    * Handle enter key press in form
@@ -227,10 +196,9 @@ export class LoginComponent {
    * Clear form data
    */
   clearForm(): void {
-    this.loginForm = {
+    this.loginFormData = {
       email: '',
       password: '',
-      rememberMe: false,
     };
     this.errorMessage = '';
   }
@@ -239,18 +207,19 @@ export class LoginComponent {
    * Auto-fill demo credentials for testing
    */
   fillDemoCredentials(): void {
-    this.loginForm.email = 'demo@portrait.com';
-    this.loginForm.password = 'password123';
+    this.loginFormData.email = 'demo@portrait.com';
+    this.loginFormData.password = 'password123';
   }
 
   /**
-   * Check if form is valid
+   * Check if form is valid - UPDATED
    */
   get isFormValid(): boolean {
     return (
-      this.loginForm.email.trim() !== '' &&
-      this.loginForm.password !== '' &&
-      this.isValidEmail(this.loginForm.email)
+      this.loginFormData.email.trim() !== '' &&
+      this.loginFormData.password !== '' &&
+      this.loginFormData.password.length >= 6 &&
+      this.isValidEmail(this.loginFormData.email)
     );
   }
 

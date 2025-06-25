@@ -16,6 +16,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { TermsOfServiceComponent } from './view/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './view/privacy-policy/privacy-policy.component';
+import { AuthGuard } from './guard/auth.guard';
+import { AdminGuard } from './guard/admin.guard';
+import { ReverseAuthGuard } from './guard/reverse-auth.guard';
+import { NoAdminGuard } from './guard/no-admin.guard';
 
 
 export const routes: Routes = [
@@ -26,10 +30,12 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate: [ReverseAuthGuard],
   },
   {
     path: 'signup',
     component: SignupComponent,
+    canActivate: [ReverseAuthGuard],
   },
   {
     path: 'blog',
@@ -38,30 +44,37 @@ export const routes: Routes = [
   {
     path: 'shop',
     component: ShopComponent,
+    canActivate: []
   },
   {
     path: 'product-detail/:id',
     component: ProductDetailComponent,
+    canActivate: []
   },
   {
     path: 'cart',
     component: CartComponent,
+    canActivate: [AuthGuard, NoAdminGuard], // Add your auth guard here if needed
   },
   {
     path: 'collection',
     component: CollectionComponent,
+    canActivate: []
   },
   {
     path: 'collection-detail/:id',
     component: CollectionDetailComponent,
+    canActivate: []
   },
   {
     path: 'user-dashboard',
     component: UserDashboardComponent,
+    canActivate: [AuthGuard, NoAdminGuard],
   },
   {
     path: 'admin-dashboard',
     component: AdminDashboardComponent,
+    canActivate: [AdminGuard],
   },
   {
     path: 'contact',
@@ -90,4 +103,4 @@ export const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
