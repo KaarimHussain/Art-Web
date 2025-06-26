@@ -114,18 +114,4 @@ artify-frontend/
 │ └── assets/
 │ └── images/, icons/
 
-## ⚙️ Setup Instructions
 
-### Prerequisites
-
-- [.NET 8 SDK](https://dotnet.microsoft.com/en-us/download)
-- [SQL Server](https://www.microsoft.com/en-us/sql-server)
-- [Node.js + Angular CLI](https://angular.io/cli)
-- Stripe/PayPal Developer Account
-
-### Backend Setup
-
-cd Artify.Api
-dotnet restore
-dotnet ef database update
-dotnet run
