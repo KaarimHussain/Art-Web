@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import CartItem from '../../models/CartItems';
-import Product from '../../models/Product';
+import { Product } from '../../models/Product';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -22,74 +22,7 @@ export class HomeComponent {
   activeProductFilter = 'all';
   activePortraitFilter = 'all';
 
-  products: Product[] = [
-    {
-      id: 1,
-      name: 'Standard Portrait Session',
-      description: '1-hour session, 5 digital images, 1 8x10 print',
-      price: 199,
-      originalPrice: 249,
-      image: '/placeholder.svg?height=600&width=400',
-      category: 'session',
-      rating: 4.9,
-      popular: false,
-    },
-    {
-      id: 2,
-      name: 'Premium Portrait Session',
-      description: '2-hour session, 10 digital images, 2 8x10 prints',
-      price: 349,
-      originalPrice: 399,
-      image: '/placeholder.svg?height=600&width=400',
-      category: 'session',
-      rating: 5.0,
-      popular: true,
-    },
-    {
-      id: 3,
-      name: 'Family Portrait Package',
-      description: '3-hour session, 20 digital images, 1 16x20 canvas print',
-      price: 499,
-      originalPrice: 599,
-      image: '/placeholder.svg?height=600&width=400',
-      category: 'session',
-      rating: 4.8,
-      popular: false,
-    },
-    {
-      id: 4,
-      name: '8x10 Print',
-      description: 'Professional quality print on premium paper',
-      price: 25,
-      originalPrice: 35,
-      image: '/placeholder.svg?height=600&width=400',
-      category: 'print',
-      rating: 4.7,
-      popular: false,
-    },
-    {
-      id: 5,
-      name: '16x20 Canvas Print',
-      description: 'Gallery-quality canvas print, ready to hang',
-      price: 150,
-      originalPrice: 200,
-      image: '/placeholder.svg?height=600&width=400',
-      category: 'print',
-      rating: 4.9,
-      popular: false,
-    },
-    {
-      id: 6,
-      name: 'Digital Image Package',
-      description: '10 high-resolution digital images with print release',
-      price: 199,
-      originalPrice: 249,
-      image: '/placeholder.svg?height=600&width=400',
-      category: 'digital',
-      rating: 4.8,
-      popular: false,
-    },
-  ];
+  products: Product[] = [];
 
   portraits: Portrait[] = [
     {
@@ -193,10 +126,10 @@ export class HomeComponent {
     } else {
       this.cartItems.push({
         id: product.id,
-        name: product.name,
+        name: product.title,
         price: product.price,
         quantity: 1,
-        image: product.image,
+        image: product.featuredImage,
       });
     }
   }

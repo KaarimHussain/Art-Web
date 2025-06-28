@@ -1,28 +1,22 @@
 <!-- Admin Nav -->
 @if(isAdmin){
 <header
-  class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-emerald-800/30 shadow-lg shadow-slate-900/20"
->
+  class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-emerald-800/30 shadow-lg shadow-slate-900/20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
       <!-- Enhanced Logo -->
-      <h2
-        class="text-2xl font-serif font-bold text-amber-400 tracking-wider relative group transition-all duration-300 hover:scale-105"
-      >
-        <span class="relative z-10">Admin Dashbaord</span>
+      <h2 routerLink="/admin-dashboard"
+        class="text-2xl font-serif font-bold text-amber-400 tracking-wider relative group transition-all duration-300 hover:scale-105">
+        <span class="relative z-10">Admin Dashboard</span>
         <div
-          class="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-emerald-400/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
-        ></div>
+          class="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-emerald-400/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10">
+        </div>
       </h2>
 
       <!-- Enhanced Toggle Button -->
-      <button
-        (click)="toggleMenu()"
-        class="md:hidden relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group z-50 border border-slate-700/50 hover:border-amber-400/50"
-      >
-        <span
-          class="material-icons text-xl text-slate-300 group-hover:text-amber-400 transition-colors duration-300"
-        >
+      <button (click)="toggleMenu()"
+        class="md:hidden relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group z-50 border border-slate-700/50 hover:border-amber-400/50">
+        <span class="material-icons text-xl text-slate-300 group-hover:text-amber-400 transition-colors duration-300">
           {{ isMenuOpen ? "close" : "menu" }}
         </span>
       </button>
@@ -30,18 +24,18 @@
       <!-- Enhanced Desktop Nav -->
       <nav class="hidden md:flex space-x-8 items-center">
         <!-- Enhanced Action Buttons -->
-        <div
-          class="flex items-center space-x-3 ml-6 pl-6 border-l border-slate-700/50"
-        >
-          <button
-            (click)="logout()"
-            class="relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-red-400/50 hover:shadow-lg hover:shadow-red-400/20"
-            title="Logout"
-          >
+        <div class="flex items-center space-x-3 ml-6 pl-6 border-l border-slate-700/50">
+          <button routerLink="/admin-dashboard"
+            class="relative h-[50px] w-[50px] flex items-center justify-center rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-amber-400/50 hover:shadow-lg hover:shadow-amber-400/20"
+            title="Dashboard">
             <span
-              class="material-icons text-slate-300 group-hover:text-red-400 transition-colors duration-300"
-              >logout</span
-            >
+              class="material-icons text-slate-300 group-hover:text-amber-400 transition-colors duration-300">dashboard</span>
+          </button>
+          <button (click)="logout()"
+            class="relative h-[50px] w-[50px] flex items-center justify-center rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-red-400/50 hover:shadow-lg hover:shadow-red-400/20"
+            title="Logout">
+            <span
+              class="material-icons text-slate-300 group-hover:text-red-400 transition-colors duration-300">logout</span>
           </button>
         </div>
       </nav>
@@ -51,22 +45,14 @@
   <!-- Enhanced Mobile Menu -->
   <div
     class="md:hidden fixed overflow-y-scroll min-h-[700px] inset-0 bg-slate-900/95 backdrop-blur-xl z-40 h-full transition-all duration-300"
-    [class.opacity-0]="!isMenuOpen"
-    [class.opacity-100]="isMenuOpen"
-    [class.pointer-events-none]="!isMenuOpen"
-    [class.pointer-events-auto]="isMenuOpen"
-    [class.translate-y-full]="!isMenuOpen"
-    [class.translate-y-0]="isMenuOpen"
-  >
+    [class.opacity-0]="!isMenuOpen" [class.opacity-100]="isMenuOpen" [class.pointer-events-none]="!isMenuOpen"
+    [class.pointer-events-auto]="isMenuOpen" [class.translate-y-full]="!isMenuOpen" [class.translate-y-0]="isMenuOpen">
     <div
-      class="flex flex-col min-h-[700px] overflow-y-scroll pt-24 px-6 bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-800/90"
-    >
+      class="flex flex-col min-h-[700px] overflow-y-scroll pt-24 px-6 bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-800/90">
       <!-- Enhanced Mobile Action Buttons -->
       <div class="flex flex-col mt-auto mb-12 gap-4">
-        <button
-          (click)="logout()"
-          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40 hover:scale-105"
-        >
+        <button (click)="logout()"
+          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40 hover:scale-105">
           <span class="material-icons mr-3">logout</span>
           Logout
         </button>
@@ -78,128 +64,93 @@
 } @else{
 <!-- User Nav -->
 <header
-  class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-emerald-800/30 shadow-lg shadow-slate-900/20"
->
+  class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-xl border-b border-emerald-800/30 shadow-lg shadow-slate-900/20">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
       <!-- Enhanced Logo -->
-      <a
-        routerLink="/"
-        class="text-2xl font-serif font-bold text-amber-400 tracking-wider relative group transition-all duration-300 hover:scale-105"
-      >
+      <a routerLink="/"
+        class="text-2xl font-serif font-bold text-amber-400 tracking-wider relative group transition-all duration-300 hover:scale-105">
         <span class="relative z-10">Portrait</span>
         <div
-          class="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-emerald-400/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"
-        ></div>
+          class="absolute inset-0 bg-gradient-to-r from-amber-400/20 to-emerald-400/20 rounded-lg blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10">
+        </div>
       </a>
 
       <!-- Enhanced Toggle Button -->
-      <button
-        (click)="toggleMenu()"
-        class="md:hidden relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group z-50 border border-slate-700/50 hover:border-amber-400/50"
-      >
-        <span
-          class="material-icons text-xl text-slate-300 group-hover:text-amber-400 transition-colors duration-300"
-        >
+      <button (click)="toggleMenu()"
+        class="md:hidden relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group z-50 border border-slate-700/50 hover:border-amber-400/50">
+        <span class="material-icons text-xl text-slate-300 group-hover:text-amber-400 transition-colors duration-300">
           {{ isMenuOpen ? "close" : "menu" }}
         </span>
       </button>
 
       <!-- Enhanced Desktop Nav -->
       <nav class="hidden md:flex space-x-8 items-center">
-        <a
-          routerLink="/"
-          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group"
-        >
+        <a routerLink="/"
+          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group">
           <span class="relative z-10">Home</span>
           <div
-            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300"
-          ></div>
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300">
+          </div>
         </a>
-        <a
-          routerLink="/shop"
-          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group"
-        >
+        <a routerLink="/shop"
+          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group">
           <span class="relative z-10">Shop</span>
           <div
-            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300"
-          ></div>
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300">
+          </div>
         </a>
-        <a
-          routerLink="/collection"
-          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group"
-        >
+        <a routerLink="/collection"
+          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group">
           <span class="relative z-10">Collection</span>
           <div
-            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300"
-          ></div>
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300">
+          </div>
         </a>
-        <a
-          routerLink="/about"
-          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group"
-        >
+        <a routerLink="/about"
+          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group">
           <span class="relative z-10">About</span>
           <div
-            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300"
-          ></div>
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300">
+          </div>
         </a>
-        <a
-          routerLink="/contact"
-          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group"
-        >
+        <a routerLink="/contact"
+          class="nav-link relative text-white hover:text-amber-400 transition-all duration-300 py-2 px-3 rounded-lg hover:bg-slate-800/30 group">
           <span class="relative z-10">Contact</span>
           <div
-            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300"
-          ></div>
+            class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-emerald-400 group-hover:w-full transition-all duration-300">
+          </div>
         </a>
 
         <!-- Enhanced Action Buttons -->
-        <div
-          class="flex items-center space-x-3 ml-6 pl-6 border-l border-slate-700/50"
-        >
+        <div class="flex items-center space-x-3 ml-6 pl-6 border-l border-slate-700/50">
           @if(isLoggedIn){
-          <button
-            (click)="navigateToCart()"
-            class="relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-amber-400/50 hover:shadow-lg hover:shadow-amber-400/20"
-          >
+          <button (click)="navigateToCart()"
+            class="relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-amber-400/50 hover:shadow-lg hover:shadow-amber-400/20">
             <span
-              class="material-icons text-slate-300 group-hover:text-amber-400 transition-colors duration-300"
-              >shopping_cart</span
-            >
+              class="material-icons text-slate-300 group-hover:text-amber-400 transition-colors duration-300">shopping_cart</span>
             <div
-              class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            ></div>
+              class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            </div>
           </button>
 
-          <button
-            (click)="navigateToDashboard()"
-            class="relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-emerald-400/50 hover:shadow-lg hover:shadow-emerald-400/20"
-          >
+          <button (click)="navigateToDashboard()"
+            class="relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-emerald-400/50 hover:shadow-lg hover:shadow-emerald-400/20">
             <span
-              class="material-icons text-slate-300 group-hover:text-emerald-400 transition-colors duration-300"
-              >dashboard</span
-            >
+              class="material-icons text-slate-300 group-hover:text-emerald-400 transition-colors duration-300">dashboard</span>
           </button>
-          <button
-            (click)="logout()"
+          <button (click)="logout()"
             class="relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-red-400/50 hover:shadow-lg hover:shadow-red-400/20"
-            title="Logout"
-          >
+            title="Logout">
             <span
-              class="material-icons text-slate-300 group-hover:text-red-400 transition-colors duration-300"
-              >logout</span
-            >
+              class="material-icons text-slate-300 group-hover:text-red-400 transition-colors duration-300">logout</span>
           </button>
           } @else{
-          <button
-            (click)="navigateToLogin()"
+          <button (click)="navigateToLogin()"
             class="relative p-3 rounded-xl hover:bg-slate-800/60 transition-all duration-300 group border border-slate-700/50 hover:border-amber-400/50 hover:shadow-lg hover:shadow-amber-400/20"
-            title="Login"
-          >
+            title="Login">
             <span
-              class="material-icons text-slate-300 group-hover:text-amber-400 transition-colors duration-300"
-              >person</span
-            >
+              class="material-icons text-slate-300 group-hover:text-amber-400 transition-colors duration-300">person</span>
           </button>
           }
         </div>
@@ -210,80 +161,44 @@
   <!-- Enhanced Mobile Menu -->
   <div
     class="md:hidden fixed overflow-y-scroll min-h-[700px] inset-0 bg-slate-900/95 backdrop-blur-xl z-40 h-full transition-all duration-300"
-    [class.opacity-0]="!isMenuOpen"
-    [class.opacity-100]="isMenuOpen"
-    [class.pointer-events-none]="!isMenuOpen"
-    [class.pointer-events-auto]="isMenuOpen"
-    [class.translate-y-full]="!isMenuOpen"
-    [class.translate-y-0]="isMenuOpen"
-  >
+    [class.opacity-0]="!isMenuOpen" [class.opacity-100]="isMenuOpen" [class.pointer-events-none]="!isMenuOpen"
+    [class.pointer-events-auto]="isMenuOpen" [class.translate-y-full]="!isMenuOpen" [class.translate-y-0]="isMenuOpen">
     <div
-      class="flex flex-col min-h-[700px] overflow-y-scroll pt-24 px-6 bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-800/90"
-    >
+      class="flex flex-col min-h-[700px] overflow-y-scroll pt-24 px-6 bg-gradient-to-b from-slate-900 via-slate-900/95 to-slate-800/90">
       <!-- Mobile Navigation Links -->
       <div class="space-y-4">
-        <a
-          routerLink="/"
-          (click)="closeMenu()"
-          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group"
-        >
+        <a routerLink="/" (click)="closeMenu()"
+          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group">
           <span class="flex items-center">
-            <span
-              class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400"
-              >home</span
-            >
+            <span class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400">home</span>
             Home
           </span>
         </a>
-        <a
-          routerLink="/shop"
-          (click)="closeMenu()"
-          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group"
-        >
+        <a routerLink="/shop" (click)="closeMenu()"
+          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group">
           <span class="flex items-center">
-            <span
-              class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400"
-              >store</span
-            >
+            <span class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400">store</span>
             Shop
           </span>
         </a>
-        <a
-          routerLink="/collection"
-          (click)="closeMenu()"
-          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group"
-        >
+        <a routerLink="/collection" (click)="closeMenu()"
+          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group">
           <span class="flex items-center">
-            <span
-              class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400"
-              >work</span
-            >
+            <span class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400">work</span>
             Collection
           </span>
         </a>
-        <a
-          routerLink="/about"
-          (click)="closeMenu()"
-          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group"
-        >
+        <a routerLink="/about" (click)="closeMenu()"
+          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group">
           <span class="flex items-center">
-            <span
-              class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400"
-              >article</span
-            >
+            <span class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400">article</span>
             About
           </span>
         </a>
-        <a
-          routerLink="/contact"
-          (click)="closeMenu()"
-          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group"
-        >
+        <a routerLink="/contact" (click)="closeMenu()"
+          class="mobile-link block text-white hover:text-amber-400 py-4 px-6 text-2xl font-medium rounded-xl hover:bg-slate-800/50 transition-all duration-300 border border-transparent hover:border-slate-700/50 group">
           <span class="flex items-center">
-            <span
-              class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400"
-              >contact_mail</span
-            >
+            <span class="material-icons mr-4 text-amber-400/70 group-hover:text-amber-400">contact_mail</span>
             Contact
           </span>
         </a>
@@ -292,39 +207,29 @@
       <!-- Enhanced Mobile Action Buttons -->
       <div class="flex flex-col mt-auto mb-12 gap-4">
         @if(isLoggedIn){
-        <button
-          (click)="navigateToCart()"
-          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 rounded-2xl py-4 px-6 text-black font-semibold transition-all duration-300 shadow-lg shadow-amber-400/30 hover:shadow-xl hover:shadow-amber-400/40 hover:scale-105"
-        >
+        <button (click)="navigateToCart()"
+          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 rounded-2xl py-4 px-6 text-black font-semibold transition-all duration-300 shadow-lg shadow-amber-400/30 hover:shadow-xl hover:shadow-amber-400/40 hover:scale-105">
           <span class="material-icons mr-3">shopping_cart</span>
           Cart
         </button>
-        <button
-          (click)="navigateToDashboard()"
-          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-emerald-600/30 hover:shadow-xl hover:shadow-emerald-600/40 hover:scale-105"
-        >
+        <button (click)="navigateToDashboard()"
+          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-emerald-600/30 hover:shadow-xl hover:shadow-emerald-600/40 hover:scale-105">
           <span class="material-icons mr-3">dashboard</span>
           Dashboard
         </button>
-        <button
-          (click)="logout()"
-          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40 hover:scale-105"
-        >
+        <button (click)="logout()"
+          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40 hover:scale-105">
           <span class="material-icons mr-3">logout</span>
           Logout
         </button>
         } @else{
-        <button
-          (click)="navigateToLogin()"
-          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-emerald-600/30 hover:shadow-xl hover:shadow-emerald-600/40 hover:scale-105"
-        >
+        <button (click)="navigateToLogin()"
+          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-emerald-600/30 hover:shadow-xl hover:shadow-emerald-600/40 hover:scale-105">
           <span class="material-icons mr-3">person</span>
           Login
         </button>
-        <button
-          (click)="navigateToSignup()"
-          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-amber-600/30 hover:shadow-xl hover:shadow-amber-600/40 hover:scale-105"
-        >
+        <button (click)="navigateToSignup()"
+          class="nav-primary-btn flex items-center justify-center bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 rounded-2xl py-4 px-6 text-white font-semibold transition-all duration-300 shadow-lg shadow-amber-600/30 hover:shadow-xl hover:shadow-amber-600/40 hover:scale-105">
           <span class="material-icons mr-3">person_add</span>
           Sign Up
         </button>

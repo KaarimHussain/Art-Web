@@ -1,349 +1,102 @@
 <div class="min-h-screen bg-slate-900 relative overflow-hidden">
   <!-- Creative Background Pattern -->
   <div class="fixed inset-0 opacity-5">
-    <div
-      class="absolute top-20 left-10 w-32 h-32 border-2 border-emerald-600 rotate-45 rounded-2xl"
-    ></div>
-    <div
-      class="absolute top-40 right-20 w-24 h-24 bg-amber-500 rounded-full opacity-10"
-    ></div>
-    <div
-      class="absolute bottom-40 left-1/4 w-16 h-16 border border-emerald-500 rotate-12"
-    ></div>
-    <div
-      class="absolute top-1/3 right-1/3 w-20 h-20 border-2 border-amber-400 rounded-full"
-    ></div>
+    <div class="absolute top-20 left-10 w-32 h-32 border-2 border-emerald-600 rotate-45 rounded-2xl"></div>
+    <div class="absolute top-40 right-20 w-24 h-24 bg-amber-500 rounded-full opacity-10"></div>
+    <div class="absolute bottom-40 left-1/4 w-16 h-16 border border-emerald-500 rotate-12"></div>
+    <div class="absolute top-1/3 right-1/3 w-20 h-20 border-2 border-amber-400 rounded-full"></div>
   </div>
 
   <!-- Main Content Area -->
   <div class="min-h-screen pb-20 pt-20">
     <!-- Top Header with Navigation Tabs -->
-    <header
-      class="bg-slate-800/90 backdrop-blur-xl border-b border-slate-700/50 relative z-30"
-    >
+    <header class="bg-slate-800/90 backdrop-blur-xl border-b border-slate-700/50 relative">
       <div class="px-4 md:px-8 py-6">
         <!-- Brand Section -->
         <div class="flex items-center justify-between mb-6">
           <div class="relative">
-            <div
-              class="absolute -top-2 -left-2 w-6 h-6 border-2 border-emerald-600/30 rotate-45 rounded-lg"
-            ></div>
+            <div class="absolute -top-2 -left-2 w-6 h-6 border-2 border-emerald-600/30 rotate-45 rounded-lg"></div>
             <div class="flex items-center space-x-3 relative z-10">
-              <div
-                class="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center"
-              >
-                <span class="text-slate-900 font-bold text-lg">P</span>
-              </div>
               <div>
-                <h1
-                  class="text-xl md:text-2xl font-serif font-bold text-slate-100"
-                >
-                  PORTRAIT Admin = active tab = {{ activeTab }}
+                <h1 class="text-xl md:text-2xl font-serif font-bold text-slate-100">
+                  Royal Portraits
                 </h1>
                 <p class="text-xs text-slate-400">Management Dashboard</p>
               </div>
             </div>
           </div>
-          <div class="flex items-center space-x-4">
-            <!-- Quick Actions -->
-            <button
-              class="relative p-3 bg-emerald-700 text-slate-100 rounded-xl hover:bg-emerald-600 transition-all group"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                ></path>
-              </svg>
-              <div
-                class="absolute -top-1 -right-1 w-3 h-3 bg-amber-500 rounded-full"
-              ></div>
-            </button>
-            <!-- Notifications -->
-            <button
-              class="relative p-3 text-slate-300 hover:text-amber-400 hover:bg-slate-700/50 rounded-xl transition-all"
-            >
-              <svg
-                class="h-5 w-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 17h5l-5 5v-5z"
-                ></path>
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 7h6a2 2 0 012 2v8a2 2 0 01-2 2H9l-4-4V9a2 2 0 012-2z"
-                ></path>
-              </svg>
-              <span
-                class="absolute -top-1 -right-1 w-5 h-5 bg-amber-500 text-slate-900 text-xs font-bold rounded-full flex items-center justify-center"
-                >3</span
-              >
-            </button>
-          </div>
         </div>
 
         <!-- Navigation Tabs -->
         <div class="relative">
-          <div
-            class="absolute -inset-4 bg-emerald-600/5 rounded-3xl rotate-1"
-          ></div>
-          <div
-            class="relative bg-slate-900/80 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/50"
-          >
-            <div
-              class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3"
-            >
+          <div class="absolute -inset-4 bg-emerald-600/5 rounded-3xl rotate-1"></div>
+          <div class="relative bg-slate-900/80 backdrop-blur-sm p-4 rounded-2xl border border-slate-700/50">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
               <!-- Dashboard Tab -->
-              <button
-                (click)="setActiveTab('dashboard')"
-                [class]="
+              <button (click)="setActiveTab('dashboard')" [class]="
                   'group relative overflow-hidden p-4 rounded-xl transition-all duration-300 transform hover:scale-105 ' +
                   (activeTab === 'dashboard'
                     ? 'bg-amber-500 text-slate-900'
                     : 'bg-slate-700/50 text-slate-100 hover:bg-slate-600')
-                "
-              >
+                ">
                 <span class="relative z-10 flex flex-col items-center">
-                  <svg
-                    class="h-6 w-6 mb-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"
-                    ></path>
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z"
-                    ></path>
-                  </svg>
+                  <span class="material-icons">dashboard</span>
                   <span class="text-sm font-semibold">Dashboard</span>
                 </span>
-                <div
-                  *ngIf="activeTab !== 'dashboard'"
-                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                ></div>
+                <div *ngIf="activeTab !== 'dashboard'"
+                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left">
+                </div>
               </button>
 
               <!-- Add Portrait Tab -->
-              <button
-                (click)="setActiveTab('add-portrait')"
-                [class]="
+              <button (click)="setActiveTab('add-portrait')" [class]="
                   'group relative overflow-hidden p-4 rounded-xl transition-all duration-300 transform hover:scale-105 ' +
                   (activeTab === 'add-portrait'
                     ? 'bg-emerald-600 text-slate-100'
                     : 'bg-slate-700/50 text-slate-100 hover:bg-slate-600')
-                "
-              >
+                ">
                 <span class="relative z-10 flex flex-col items-center">
-                  <svg
-                    class="h-6 w-6 mb-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                    ></path>
-                  </svg>
+                  <span class="material-icons">add</span>
                   <span class="text-sm font-semibold">Add Portrait</span>
                 </span>
-                <div
-                  *ngIf="activeTab !== 'add-portrait'"
-                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                ></div>
+                <div *ngIf="activeTab !== 'add-portrait'"
+                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left">
+                </div>
               </button>
 
-              <!-- Gallery Tab -->
-              <button
-                (click)="setActiveTab('gallery')"
-                [class]="
+              <!-- Collection Tab -->
+              <button (click)="setActiveTab('gallery')" [class]="
                   'group relative overflow-hidden p-4 rounded-xl transition-all duration-300 transform hover:scale-105 ' +
                   (activeTab === 'gallery'
                     ? 'bg-emerald-600 text-slate-100'
                     : 'bg-slate-700/50 text-slate-100 hover:bg-slate-600')
-                "
-              >
+                ">
                 <span class="relative z-10 flex flex-col items-center">
-                  <svg
-                    class="h-6 w-6 mb-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    ></path>
-                  </svg>
-                  <span class="text-sm font-semibold">Gallery</span>
+                  <span class="material-icons">photo</span>
+                  <span class="text-sm font-semibold">Portraits</span>
                   <span
-                    class="absolute -top-1 -right-1 w-5 h-5 bg-amber-500 text-slate-900 text-xs font-bold rounded-full flex items-center justify-center"
-                    >{{ galleryCount }}</span
-                  >
+                    class="absolute -top-1 -right-1 w-5 h-5 bg-amber-500 text-slate-900 text-xs font-bold rounded-full flex items-center justify-center">{{
+                    galleryCount }}</span>
                 </span>
-                <div
-                  *ngIf="activeTab !== 'gallery'"
-                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                ></div>
-              </button>
-
-              <!-- Services Tab -->
-              <button
-                (click)="setActiveTab('services')"
-                [class]="
-                  'group relative overflow-hidden p-4 rounded-xl transition-all duration-300 transform hover:scale-105 ' +
-                  (activeTab === 'services'
-                    ? 'bg-amber-500 text-slate-900'
-                    : 'bg-slate-700/50 text-slate-100 hover:bg-slate-600')
-                "
-              >
-                <span class="relative z-10 flex flex-col items-center">
-                  <svg
-                    class="h-6 w-6 mb-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                    ></path>
-                  </svg>
-                  <span class="text-sm font-semibold">Services</span>
-                </span>
-                <div
-                  *ngIf="activeTab !== 'services'"
-                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                ></div>
-              </button>
-
-              <!-- Bookings Tab -->
-              <button
-                (click)="setActiveTab('bookings')"
-                [class]="
-                  'group relative overflow-hidden p-4 rounded-xl transition-all duration-300 transform hover:scale-105 ' +
-                  (activeTab === 'bookings'
-                    ? 'bg-emerald-600 text-slate-100'
-                    : 'bg-slate-700/50 text-slate-100 hover:bg-slate-600')
-                "
-              >
-                <span class="relative z-10 flex flex-col items-center">
-                  <svg
-                    class="h-6 w-6 mb-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    ></path>
-                  </svg>
-                  <span class="text-sm font-semibold">Bookings</span>
-                  <span
-                    class="absolute -top-1 -right-1 w-5 h-5 bg-amber-500 text-slate-900 text-xs font-bold rounded-full flex items-center justify-center"
-                    >{{ pendingBookings }}</span
-                  >
-                </span>
-                <div
-                  *ngIf="activeTab !== 'bookings'"
-                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                ></div>
+                <div *ngIf="activeTab !== 'gallery'"
+                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left">
+                </div>
               </button>
 
               <!-- Clients Tab -->
-              <button
-                (click)="setActiveTab('clients')"
-                [class]="
+              <button (click)="setActiveTab('clients')" [class]="
                   'group relative overflow-hidden p-4 rounded-xl transition-all duration-300 transform hover:scale-105 ' +
                   (activeTab === 'clients'
                     ? 'bg-amber-500 text-slate-900'
                     : 'bg-slate-700/50 text-slate-100 hover:bg-slate-600')
-                "
-              >
+                ">
                 <span class="relative z-10 flex flex-col items-center">
-                  <svg
-                    class="h-6 w-6 mb-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"
-                    ></path>
-                  </svg>
+                  <span class="material-icons">people</span>
                   <span class="text-sm font-semibold">Clients</span>
                 </span>
-                <div
-                  *ngIf="activeTab !== 'clients'"
-                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                ></div>
-              </button>
-
-              <!-- Analytics Tab -->
-              <button
-                (click)="setActiveTab('analytics')"
-                [class]="
-                  'group relative overflow-hidden p-4 rounded-xl transition-all duration-300 transform hover:scale-105 ' +
-                  (activeTab === 'analytics'
-                    ? 'bg-emerald-600 text-slate-100'
-                    : 'bg-slate-700/50 text-slate-100 hover:bg-slate-600')
-                "
-              >
-                <span class="relative z-10 flex flex-col items-center">
-                  <svg
-                    class="h-6 w-6 mb-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                    ></path>
-                  </svg>
-                  <span class="text-sm font-semibold">Analytics</span>
-                </span>
-                <div
-                  *ngIf="activeTab !== 'analytics'"
-                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                ></div>
+                <div *ngIf="activeTab !== 'clients'"
+                  class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left">
+                </div>
               </button>
             </div>
           </div>
@@ -355,94 +108,30 @@
     <main class="px-4 md:px-8 py-8 relative z-10 min-h-[calc(100vh-12rem)]">
       <!-- Dashboard Overview -->
       <div *ngIf="activeTab === 'dashboard'">
-        <app-dashboard-overview
-          [totalRevenue]="totalRevenue"
-          [activeBookings]="activeBookings"
-          [pendingBookings]="pendingBookings"
-          [totalClients]="totalClients"
-          [galleryCount]="galleryCount"
-          [revenueData]="revenueData"
-          [recentActivities]="recentActivities"
-        >
+        <app-dashboard-overview [totalRevenue]="totalRevenue" [activeBookings]="activeBookings"
+          [pendingBookings]="pendingBookings" [totalClients]="totalClients" [galleryCount]="galleryCount"
+          [revenueData]="revenueData" [recentActivities]="recentActivities">
         </app-dashboard-overview>
       </div>
 
       <!-- Gallery Management -->
       <div *ngIf="activeTab === 'gallery'">
-        <app-gallery-management
-          [galleryItems]="galleryItems"
-          (uploadNew)="onUploadNew()"
-        >
+        <app-gallery-management [galleryItems]="galleryItems" (uploadNew)="onUploadNew()">
         </app-gallery-management>
       </div>
 
       <!-- Add Portrait Form -->
       <div *ngIf="activeTab === 'add-portrait'">
-        <app-add-portrait-form
-          (backToGallery)="onBackToGallery()"
-          (submitPortrait)="onSubmitPortrait($event)"
-        >
+        <app-add-portrait-form (backToGallery)="onBackToGallery()" (submitPortrait)="onSubmitPortrait($event)">
         </app-add-portrait-form>
       </div>
 
       <!-- Clients Management -->
       <div *ngIf="activeTab === 'clients'">
-        <app-clients-management
-          [clients]="clients"
-          [totalClients]="totalClients"
-          [activeClientsThisMonth]="activeClientsThisMonth"
-          [newClientsThisWeek]="newClientsThisWeek"
-          [vipClients]="vipClients"
-        >
+        <app-clients-management>
         </app-clients-management>
       </div>
 
-      <!-- Other tabs -->
-      <div *ngIf="activeTab === 'bookings'" class="text-center py-20">
-        <div class="relative inline-block">
-          <div
-            class="absolute -top-4 -left-4 w-16 h-16 border-2 border-amber-500/30 rotate-45 rounded-2xl"
-          ></div>
-          <h2
-            class="text-3xl font-serif font-bold text-slate-100 relative z-10"
-          >
-            Bookings Management
-          </h2>
-        </div>
-        <p class="text-slate-400 mt-4">
-          Bookings management interface coming soon...
-        </p>
-      </div>
-
-      <div *ngIf="activeTab === 'analytics'" class="text-center py-20">
-        <div class="relative inline-block">
-          <div
-            class="absolute -top-4 -left-4 w-16 h-16 border-2 border-amber-500/30 rotate-45 rounded-2xl"
-          ></div>
-          <h2
-            class="text-3xl font-serif font-bold text-slate-100 relative z-10"
-          >
-            Analytics Dashboard
-          </h2>
-        </div>
-        <p class="text-slate-400 mt-4">Analytics dashboard coming soon...</p>
-      </div>
-
-      <div *ngIf="activeTab === 'services'" class="text-center py-20">
-        <div class="relative inline-block">
-          <div
-            class="absolute -top-4 -left-4 w-16 h-16 border-2 border-emerald-600/30 rotate-45 rounded-2xl"
-          ></div>
-          <h2
-            class="text-3xl font-serif font-bold text-slate-100 relative z-10"
-          >
-            Services Management
-          </h2>
-        </div>
-        <p class="text-slate-400 mt-4">
-          Services management interface coming soon...
-        </p>
-      </div>
     </main>
   </div>
 </div>

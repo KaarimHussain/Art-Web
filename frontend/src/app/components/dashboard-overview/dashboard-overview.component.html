@@ -1,171 +1,142 @@
 <!-- Stats Cards -->
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-    <!-- Total Revenue -->
-    <div class="relative group">
-      <div class="absolute -inset-2 bg-emerald-600/10 rounded-3xl rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
-      <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
-        <div class="flex items-center justify-between mb-4">
-          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
-            <svg class="h-6 w-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-            </svg>
-          </div>
-          <span class="text-emerald-400 text-sm font-semibold">+12.5%</span>
-        </div>
-        <h3 class="text-2xl font-bold text-slate-100 mb-1">${{ totalRevenue | number:'1.0-0' }}</h3>
-        <p class="text-slate-400 text-sm">Total Revenue</p>
-      </div>
+  <!-- Total Revenue -->
+  <div class="relative group">
+    <div
+      class="absolute -inset-2 bg-emerald-600/10 rounded-3xl rotate-1 group-hover:rotate-2 transition-transform duration-300">
     </div>
-  
-    <!-- Active Bookings -->
-    <div class="relative group">
-      <div class="absolute -inset-2 bg-amber-500/10 rounded-3xl -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
-      <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
-        <div class="flex items-center justify-between mb-4">
-          <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
-            <svg class="h-6 w-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-            </svg>
-          </div>
-          <span class="text-amber-400 text-sm font-semibold">{{ pendingBookings }}</span>
+    <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
+          <svg class="h-6 w-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
+            </path>
+          </svg>
         </div>
-        <h3 class="text-2xl font-bold text-slate-100 mb-1">{{ activeBookings }}</h3>
-        <p class="text-slate-400 text-sm">Active Bookings</p>
+        <span class="text-emerald-400 text-sm font-semibold">+12.5%</span>
       </div>
+      <h3 class="text-2xl font-bold text-slate-100 mb-1">${{ totalRevenue | number:'1.0-0' }}</h3>
+      <p class="text-slate-400 text-sm">Total Revenue</p>
     </div>
-  
-    <!-- Total Clients -->
-    <div class="relative group">
-      <div class="absolute -inset-2 bg-emerald-600/10 rounded-3xl rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
-      <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
-        <div class="flex items-center justify-between mb-4">
-          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
-            <svg class="h-6 w-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-            </svg>
-          </div>
-          <span class="text-emerald-400 text-sm font-semibold">+8.2%</span>
+  </div>
+
+  <!-- Active Bookings -->
+  <div class="relative group">
+    <div
+      class="absolute -inset-2 bg-amber-500/10 rounded-3xl -rotate-1 group-hover:-rotate-2 transition-transform duration-300">
+    </div>
+    <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
+          <svg class="h-6 w-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
         </div>
-        <h3 class="text-2xl font-bold text-slate-100 mb-1">{{ totalClients }}</h3>
-        <p class="text-slate-400 text-sm">Total Clients</p>
+        <span class="text-amber-400 text-sm font-semibold">{{ pendingBookings }}</span>
       </div>
+      <h3 class="text-2xl font-bold text-slate-100 mb-1">{{ activeBookings }}</h3>
+      <p class="text-slate-400 text-sm">Active Bookings</p>
     </div>
-  
-    <!-- Gallery Items -->
-    <div class="relative group">
-      <div class="absolute -inset-2 bg-amber-500/10 rounded-3xl -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
-      <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
-        <div class="flex items-center justify-between mb-4">
-          <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
-            <svg class="h-6 w-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-            </svg>
-          </div>
-          <span class="text-amber-400 text-sm font-semibold">{{ galleryCount }}</span>
+  </div>
+
+  <!-- Total Clients -->
+  <div class="relative group">
+    <div
+      class="absolute -inset-2 bg-emerald-600/10 rounded-3xl rotate-1 group-hover:rotate-2 transition-transform duration-300">
+    </div>
+    <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
+          <svg class="h-6 w-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z">
+            </path>
+          </svg>
         </div>
-        <h3 class="text-2xl font-bold text-slate-100 mb-1">{{ galleryCount }}</h3>
-        <p class="text-slate-400 text-sm">Gallery Items</p>
+        <span class="text-emerald-400 text-sm font-semibold">+8.2%</span>
+      </div>
+      <h3 class="text-2xl font-bold text-slate-100 mb-1">{{ totalClients }}</h3>
+      <p class="text-slate-400 text-sm">Total Clients</p>
+    </div>
+  </div>
+
+  <!-- Gallery Items -->
+  <div class="relative group">
+    <div
+      class="absolute -inset-2 bg-amber-500/10 rounded-3xl -rotate-1 group-hover:-rotate-2 transition-transform duration-300">
+    </div>
+    <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
+      <div class="flex items-center justify-between mb-4">
+        <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
+          <svg class="h-6 w-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+            </path>
+          </svg>
+        </div>
+        <span class="text-amber-400 text-sm font-semibold">{{ galleryCount }}</span>
+      </div>
+      <h3 class="text-2xl font-bold text-slate-100 mb-1">{{ galleryCount }}</h3>
+      <p class="text-slate-400 text-sm">Gallery Items</p>
+    </div>
+  </div>
+</div>
+
+<!-- Charts Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+  <!-- Revenue Chart -->
+  <div class="relative">
+    <div class="absolute -inset-4 bg-emerald-600/5 rounded-3xl rotate-1"></div>
+    <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
+      <div class="flex items-center justify-between mb-6">
+        <h3 class="text-xl font-serif font-bold text-slate-100">Revenue Overview</h3>
+        <div class="flex items-center space-x-2">
+          <div class="w-3 h-3 bg-emerald-500 rounded-full"></div>
+          <span class="text-sm text-slate-300">This Month</span>
+        </div>
+      </div>
+      <div class="h-64 flex items-end justify-between space-x-2">
+        <div *ngFor="let data of revenueData; let i = index" class="flex-1 flex flex-col items-center">
+          <div [style.height.%]="(data.value / maxRevenue) * 100" [class]="'w-full rounded-t-lg transition-all duration-500 hover:opacity-80 ' + 
+                          (i % 2 === 0 ? 'bg-emerald-600' : 'bg-amber-500')"></div>
+          <span class="text-xs text-slate-400 mt-2">{{ data.month }}</span>
+        </div>
       </div>
     </div>
   </div>
-  
-  <!-- Charts Section -->
-  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-    <!-- Revenue Chart -->
-    <div class="relative">
-      <div class="absolute -inset-4 bg-emerald-600/5 rounded-3xl rotate-1"></div>
-      <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
-        <div class="flex items-center justify-between mb-6">
-          <h3 class="text-xl font-serif font-bold text-slate-100">Revenue Overview</h3>
-          <div class="flex items-center space-x-2">
-            <div class="w-3 h-3 bg-emerald-500 rounded-full"></div>
-            <span class="text-sm text-slate-300">This Month</span>
-          </div>
-        </div>
-        <div class="h-64 flex items-end justify-between space-x-2">
-          <div *ngFor="let data of revenueData; let i = index" class="flex-1 flex flex-col items-center">
-            <div [style.height.%]="(data.value / maxRevenue) * 100" 
-                 [class]="'w-full rounded-t-lg transition-all duration-500 hover:opacity-80 ' + 
-                          (i % 2 === 0 ? 'bg-emerald-600' : 'bg-amber-500')"></div>
-            <span class="text-xs text-slate-400 mt-2">{{ data.month }}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <!-- Recent Activity -->
-    <div class="relative">
-      <div class="absolute -inset-4 bg-amber-500/5 rounded-3xl -rotate-1"></div>
-      <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
-        <h3 class="text-xl font-serif font-bold text-slate-100 mb-6">Recent Activity</h3>
-        <div class="space-y-4">
-          <div *ngFor="let activity of recentActivities; let i = index" class="flex items-center space-x-4 p-3 rounded-xl hover:bg-slate-700/30 transition-all">
-            <div [class]="'w-10 h-10 rounded-xl flex items-center justify-center ' + 
+
+  <!-- Recent Activity -->
+  <div class="relative">
+    <div class="absolute -inset-4 bg-amber-500/5 rounded-3xl -rotate-1"></div>
+    <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-2xl border border-slate-700/30">
+      <h3 class="text-xl font-serif font-bold text-slate-100 mb-6">Recent Activity</h3>
+      <div class="space-y-4">
+        <div *ngFor="let activity of recentActivities; let i = index"
+          class="flex items-center space-x-4 p-3 rounded-xl hover:bg-slate-700/30 transition-all">
+          <div [class]="'w-10 h-10 rounded-xl flex items-center justify-center ' + 
                          (activity.type === 'booking' ? 'bg-amber-500' : 
                           activity.type === 'payment' ? 'bg-emerald-600' : 'bg-slate-600')">
-              <svg class="h-5 w-5" [class]="activity.type === 'booking' ? 'text-slate-900' : 'text-slate-100'" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path *ngIf="activity.type === 'booking'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                <path *ngIf="activity.type === 'payment'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
-                <path *ngIf="activity.type === 'gallery'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-              </svg>
-            </div>
-            <div class="flex-1">
-              <p class="text-sm font-medium text-slate-100">{{ activity.title }}</p>
-              <p class="text-xs text-slate-400">{{ activity.time }}</p>
-            </div>
-            <div class="w-2 h-2 bg-amber-500 rounded-full"></div>
+            <svg class="h-5 w-5" [class]="activity.type === 'booking' ? 'text-slate-900' : 'text-slate-100'" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path *ngIf="activity.type === 'booking'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              <path *ngIf="activity.type === 'payment'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1">
+              </path>
+              <path *ngIf="activity.type === 'gallery'" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2 2v12a2 2 0 002 2z">
+              </path>
+            </svg>
           </div>
+          <div class="flex-1">
+            <p class="text-sm font-medium text-slate-100">{{ activity.title }}</p>
+            <p class="text-xs text-slate-400">{{ activity.time }}</p>
+          </div>
+          <div class="w-2 h-2 bg-amber-500 rounded-full"></div>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- Quick Actions -->
-  <div class="relative">
-    <div class="absolute -inset-6 bg-emerald-600/5 rounded-3xl rotate-1"></div>
-    <div class="relative bg-slate-800/90 backdrop-blur-sm p-8 rounded-2xl border border-slate-700/30">
-      <h3 class="text-xl font-serif font-bold text-slate-100 mb-6">Quick Actions</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <button class="group relative overflow-hidden p-6 bg-emerald-700 text-slate-100 rounded-xl hover:bg-emerald-600 transition-all duration-300 transform hover:scale-105">
-          <span class="relative z-10 flex flex-col items-center">
-            <svg class="h-8 w-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-            </svg>
-            <span class="font-semibold">Add Portrait</span>
-          </span>
-          <div class="absolute inset-0 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-        </button>
-        
-        <button class="group relative overflow-hidden p-6 bg-amber-500 text-slate-900 rounded-xl hover:bg-amber-400 transition-all duration-300 transform hover:scale-105">
-          <span class="relative z-10 flex flex-col items-center">
-            <svg class="h-8 w-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-            </svg>
-            <span class="font-semibold">New Booking</span>
-          </span>
-          <div class="absolute inset-0 bg-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-        </button>
-        
-        <button class="group relative overflow-hidden p-6 bg-slate-700 text-slate-100 rounded-xl hover:bg-slate-600 transition-all duration-300 transform hover:scale-105">
-          <span class="relative z-10 flex flex-col items-center">
-            <svg class="h-8 w-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-            </svg>
-            <span class="font-semibold">Add Client</span>
-          </span>
-          <div class="absolute inset-0 bg-slate-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-        </button>
-        
-        <button class="group relative overflow-hidden p-6 bg-emerald-700 text-slate-100 rounded-xl hover:bg-emerald-600 transition-all duration-300 transform hover:scale-105">
-          <span class="relative z-10 flex flex-col items-center">
-            <svg class="h-8 w-8 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-            <span class="font-semibold">View Reports</span>
-          </span>
-          <div class="absolute inset-0 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-        </button>
-      </div>
-    </div>
-  </div>
-  
+</div>

@@ -1,203 +1,241 @@
 <!-- Clients Header -->
 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-    <div>
-      <h2 class="text-2xl font-serif font-bold text-slate-100 mb-2">Client Management</h2>
-      <p class="text-slate-400">Manage your registered clients and their information</p>
-    </div>
-    <div class="flex items-center space-x-4">
-      <!-- Search -->
-      <div class="relative">
-        <input type="text" [(ngModel)]="clientSearchTerm" (input)="filterClients()"
-               placeholder="Search clients..." 
-               class="pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-slate-100 placeholder-slate-400 w-64">
-        <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-        </svg>
-      </div>
-      <!-- Add Client Button -->
-      <button class="group relative overflow-hidden px-6 py-3 bg-amber-500 text-slate-900 font-semibold rounded-xl hover:bg-amber-400 transition-all duration-300">
-        <span class="relative z-10 flex items-center">
-          <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-          </svg>
-          Add Client
-        </span>
-        <div class="absolute inset-0 bg-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-      </button>
+  <div>
+    <h2 class="text-2xl font-serif font-bold text-slate-100 mb-2">Client Management</h2>
+    <p class="text-slate-400">Manage your registered clients and their information</p>
+  </div>
+  <div class="flex items-center space-x-4">
+    <!-- Search -->
+    <div class="relative">
+      <input type="text" [(ngModel)]="clientSearchTerm" (input)="filterClients()" placeholder="Search clients..."
+        class="pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all text-slate-100 placeholder-slate-400 w-64">
+      <svg class="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" fill="none"
+        stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
     </div>
   </div>
-  
-  <!-- Clients Stats -->
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-    <div class="relative group">
-      <div class="absolute -inset-2 bg-emerald-600/10 rounded-2xl rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
-      <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-xl border border-slate-700/30">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-slate-400 text-sm">Total Clients</p>
-            <p class="text-2xl font-bold text-slate-100">{{ totalClients }}</p>
-          </div>
-          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
-            <svg class="h-6 w-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
+</div>
+
+<!-- Clients Stats -->
+<div class="grid grid-cols-2 md:grid-cols-2 gap-6 mb-8">
+  <div class="relative group">
+    <div
+      class="absolute -inset-2 bg-emerald-600/10 rounded-2xl rotate-1 group-hover:rotate-2 transition-transform duration-300">
     </div>
-  
-    <div class="relative group">
-      <div class="absolute -inset-2 bg-amber-500/10 rounded-2xl -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
-      <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-xl border border-slate-700/30">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-slate-400 text-sm">Active This Month</p>
-            <p class="text-2xl font-bold text-slate-100">{{ activeClientsThisMonth }}</p>
-          </div>
-          <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
-            <svg class="h-6 w-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-            </svg>
-          </div>
+    <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-xl border border-slate-700/30">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-slate-400 text-sm">Total Clients</p>
+          <p class="text-2xl font-bold text-slate-100">{{ totalClients }}</p>
         </div>
-      </div>
-    </div>
-  
-    <div class="relative group">
-      <div class="absolute -inset-2 bg-emerald-600/10 rounded-2xl rotate-1 group-hover:rotate-2 transition-transform duration-300"></div>
-      <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-xl border border-slate-700/30">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-slate-400 text-sm">New This Week</p>
-            <p class="text-2xl font-bold text-slate-100">{{ newClientsThisWeek }}</p>
-          </div>
-          <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
-            <svg class="h-6 w-6 text-slate-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="relative group">
-      <div class="absolute -inset-2 bg-amber-500/10 rounded-2xl -rotate-1 group-hover:-rotate-2 transition-transform duration-300"></div>
-      <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-xl border border-slate-700/30">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-slate-400 text-sm">VIP Clients</p>
-            <p class="text-2xl font-bold text-slate-100">{{ vipClients }}</p>
-          </div>
-          <div class="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
-            <svg class="h-6 w-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-            </svg>
-          </div>
+        <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
+          <span class=" material-icons text-white">group</span>
         </div>
       </div>
     </div>
   </div>
-  
-  <!-- Clients Table -->
-  <div class="relative">
-    <div class="absolute -inset-4 bg-emerald-600/5 rounded-3xl rotate-1"></div>
-    <div class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 overflow-hidden">
-      <div class="p-6 border-b border-slate-700/50">
-        <h3 class="text-xl font-serif font-bold text-slate-100">All Clients</h3>
+
+  <div class="relative group">
+    <div
+      class="absolute -inset-2 bg-emerald-600/10 rounded-2xl rotate-1 group-hover:rotate-2 transition-transform duration-300">
+    </div>
+    <div class="relative bg-slate-800/90 backdrop-blur-sm p-6 rounded-xl border border-slate-700/30">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-slate-400 text-sm">New This Week</p>
+          <p class="text-2xl font-bold text-slate-100">{{ newClientsThisMonth }}</p>
+        </div>
+        <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
+          <span class="material-icons text-white">person_add</span>
+        </div>
       </div>
-      
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead class="bg-slate-700/30">
-            <tr>
-              <th class="px-6 py-4 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Client</th>
-              <th class="px-6 py-4 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Contact</th>
-              <th class="px-6 py-4 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Sessions</th>
-              <th class="px-6 py-4 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Status</th>
-              <th class="px-6 py-4 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Joined</th>
-              <th class="px-6 py-4 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Actions</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-slate-700/50">
-            <tr *ngFor="let client of filteredClients; let i = index" class="hover:bg-slate-700/20 transition-all">
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center space-x-4">
-                  <div class="relative">
-                    <img [src]="client.avatar" [alt]="client.name" class="w-12 h-12 rounded-xl object-cover">
-                    <div [class]="'absolute -top-1 -right-1 w-3 h-3 rounded-full border-2 border-slate-800 ' + 
-                                 (client.status === 'active' ? 'bg-emerald-500' : 'bg-slate-500')"></div>
-                  </div>
-                  <div>
-                    <p class="text-sm font-semibold text-slate-100">{{ client.name }}</p>
-                    <p class="text-xs text-slate-400">ID: {{ client.id }}</p>
-                  </div>
-                </div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
+    </div>
+  </div>
+</div>
+
+<!-- Clients Table -->
+<div class="relative">
+  <div class="absolute -inset-4 bg-emerald-600/5 rounded-3xl rotate-1"></div>
+  <div class="relative bg-slate-800/90 backdrop-blur-sm rounded-2xl border border-slate-700/30 overflow-hidden">
+    <div class="p-6 border-b border-slate-700/50">
+      <h3 class="text-xl font-serif font-bold text-slate-100">All Clients</h3>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-slate-700/30">
+          <tr>
+            <th class="px-6 py-4 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Id</th>
+            <th class="px-6 py-4 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Contact</th>
+            <th class="px-6 py-4 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Joined</th>
+            <th class="px-6 py-4 text-left text-xs font-semibold text-slate-300 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-700/50">
+          <tr *ngFor="let client of filteredClients; let i = index" class="hover:bg-slate-700/20 transition-all">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center space-x-4">
                 <div>
-                  <p class="text-sm text-slate-100">{{ client.email }}</p>
-                  <p class="text-xs text-slate-400">{{ client.phone }}</p>
+                  <p class="text-sm font-semibold text-slate-100">{{ client.username }}</p>
+                  <p class="text-xs text-slate-400">ID: {{ client.id }}</p>
                 </div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center space-x-2">
-                  <span class="text-sm font-semibold text-slate-100">{{ client.totalSessions }}</span>
-                  <span class="text-xs text-slate-400">sessions</span>
-                </div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <span [class]="'px-3 py-1 text-xs font-medium rounded-full ' + 
-                              (client.status === 'active' ? 'bg-emerald-600/20 text-emerald-400' : 
-                               client.status === 'vip' ? 'bg-amber-500/20 text-amber-400' : 
-                               'bg-slate-600/20 text-slate-400')">
-                  {{ client.status | titlecase }}
-                </span>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-400">
-                {{ client.joinedDate | date:'MMM dd, yyyy' }}
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center space-x-2">
-                  <button class="p-2 text-slate-400 hover:text-emerald-400 hover:bg-emerald-600/10 rounded-lg transition-all">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                    </svg>
-                  </button>
-                  <button class="p-2 text-slate-400 hover:text-amber-400 hover:bg-amber-500/10 rounded-lg transition-all">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                    </svg>
-                  </button>
-                  <button class="p-2 text-slate-400 hover:text-red-400 hover:bg-red-600/10 rounded-lg transition-all">
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                    </svg>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div>
+                <p class="text-sm text-slate-100">{{ client.email }}</p>
+                <p class="text-xs text-slate-400">{{ client.phoneNumber }}</p>
+              </div>
+            </td>
+
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-400">
+              {{ client.createdAt | date:'MMM dd, yyyy' }}
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center space-x-2">
+                <button (click)="openEditModal(client)"
+                  class="p-2 text-slate-400 hover:text-amber-400 hover:bg-amber-500/10 rounded-lg transition-all">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                    </path>
+                  </svg>
+                </button>
+                <button (click)="deleteClient(client.id)" [disabled]="isDeletingLoading"
+                  class="p-2 text-slate-400 hover:text-red-400 hover:bg-red-600/10 rounded-lg transition-all">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                    </path>
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="px-6 py-4 border-t border-slate-700/50 flex items-center justify-between">
+      <div class="text-sm text-slate-400">
+        Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage,
+        filteredClients.length) }} of {{ filteredClients.length }} clients
       </div>
-  
-      <!-- Pagination -->
-      <div class="px-6 py-4 border-t border-slate-700/50 flex items-center justify-between">
-        <div class="text-sm text-slate-400">
-          Showing {{ (currentPage - 1) * itemsPerPage + 1 }} to {{ Math.min(currentPage * itemsPerPage, filteredClients.length) }} of {{ filteredClients.length }} clients
-        </div>
-        <div class="flex items-center space-x-2">
-          <button (click)="previousPage()" [disabled]="currentPage === 1" 
-                  class="px-3 py-2 text-sm bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
-            Previous
-          </button>
-          <span class="px-3 py-2 text-sm text-slate-300">{{ currentPage }} of {{ totalPages }}</span>
-          <button (click)="nextPage()" [disabled]="currentPage === totalPages"
-                  class="px-3 py-2 text-sm bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
-            Next
-          </button>
-        </div>
+      <div class="flex items-center space-x-2">
+        <button (click)="previousPage()" [disabled]="currentPage === 1"
+          class="px-3 py-2 text-sm bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+          Previous
+        </button>
+        <span class="px-3 py-2 text-sm text-slate-300">{{ currentPage }} of {{ totalPages }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage === totalPages"
+          class="px-3 py-2 text-sm bg-slate-700 text-slate-300 rounded-lg hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+          Next
+        </button>
       </div>
     </div>
   </div>
-  
+</div>
+
+<!-- Edit Client Modal -->
+<div *ngIf="isEditModalOpen" class="fixed inset-0 z-[100] overflow-y-auto">
+  <!-- Backdrop -->
+  <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" (click)="closeEditModal()"></div>
+
+  <!-- Modal -->
+  <div class="flex min-h-full items-center justify-center p-4">
+    <div
+      class="relative bg-slate-800 rounded-2xl border border-slate-700/50 shadow-2xl w-full max-w-md transform transition-all">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-6 border-b border-slate-700/50">
+        <h3 class="text-xl font-serif font-bold text-slate-100">Edit Client</h3>
+        <button (click)="closeEditModal()" class="text-slate-400 hover:text-slate-100 transition-colors">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-6">
+        <form (ngSubmit)="updateClient()" class="space-y-4">
+          <!-- ID Field (Read-only) -->
+          <div>
+            <label for="editId" class="block text-sm font-medium text-slate-300 mb-2">
+              ID <small class="text-slate-400">(Read-only)</small>
+            </label>
+            <input type="text" readonly id="editId" [(ngModel)]="editClientForm.id" name="editId"
+              class="w-full px-4 py-3 bg-slate-700/30 border border-slate-600/30 rounded-xl text-slate-400 cursor-not-allowed">
+          </div>
+
+          <!-- Username Field -->
+          <div>
+            <label for="editUsername" class="block text-sm font-medium text-slate-300 mb-2">
+              Username <span class="text-red-400">*</span>
+            </label>
+            <input type="text" id="editUsername" [(ngModel)]="editClientForm.username" name="editUsername" required
+              (input)="onFieldChange('username')"
+              [class]="'w-full px-4 py-3 bg-slate-700/50 border rounded-xl transition-all text-slate-100 placeholder-slate-400 ' + getFieldErrorClass('username')"
+              placeholder="Enter username (3-50 characters, letters, numbers, _, -)">
+
+            <!-- Username Error Messages -->
+            <div *ngIf="hasFieldError('username')" class="mt-2 space-y-1">
+              <div *ngFor="let error of validationErrors.username" class="flex items-center text-red-400 text-sm">
+                <svg class="h-4 w-4 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                {{ error }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone Number Field -->
+          <div>
+            <label for="editPhoneNumber" class="block text-sm font-medium text-slate-300 mb-2">
+              Phone Number <span class="text-red-400">*</span>
+            </label>
+            <input type="tel" id="editPhoneNumber" [(ngModel)]="editClientForm.phoneNumber" name="editPhoneNumber"
+              required (input)="onFieldChange('phoneNumber')"
+              [class]="'w-full px-4 py-3 bg-slate-700/50 border rounded-xl transition-all text-slate-100 placeholder-slate-400 ' + getFieldErrorClass('phoneNumber')"
+              placeholder="Enter phone number (10-15 digits)">
+
+            <!-- Phone Number Error Messages -->
+            <div *ngIf="hasFieldError('phoneNumber')" class="mt-2 space-y-1">
+              <div *ngFor="let error of validationErrors.phoneNumber" class="flex items-center text-red-400 text-sm">
+                <svg class="h-4 w-4 mr-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                {{ error }}
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal Footer -->
+          <div class="flex items-center justify-end space-x-3 pt-6">
+            <button type="button" (click)="closeEditModal()"
+              class="px-4 py-2 text-slate-300 hover:text-slate-100 transition-colors">
+              Cancel
+            </button>
+            <button type="submit" [disabled]="isUpdatingLoading"
+              class="px-6 py-2 bg-amber-500 text-slate-900 font-semibold rounded-xl hover:bg-amber-400 disabled:opacity-50 disabled:cursor-not-allowed transition-all">
+              <span *ngIf="!isUpdatingLoading">Update Client</span>
+              <span *ngIf="isUpdatingLoading" class="flex items-center">
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                  </path>
+                </svg>
+                Updating...
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

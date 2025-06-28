@@ -4,6 +4,7 @@ import { DashboardOverviewComponent } from "../../components/dashboard-overview/
 import { AddPortraitFormComponent } from "../../components/add-portrait-form/add-portrait-form.component";
 import { ClientsManagementComponent } from "../../components/clients-management/clients-management.component";
 import { CommonModule } from "@angular/common";
+import { ProductService } from "../../services/product.service";
 
 interface RevenueData {
   month: string
@@ -30,10 +31,7 @@ interface Client {
   name: string
   email: string
   phone: string
-  avatar: string
-  status: "active" | "inactive" | "vip"
-  totalSessions: number
-  joinedDate: Date
+  createdAt: Date
 }
 
 @Component({
@@ -104,159 +102,27 @@ export class AdminDashboardComponent implements OnInit {
   ]
 
   // Gallery Items
-  galleryItems: GalleryItem[] = [
-    {
-      id: 1,
-      src: "/placeholder.svg?height=400&width=300",
-      title: "Professional Headshot",
-      category: "Corporate",
-      status: "published",
-      date: "2024-01-15",
-    },
-    {
-      id: 2,
-      src: "/placeholder.svg?height=400&width=300",
-      title: "Family Portrait",
-      category: "Family",
-      status: "published",
-      date: "2024-01-14",
-    },
-    {
-      id: 3,
-      src: "/placeholder.svg?height=400&width=300",
-      title: "Artistic Portrait",
-      category: "Creative",
-      status: "draft",
-      date: "2024-01-13",
-    },
-    {
-      id: 4,
-      src: "/placeholder.svg?height=400&width=300",
-      title: "Wedding Portrait",
-      category: "Wedding",
-      status: "published",
-      date: "2024-01-12",
-    },
-    {
-      id: 5,
-      src: "/placeholder.svg?height=400&width=300",
-      title: "Senior Portrait",
-      category: "Senior",
-      status: "published",
-      date: "2024-01-11",
-    },
-    {
-      id: 6,
-      src: "/placeholder.svg?height=400&width=300",
-      title: "Maternity Portrait",
-      category: "Maternity",
-      status: "draft",
-      date: "2024-01-10",
-    },
-    {
-      id: 7,
-      src: "/placeholder.svg?height=400&width=300",
-      title: "Business Portrait",
-      category: "Corporate",
-      status: "published",
-      date: "2024-01-09",
-    },
-    {
-      id: 8,
-      src: "/placeholder.svg?height=400&width=300",
-      title: "Children Portrait",
-      category: "Children",
-      status: "published",
-      date: "2024-01-08",
-    },
-  ]
+  galleryItems: GalleryItem[] = []
 
-  // Clients
-  clients: Client[] = [
-    {
-      id: "CL001",
-      name: "Sarah Johnson",
-      email: "sarah.johnson@email.com",
-      phone: "+1 (555) 123-4567",
-      avatar: "/placeholder.svg?height=48&width=48",
-      status: "active",
-      totalSessions: 8,
-      joinedDate: new Date("2023-01-15"),
-    },
-    {
-      id: "CL002",
-      name: "Michael Chen",
-      email: "michael.chen@email.com",
-      phone: "+1 (555) 234-5678",
-      avatar: "/placeholder.svg?height=48&width=48",
-      status: "vip",
-      totalSessions: 15,
-      joinedDate: new Date("2022-11-20"),
-    },
-    {
-      id: "CL003",
-      name: "Emily Rodriguez",
-      email: "emily.rodriguez@email.com",
-      phone: "+1 (555) 345-6789",
-      avatar: "/placeholder.svg?height=48&width=48",
-      status: "active",
-      totalSessions: 3,
-      joinedDate: new Date("2024-01-08"),
-    },
-    {
-      id: "CL004",
-      name: "David Thompson",
-      email: "david.thompson@email.com",
-      phone: "+1 (555) 456-7890",
-      avatar: "/placeholder.svg?height=48&width=48",
-      status: "inactive",
-      totalSessions: 12,
-      joinedDate: new Date("2023-06-10"),
-    },
-    {
-      id: "CL005",
-      name: "Lisa Wang",
-      email: "lisa.wang@email.com",
-      phone: "+1 (555) 567-8901",
-      avatar: "/placeholder.svg?height=48&width=48",
-      status: "vip",
-      totalSessions: 22,
-      joinedDate: new Date("2022-08-03"),
-    },
-    {
-      id: "CL006",
-      name: "James Wilson",
-      email: "james.wilson@email.com",
-      phone: "+1 (555) 678-9012",
-      avatar: "/placeholder.svg?height=48&width=48",
-      status: "active",
-      totalSessions: 6,
-      joinedDate: new Date("2023-12-22"),
-    },
-    {
-      id: "CL007",
-      name: "Maria Garcia",
-      email: "maria.garcia@email.com",
-      phone: "+1 (555) 789-0123",
-      avatar: "/placeholder.svg?height=48&width=48",
-      status: "active",
-      totalSessions: 4,
-      joinedDate: new Date("2024-01-12"),
-    },
-    {
-      id: "CL008",
-      name: "Robert Kim",
-      email: "robert.kim@email.com",
-      phone: "+1 (555) 890-1234",
-      avatar: "/placeholder.svg?height=48&width=48",
-      status: "vip",
-      totalSessions: 18,
-      joinedDate: new Date("2022-12-15"),
-    },
-  ]
+
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    // Component initialization
+    this.loadProducts();
+  }
+
+  loadProducts(): void {
+    this.productService.getAll().subscribe((products) => {
+      this.galleryItems = products.map(p => ({
+        id: p.id,
+        src: p.featuredImage,
+        title: p.title,
+        category: p.category,
+        status: p.isAvailable ? "published" : "draft",
+        date: p.createdAt
+      }));
+      this.galleryCount = this.galleryItems.length;
+    });
   }
 
   setActiveTab(tab: string): void {

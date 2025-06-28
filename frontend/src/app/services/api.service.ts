@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import Product from '../models/Product';
+import { Product } from '../models/Product';
 import CartItem from '../models/CartItems';
 
 @Injectable({
@@ -11,9 +11,6 @@ export class ApiService {
   private apiUrl = 'http://localhost:5263/api';
 
   constructor(private http: HttpClient) { }
-
-  // Authentication API
-  
 
   // Products API
   getAllProducts(): Observable<Product[]> {

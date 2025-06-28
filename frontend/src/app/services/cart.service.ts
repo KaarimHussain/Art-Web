@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, of, tap } from 'rxjs';
 import { ApiService } from './api.service';
 import CartItem from '../models/CartItems';
-import Product from '../models/Product';
+import { Product } from '../models/Product';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import Product from '../models/Product';
 export class CartService {
   private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
   cartItems$ = this.cartItemsSubject.asObservable();
-  
+
   private cartTotalSubject = new BehaviorSubject<number>(0);
   cartTotal$ = this.cartTotalSubject.asObservable();
 
@@ -32,7 +32,7 @@ export class CartService {
 
   private updateCartTotal(): void {
     const total = this.cartItemsSubject.value.reduce(
-      (sum, item) => sum + (item.price * item.quantity), 
+      (sum, item) => sum + (item.price * item.quantity),
       0
     );
     this.cartTotalSubject.next(total);
@@ -49,10 +49,10 @@ export class CartService {
   addToCart(product: Product, quantity: number = 1): Observable<boolean> {
     const cartItem: CartItem = {
       id: product.id,
-      name: product.name,
+      name: product.title,
       price: product.price,
       quantity: quantity,
-      image: product.image
+      image: product.featuredImage
     };
 
     return this.apiService.addToCart(cartItem).pipe(
@@ -60,7 +60,7 @@ export class CartService {
         // Check if item already exists in cart
         const currentItems = this.cartItemsSubject.value;
         const existingItemIndex = currentItems.findIndex(item => item.id === cartItem.id);
-        
+
         if (existingItemIndex > -1) {
           // Update quantity
           const updatedItems = [...currentItems];
@@ -70,7 +70,7 @@ export class CartService {
           // Add new item
           this.cartItemsSubject.next([...currentItems, cartItem]);
         }
-        
+
         this.updateCartTotal();
       }),
       map(() => true),
@@ -86,7 +86,7 @@ export class CartService {
       tap(() => {
         const items = this.cartItemsSubject.value;
         const itemIndex = items.findIndex(item => item.id === id);
-        
+
         if (itemIndex > -1) {
           const updatedItems = [...items];
           updatedItems[itemIndex].quantity = quantity;
