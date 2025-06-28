@@ -169,3 +169,5 @@ C:\Users\HP\OneDrive\Desktop\Art Website\backend\obj\Debug\net9.0\backend.pdb
 C:\Users\HP\OneDrive\Desktop\Art Website\backend\obj\Debug\net9.0\backend.genruntimeconfig.cache
 C:\Users\HP\OneDrive\Desktop\Art Website\backend\obj\Debug\net9.0\ref\backend.dll
 C:\Users\HP\OneDrive\Desktop\Art Website\backend\bin\Debug\net9.0\BCrypt.Net-Next.dll
+C:\Users\HP\OneDrive\Desktop\Art Website\backend\bin\Debug\net9.0\CloudinaryDotNet.dll
+C:\Users\HP\OneDrive\Desktop\Art Website\backend\bin\Debug\net9.0\Newtonsoft.Json.dll

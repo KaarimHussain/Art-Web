@@ -1,5 +1,10 @@
-using backend.Models;
+using ArtWebsite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
+using System.Text.Json;
 
 namespace backend.Controllers;
 
@@ -7,84 +12,149 @@ namespace backend.Controllers;
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
-    private static readonly List<Product> _products = new()
-    {
-        new Product
-        {
-            Id = 1,
-            Name = "Abstract Portrait",
-            Description = "A beautiful abstract portrait painting",
-            Price = 299.99m,
-            OriginalPrice = 349.99m,
-            Image =
-                "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=890&q=80",
-            Category = "Portrait",
-            Rating = 5,
-            Popular = true,
-        },
-        new Product
-        {
-            Id = 2,
-            Name = "Landscape Painting",
-            Description = "A serene landscape painting of mountains",
-            Price = 199.99m,
-            Image =
-                "https://images.unsplash.com/photo-1580136579312-94651dfd596d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-            Category = "Landscape",
-            Rating = 4,
-            Popular = false,
-        },
-        new Product
-        {
-            Id = 3,
-            Name = "Modern Art Piece",
-            Description = "A contemporary modern art piece",
-            Price = 399.99m,
-            OriginalPrice = 499.99m,
-            Image =
-                "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-            Category = "Modern",
-            Rating = 5,
-            Popular = true,
-        },
-    };
-
+    private readonly AppDbContext _context;
     private readonly ILogger<ProductsController> _logger;
 
-    public ProductsController(ILogger<ProductsController> logger)
+    public ProductsController(AppDbContext context, ILogger<ProductsController> logger)
     {
+        _context = context;
         _logger = logger;
     }
 
+    // GET: api/products
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        return Ok(_products);
+        var products = await _context
+            .Products.Include(p => p.Images)
+            .Include(p => p.Tags)
+            .ToListAsync();
+
+        return Ok(products);
     }
 
+    // GET: api/products/5
     [HttpGet("{id}")]
-    public IActionResult GetById(int id)
+    public async Task<IActionResult> GetById(int id)
     {
-        var product = _products.FirstOrDefault(p => p.Id == id);
+        var product = await _context
+            .Products.Include(p => p.Images)
+            .Include(p => p.Tags)
+            .FirstOrDefaultAsync(p => p.Id == id);
+
         if (product == null)
-        {
-            return NotFound(new ApiResponse { Message = "Product not found", Status = "error" });
-        }
+            return NotFound(new { Message = "Product not found" });
 
         return Ok(product);
     }
 
+    // GET: api/products/category/Landscape
     [HttpGet("category/{category}")]
-    public IActionResult GetByCategory(string category)
+    public async Task<IActionResult> GetByCategory(string category)
     {
-        var products = _products.Where(p => p.Category.ToLower() == category.ToLower()).ToList();
+        var products = await _context.Products
+            .Include(p => p.Images)
+            .Include(p => p.Tags)
+            .Where(p => p.Category == category)
+            .ToListAsync();
+
         return Ok(products);
     }
 
-    [HttpGet("popular")]
-    public IActionResult GetPopular()
+    // GET: api/products/tag/Abstract
+    [HttpGet("tag/{tagName}")]
+    public async Task<IActionResult> GetByTag(string tagName)
     {
-        var products = _products.Where(p => p.Popular).ToList();
+        var products = await _context
+            .Products.Where(p => p.Tags.Any(t => t.Name.ToLower() == tagName.ToLower()))
+            .Include(p => p.Images)
+            .Include(p => p.Tags)
+            .ToListAsync();
+
         return Ok(products);
+    }
+
+
+
+    // POST: api/products
+    [HttpPost]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Create([FromForm] IFormFile featuredImage, [FromForm] List<IFormFile> additionalImages, [FromForm] string product)
+    {
+        if (string.IsNullOrEmpty(product))
+            return BadRequest(new { Message = "Product data is required." });
+        var productObj = JsonSerializer.Deserialize<Product>(product);
+        if (productObj == null)
+            return BadRequest(new { Message = "Invalid product data." });
+        // TODO: Save images to storage (e.g., Cloudinary or local), set URLs on productObj
+        // For now, just set dummy URLs
+        if (featuredImage != null)
+            productObj.FeaturedImage = $"/uploads/{featuredImage.FileName}";
+        if (additionalImages != null && additionalImages.Count > 0)
+        {
+            productObj.Images = additionalImages.Select((img, idx) => new ProductImage
+            {
+                Url = $"/uploads/{img.FileName}",
+                AltText = $"{productObj.Title} - Image {idx + 1}",
+            }).ToList();
+        }
+        _context.Products.Add(productObj);
+        await _context.SaveChangesAsync();
+        return CreatedAtAction(nameof(GetById), new { id = productObj.Id }, productObj);
+    }
+
+    // PUT: api/products/5
+    [HttpPut("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Update(int id, [FromBody] Product updated)
+    {
+        var existing = await _context
+            .Products.Include(p => p.Images)
+            .Include(p => p.Tags)
+            .FirstOrDefaultAsync(p => p.Id == id);
+
+        if (existing == null)
+            return NotFound();
+
+        // Simple mapping – can refactor to use AutoMapper later
+        existing.Title = updated.Title;
+        existing.Description = updated.Description;
+        existing.Price = updated.Price;
+        existing.OriginalPrice = updated.OriginalPrice;
+        existing.Category = updated.Category;
+        existing.Medium = updated.Medium;
+        existing.Surface = updated.Surface;
+        existing.Style = updated.Style;
+        existing.WidthInInches = updated.WidthInInches;
+        existing.HeightInInches = updated.HeightInInches;
+        existing.DepthInInches = updated.DepthInInches;
+        existing.IsFramed = updated.IsFramed;
+        existing.IsSigned = updated.IsSigned;
+        existing.YearCreated = updated.YearCreated;
+        existing.IsAvailable = updated.IsAvailable;
+        existing.QuantityAvailable = updated.QuantityAvailable;
+        existing.ShippingFromCountry = updated.ShippingFromCountry;
+        existing.ShippingWeightKg = updated.ShippingWeightKg;
+        existing.IsSold = updated.IsSold;
+        existing.IsFeatured = updated.IsFeatured;
+
+        await _context.SaveChangesAsync();
+
+        return Ok(existing);
+    }
+
+    // DELETE: api/products/5
+    [HttpDelete("{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var product = await _context.Products.FindAsync(id);
+        if (product == null)
+            return NotFound();
+
+        _context.Products.Remove(product);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
 }

@@ -1,5 +1,6 @@
 using System.Text;
 using ArtWebsite.Components;
+using ArtWebsite.Config;
 using ArtWebsite.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -47,8 +48,14 @@ builder.Services.AddCors(options =>
     );
 });
 
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ArtWebConn")));
+
+// Add Cloudinary service
+builder.Services.Configure<CloudinarySettings>(
+    builder.Configuration.GetSection("CloudinarySettings"));
+builder.Services.AddScoped<CloudinaryService>();
 
 var app = builder.Build();
 

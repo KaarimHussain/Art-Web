@@ -1,5 +1,6 @@
 using ArtWebsite.Components;
-using ArtWebsite.DTO;
+using ArtWebsite.DTO
+;
 using ArtWebsite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
